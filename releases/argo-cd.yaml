@@ -1,0 +1,48 @@
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: argo-cd
+    namespace: devops
+    chart: argo/argo-cd
+    version: "1.4.5"
+    installed: '{{ env "ARGO_CD_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: argocd
+
+        server:
+          extraArgs:
+            insecure: true
+
+          ingress:
+            enabled: true
+            annotations:
+              kubernetes.io/ingress.class: nginx
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            hosts:
+              - '{{ requiredEnv "ARGO_CD_INGRESS_HOST" }}'
+            tls:
+              - secretName: argocd-server-tls
+                hosts:
+                  - '{{ requiredEnv "ARGO_CD_INGRESS_HOST" }}'
+
+          config:
+            repositories: |
+              - name: env-demo
+                type: git
+                url: https://github.com/opspresso/argocd-env-demo
+              - name: stable
+                type: helm
+                url: https://kubernetes-charts.storage.googleapis.com
+              - name: argo
+                type: helm
+                url: https://argoproj.github.io/argo-helm
+
+        configs:
+          secret:
+            createSecret: true
+            # argocdServerAdminPassword: "$(htpasswd -nbBC 10 '' 'password' | tr -d ':\n' | sed 's/$2y/$2a/')"
+            argocdServerAdminPassword: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"

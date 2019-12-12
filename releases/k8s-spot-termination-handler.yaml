@@ -1,0 +1,17 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+  - name: k8s-spot-termination-handler
+    namespace: kube-system
+    chart: stable/k8s-spot-termination-handler
+    version: "1.4.8"
+    installed: '{{ env "K8S_SPOT_TERMINATION_HANDLER_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: k8s-spot-termination-handler
+
+        clusterName: '{{ requiredEnv "CLUSTER_NAME" }}'
+
+        slackUrl: '{{ env "K8S_SPOT_TERMINATION_HANDLER_SLACK_URL" }}'

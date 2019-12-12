@@ -1,0 +1,51 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+  - name: chartmuseum
+    namespace: devops
+    chart: stable/chartmuseum
+    version: "1.4.0"
+    installed: '{{ env "CHARTMUSEUM_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: chartmuseum
+
+        replica:
+          annotations:
+            cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+            iam.amazonaws.com/role: '{{ env "CHARTMUSEUM_IAM_ROLE" }}'
+
+        env:
+          open:
+            DEBUG: '{{ env "CHARTMUSEUM_DEBUG" | default "false" }}'
+            DISABLE_API: '{{ env "CHARTMUSEUM_DISABLE_API" | default "false" }}'
+            ALLOW_OVERWRITE: '{{ env "CHARTMUSEUM_ALLOW_OVERWRITE" | default "false" }}'
+            # use amazon s3 storage as backend
+            STORAGE: "amazon"
+            ### Required: CHARTMUSEUM_STORAGE_AMAZON_BUCKET;
+            STORAGE_AMAZON_BUCKET: '{{ requiredEnv "CHARTMUSEUM_STORAGE_AMAZON_BUCKET" }}'
+            ### Required: CHARTMUSEUM_STORAGE_AMAZON_PREFIX; e.g. /
+            STORAGE_AMAZON_PREFIX: '{{ requiredEnv "CHARTMUSEUM_STORAGE_AMAZON_PREFIX" }}'
+            ### Required: CHARTMUSEUM_STORAGE_AMAZON_REGION; e.g. us-west-2
+            STORAGE_AMAZON_REGION: '{{ requiredEnv "CHARTMUSEUM_STORAGE_AMAZON_REGION" }}'
+          secret:
+            ### Required: CHARTMUSEUM_BASIC_AUTH_USER; e.g. server
+            BASIC_AUTH_USER: '{{ requiredEnv "CHARTMUSEUM_BASIC_AUTH_USER" }}'
+            ### Required: CHARTMUSEUM_BASIC_AUTH_PASS; e.g. 15041434-3DC2-42F8-9358-F8AED8780A66
+            BASIC_AUTH_PASS: '{{ requiredEnv "CHARTMUSEUM_BASIC_AUTH_PASS" }}'
+
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: nginx
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+            ingress.kubernetes.io/proxy-body-size: "500m"
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          hosts:
+            - name: '{{ requiredEnv "CHARTMUSEUM_HOST" }}'
+              path: /
+              tls: true
+              tlsSecret: chartmuseum-tls

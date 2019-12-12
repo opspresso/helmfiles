@@ -9,7 +9,7 @@ releases:
     namespace: kube-ingress
     chart: jetstack/cert-manager
     version: "v0.12.0"
-    installed: true
+    installed: '{{ env "CERT_MANAGER_INSTALLED" | default "false" }}'
     wait: true
     hooks:
       - events: ["presync"]
@@ -22,15 +22,13 @@ releases:
           ]
     values:
       - nameOverride: cert-manager
+
         rbac:
-          ### Optional: CERT_MANAGER_RBAC_ENABLED;
           create: '{{ env "CERT_MANAGER_RBAC_ENABLED" | default "false" }}'
+
         ingressShim:
           defaultIssuerName: letsencrypt-prod
           defaultIssuerKind: ClusterIssuer
-        podAnnotations:
-          ### Optional: CERT_MANAGER_IAM_ROLE;
-          iam.amazonaws.com/role: '{{ env "CERT_MANAGER_IAM_ROLE" }}'
 
   - name: cert-manager-issuers
     namespace: kube-ingress
@@ -51,7 +49,7 @@ releases:
                 # The ACME server URL
                 server: https://acme-v02.api.letsencrypt.org/directory
                 # Email address used for ACME registration
-                email: '{{ requiredEnv "CERT_MANAGER_ISSUER_MAIL" }}'
+                email: '{{ requiredEnv "CERT_MANAGER_ISSUER_EMAIL" }}'
                 # Name of a secret used to store the ACME account private key
                 privateKeySecretRef:
                   name: letsencrypt-prod

@@ -7,10 +7,15 @@ releases:
     namespace: devops
     chart: argo/argo
     version: "0.6.3"
-    installed: true
+    installed: '{{ env "ARGO_INSTALLED" | default "false" }}'
     wait: true
     values:
       - nameOverride: argo
+
+        controller:
+          podAnnotations:
+            iam.amazonaws.com/role: '{{ env "ARGO_IAM_ROLE" }}'
+
         ui:
           ingress:
             enabled: true
@@ -24,8 +29,10 @@ releases:
               - secretName: argo-ui-tls
                 hosts:
                   - '{{ requiredEnv "ARGO_INGRESS_HOST" }}'
+
         useDefaultArtifactRepo: true
         useStaticCredentials: false
+
         artifactRepository:
           s3:
             bucket: '{{ env "ARGO_BUCKET" }}'

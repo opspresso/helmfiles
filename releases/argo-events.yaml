@@ -1,0 +1,13 @@
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: argo-events
+    namespace: devops
+    chart: argo/argo-events
+    version: "0.6.0"
+    installed: '{{ env "ARGO_EVENTS_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: argo-events

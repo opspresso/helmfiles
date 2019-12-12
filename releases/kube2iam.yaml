@@ -1,0 +1,29 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+  - name: kube2iam
+    namespace: kube-system
+    chart: stable/kube2iam
+    version: "2.1.0"
+    installed: '{{ env "KUBE2IAM_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: kube2iam
+
+        aws:
+          region: '{{ requiredEnv "AWS_REGION" }}'
+
+        extraArgs:
+          auto-discover-base-arn: true
+          auto-discover-default-role: true
+          # base-role-arn: BASE_ROLE_ARN
+          # default-role: DEFAULT_ROLE
+
+        host:
+          iptables: true
+          interface: eni+
+
+        rbac:
+          create: true
