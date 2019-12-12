@@ -1,0 +1,71 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+  - name: grafana
+    namespace: monitor
+    chart: stable/grafana
+    version: "4.1.3"
+    installed: '{{ env "GRAFANA_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: grafana
+
+        adminUser: '{{ env "GRAFANA_USERNAME" | default "admin" }}'
+        adminPassword: '{{ env "GRAFANA_PASSWORD" | default "password" }}'
+
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: nginx
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          hosts:
+            - '{{ requiredEnv "GRAFANA_HOST" }}'
+          tls:
+            - secretName: grafana-tls
+              hosts:
+                - '{{ requiredEnv "GRAFANA_HOST" }}'
+
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: Prometheus
+                type: prometheus
+                url: http://prometheus-server
+                access: proxy
+                isDefault: true
+
+        dashboardProviders:
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+              - name: "default"
+                orgId: 1
+                folder: ""
+                type: file
+                disableDeletion: false
+                editable: true
+                options:
+                  path: /var/lib/grafana/dashboards/default
+
+        dashboards:
+          default:
+            kube-cluster:
+              # https://grafana.com/dashboards/9797
+              gnetId: 9797
+              revision: 6
+              datasource: Prometheus
+            kube-deployment:
+              # https://grafana.com/dashboards/9679
+              gnetId: 9679
+              revision: 6
+              datasource: Prometheus
+            nginx-ingress:
+              url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
+              datasource: Prometheus
+            argo-cd:
+              url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
+              datasource: Prometheus

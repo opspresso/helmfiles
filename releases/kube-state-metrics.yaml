@@ -1,0 +1,13 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+  - name: kube-state-metrics
+    namespace: kube-system
+    chart: stable/kube-state-metrics
+    version: "2.4.1"
+    installed: '{{ env "KUBE_STATE_METRICS_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: kube-state-metrics

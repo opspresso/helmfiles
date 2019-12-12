@@ -1,0 +1,35 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+releases:
+  - name: nginx-ingress
+    namespace: kube-ingress
+    chart: stable/nginx-ingress
+    version: "1.26.2"
+    installed: '{{ env "NGINX_INGRESS_INSTALLED" | default "false" }}'
+    wait: true
+    values:
+      - nameOverride: nginx-ingress
+
+        controller:
+          kind: '{{ env "NGINX_INGRESS_CONTROLLER_KIND" | default "DaemonSet" }}'
+          config:
+            use-forwarded-headers: "true"
+          service:
+            annotations:
+              # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+              # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: ""
+              # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+              # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+              service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+              # external-dns.alpha.kubernetes.io/hostname: "demo.domain.com."
+              # external-dns.alpha.kubernetes.io/ttl: 300
+          stats:
+            enabled: true
+          metrics:
+            enabled: true
+            service:
+              annotations:
+                prometheus.io/scrape: "true"
+                prometheus.io/port: "10254"

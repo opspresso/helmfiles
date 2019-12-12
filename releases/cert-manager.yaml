@@ -1,0 +1,61 @@
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
+
+releases:
+  - name: cert-manager
+    namespace: kube-ingress
+    chart: jetstack/cert-manager
+    version: "v0.12.0"
+    installed: '{{ env "CERT_MANAGER_INSTALLED" | default "false" }}'
+    wait: true
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          [
+            "-c",
+            "kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml",
+          ]
+    values:
+      - nameOverride: cert-manager
+
+        rbac:
+          create: '{{ env "CERT_MANAGER_RBAC_ENABLED" | default "false" }}'
+
+        ingressShim:
+          defaultIssuerName: letsencrypt-prod
+          defaultIssuerKind: ClusterIssuer
+
+  - name: cert-manager-issuers
+    namespace: kube-ingress
+    chart: incubator/raw
+    version: "0.1.0"
+    installed: true
+    wait: true
+    force: true
+    recreatePods: true
+    values:
+      - resources:
+          - apiVersion: cert-manager.io/v1alpha2
+            kind: ClusterIssuer
+            metadata:
+              name: letsencrypt-prod
+            spec:
+              acme:
+                # The ACME server URL
+                server: https://acme-v02.api.letsencrypt.org/directory
+                # Email address used for ACME registration
+                email: '{{ requiredEnv "CERT_MANAGER_ISSUER_EMAIL" }}'
+                # Name of a secret used to store the ACME account private key
+                privateKeySecretRef:
+                  name: letsencrypt-prod
+                solvers:
+                  # An empty 'selector' means that this solver matches all domains
+                  - selector: {}
+                    http01:
+                      ingress:
+                        class: nginx
