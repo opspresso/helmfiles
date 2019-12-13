@@ -20,6 +20,7 @@ releases:
 
         s3:
           region: '{{ requiredEnv "DOCKER_REGISTRY_S3_REGION" }}'
+          regionEndpoint: '{{ requiredEnv "DOCKER_REGISTRY_S3_ENDPOINT" }}'
           bucket: '{{ requiredEnv "DOCKER_REGISTRY_S3_BUCKET" }}'
           encrypt: '{{ env "DOCKER_REGISTRY_S3_ENCRYPT" | default "false" }}'
           secure: '{{ env "DOCKER_REGISTRY_S3_SECURE" | default "false" }}'

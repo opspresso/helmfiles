@@ -22,4 +22,4 @@ helmfiles:
   # - releases/argo-events.yaml
 
   - releases/chartmuseum.yaml
-  # - releases/docker-registry.yaml
+  - releases/docker-registry.yaml
