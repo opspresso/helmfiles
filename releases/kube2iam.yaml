@@ -7,7 +7,7 @@ releases:
     namespace: kube-system
     chart: stable/kube2iam
     version: "2.1.0"
-    installed: '{{ env "KUBE2IAM_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: kube2iam

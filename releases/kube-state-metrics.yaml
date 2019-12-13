@@ -7,7 +7,7 @@ releases:
     namespace: kube-system
     chart: stable/kube-state-metrics
     version: "2.4.1"
-    installed: '{{ env "KUBE_STATE_METRICS_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: kube-state-metrics

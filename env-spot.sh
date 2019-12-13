@@ -41,5 +41,6 @@ export ARGO_BUCKET="${CLUSTER_NAME}-argo"
 
 export ARGO_CD_INSTALLED="true"
 export ARGO_CD_INGRESS_HOST="argocd-devops.${BASE_DOMAIN}"
+export ARGO_CD_PASSWORD='$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2'
 
 export ARGO_EVENTS_INSTALLED="true"

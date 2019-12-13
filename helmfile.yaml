@@ -1,17 +1,25 @@
 # Ordered list of releases.
 
 helmfiles:
-  # kube-ingress
-  - releases/cert-manager.yaml
-  - releases/nginx-ingress.yaml
+  # # kube-ingress
+  # - releases/cert-manager.yaml
+  # - releases/nginx-ingress.yaml
 
-  # kube-system
-  - releases/cluster-autoscaler.yaml
-  - releases/cluster-overprovisioner.yaml
-  - releases/kube-state-metrics.yaml
-  - releases/kube2iam.yaml
-  - releases/metrics-server.yaml
+  # # kube-system
+  # - releases/kube2iam.yaml
+  # - releases/metrics-server.yaml
+  # - releases/kube-state-metrics.yaml
+  # - releases/cluster-autoscaler.yaml
+  # - releases/cluster-overprovisioner.yaml
 
-  # monitor
-  - releases/prometheus.yaml
-  - releases/grafana.yaml
+  # # monitor
+  # - releases/prometheus.yaml
+  # - releases/grafana.yaml
+
+  # # devops
+  # - releases/argo.yaml
+  # - releases/argo-cd.yaml
+  # - releases/argo-events.yaml
+
+  - releases/chartmuseum.yaml
+  # - releases/docker-registry.yaml

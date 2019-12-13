@@ -7,7 +7,7 @@ releases:
     namespace: kube-system
     chart: stable/cluster-autoscaler
     version: "6.2.0"
-    installed: '{{ env "CLUSTER_AUTOSCALER_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: cluster-autoscaler

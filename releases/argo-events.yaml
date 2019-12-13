@@ -7,7 +7,7 @@ releases:
     namespace: devops
     chart: argo/argo-events
     version: "0.6.0"
-    installed: '{{ env "ARGO_EVENTS_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: argo-events

@@ -7,7 +7,7 @@ releases:
     namespace: devops
     chart: stable/jenkins
     version: "1.9.8"
-    installed: '{{ env "JENKINS_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: jenkins
