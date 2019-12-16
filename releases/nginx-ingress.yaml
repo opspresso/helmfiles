@@ -7,13 +7,18 @@ releases:
     namespace: kube-ingress
     chart: stable/nginx-ingress
     version: "1.26.2"
-    installed: '{{ env "NGINX_INGRESS_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "/bin/sh"
+        args: ["-c", "../bin/nginx_ingress_route53.sh"]
     values:
       - nameOverride: nginx-ingress
 
         controller:
-          kind: '{{ env "NGINX_INGRESS_CONTROLLER_KIND" | default "DaemonSet" }}'
+          kind: '{{ env "NGINX_INGRESS_CONTROLLER_KIND" | default "Deployment" }}'
           config:
             use-forwarded-headers: "true"
           service:

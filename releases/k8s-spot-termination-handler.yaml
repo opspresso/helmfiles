@@ -7,7 +7,7 @@ releases:
     namespace: kube-system
     chart: stable/k8s-spot-termination-handler
     version: "1.4.8"
-    installed: '{{ env "K8S_SPOT_TERMINATION_HANDLER_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: k8s-spot-termination-handler

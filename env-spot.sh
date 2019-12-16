@@ -5,7 +5,8 @@ export AWS_REGION="ap-northeast-2"
 
 export CLUSTER_NAME="seoul-dev-spot-eks"
 
-export BASE_DOMAIN="spot.mzdev.be"
+export ROOT_DOMAIN="mzdev.be"
+export BASE_DOMAIN="spot.${ROOT_DOMAIN}"
 
 # kube-ingress
 export CERT_MANAGER_INSTALLED="true"
@@ -31,15 +32,16 @@ export METRICS_SERVER_INSTALLED="true"
 export PROMETHEUS_INSTALLED="true"
 
 export GRAFANA_INSTALLED="true"
-export GRAFANA_HOST="grafana-monitor.${BASE_DOMAIN}"
+export GRAFANA_HOST="grafana.${BASE_DOMAIN}"
 
-# devops
+# argo
 export ARGO_INSTALLED="true"
-export ARGO_INGRESS_HOST="argo-devops.${BASE_DOMAIN}"
+export ARGO_INGRESS_HOST="argo.${BASE_DOMAIN}"
 export ARGO_IAM_ROLE="${CLUSTER_NAME}-argo"
 export ARGO_BUCKET="${CLUSTER_NAME}-argo"
 
 export ARGO_CD_INSTALLED="true"
-export ARGO_CD_INGRESS_HOST="argocd-devops.${BASE_DOMAIN}"
+export ARGO_CD_INGRESS_HOST="argocd.${BASE_DOMAIN}"
+export ARGO_CD_PASSWORD='$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2'
 
 export ARGO_EVENTS_INSTALLED="true"

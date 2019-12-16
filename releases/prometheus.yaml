@@ -6,8 +6,8 @@ releases:
   - name: prometheus
     namespace: monitor
     chart: stable/prometheus
-    version: "9.5.1"
-    installed: '{{ env "PROMETHEUS_INSTALLED" | default "false" }}'
+    version: "9.5.2"
+    installed: true
     wait: true
     values:
       - nameOverride: prometheus

@@ -7,7 +7,7 @@ releases:
     namespace: devops
     chart: stable/docker-registry
     version: "1.8.3"
-    installed: '{{ env "DOCKER_REGISTRY_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: docker-registry
@@ -19,18 +19,24 @@ releases:
         storage: s3
 
         s3:
-          region: '{{ requiredEnv "AWS_REGION" }}'
+          region: '{{ requiredEnv "DOCKER_REGISTRY_S3_REGION" }}'
+          regionEndpoint: '{{ requiredEnv "DOCKER_REGISTRY_S3_ENDPOINT" }}'
           bucket: '{{ requiredEnv "DOCKER_REGISTRY_S3_BUCKET" }}'
           encrypt: '{{ env "DOCKER_REGISTRY_S3_ENCRYPT" | default "false" }}'
           secure: '{{ env "DOCKER_REGISTRY_S3_SECURE" | default "false" }}'
+
+        secrets:
+          s3:
+            accessKey: ""
+            secretKey: ""
 
         ingress:
           enabled: true
           annotations:
             kubernetes.io/ingress.class: nginx
             nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-            nginx.ingress.kubernetes.io/proxy-body-size: "500m"
-            ingress.kubernetes.io/proxy-body-size: "500m"
+            nginx.ingress.kubernetes.io/proxy-body-size: 500m
+            ingress.kubernetes.io/proxy-body-size: 500m
             cert-manager.io/cluster-issuer: "letsencrypt-prod"
           hosts:
             - '{{ requiredEnv "DOCKER_REGISTRY_HOST" }}'

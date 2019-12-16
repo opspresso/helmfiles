@@ -7,7 +7,7 @@ releases:
     namespace: kube-system
     chart: stable/cluster-overprovisioner
     version: "0.2.6"
-    installed: '{{ env "CLUSTER_OVERPROVISIONER_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: cluster-overprovisioner

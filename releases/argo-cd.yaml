@@ -4,10 +4,10 @@ repositories:
 
 releases:
   - name: argo-cd
-    namespace: devops
+    namespace: argo
     chart: argo/argo-cd
     version: "1.4.5"
-    installed: '{{ env "ARGO_CD_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: argocd
@@ -45,4 +45,4 @@ releases:
           secret:
             createSecret: true
             # argocdServerAdminPassword: "$(htpasswd -nbBC 10 '' 'password' | tr -d ':\n' | sed 's/$2y/$2a/')"
-            argocdServerAdminPassword: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"
+            argocdServerAdminPassword: '{{ requiredEnv "ARGO_CD_PASSWORD" }}'

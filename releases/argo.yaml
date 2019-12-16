@@ -4,10 +4,10 @@ repositories:
 
 releases:
   - name: argo
-    namespace: devops
+    namespace: argo
     chart: argo/argo
     version: "0.6.3"
-    installed: '{{ env "ARGO_INSTALLED" | default "false" }}'
+    installed: true
     wait: true
     values:
       - nameOverride: argo

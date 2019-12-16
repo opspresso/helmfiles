@@ -5,7 +5,8 @@ export AWS_REGION="ap-northeast-2"
 
 export CLUSTER_NAME="seoul-dev-demo-eks"
 
-export BASE_DOMAIN="demo.mzdev.be"
+export ROOT_DOMAIN="mzdev.be"
+export BASE_DOMAIN="demo.${ROOT_DOMAIN}"
 
 # kube-ingress
 export CERT_MANAGER_INSTALLED="true"
@@ -31,15 +32,43 @@ export METRICS_SERVER_INSTALLED="true"
 export PROMETHEUS_INSTALLED="true"
 
 export GRAFANA_INSTALLED="true"
-export GRAFANA_HOST="grafana-monitor.${BASE_DOMAIN}"
+export GRAFANA_HOST="grafana.${BASE_DOMAIN}"
 
-# devops
+# argo
 export ARGO_INSTALLED="true"
-export ARGO_INGRESS_HOST="argo-devops.${BASE_DOMAIN}"
+export ARGO_INGRESS_HOST="argo.${BASE_DOMAIN}"
 export ARGO_IAM_ROLE="${CLUSTER_NAME}-argo"
 export ARGO_BUCKET="${CLUSTER_NAME}-argo"
 
 export ARGO_CD_INSTALLED="true"
-export ARGO_CD_INGRESS_HOST="argocd-devops.${BASE_DOMAIN}"
+export ARGO_CD_INGRESS_HOST="argocd.${BASE_DOMAIN}"
+export ARGO_CD_PASSWORD='$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2'
 
 export ARGO_EVENTS_INSTALLED="true"
+
+# devops
+export CHARTMUSEUM_INSTALLED="true"
+export CHARTMUSEUM_IAM_ROLE="${CLUSTER_NAME}-chartmuseum"
+export CHARTMUSEUM_DEBUG="true"
+export CHARTMUSEUM_DISABLE_API="false"
+export CHARTMUSEUM_ALLOW_OVERWRITE="false"
+export CHARTMUSEUM_STORAGE_AMAZON_BUCKET="${CLUSTER_NAME}-chartmuseum"
+export CHARTMUSEUM_STORAGE_AMAZON_PREFIX="/"
+export CHARTMUSEUM_STORAGE_AMAZON_REGION="${AWS_REGION}"
+# export CHARTMUSEUM_BASIC_AUTH_USER="server"
+# export CHARTMUSEUM_BASIC_AUTH_PASS="924426A5-DA22-4A10-9FB1-418761684372"
+export CHARTMUSEUM_HOST="chartmuseum.${BASE_DOMAIN}"
+
+export DOCKER_REGISTRY_INSTALLED="true"
+export DOCKER_REGISTRY_IAM_ROLE="${CLUSTER_NAME}-docker-registry"
+export DOCKER_REGISTRY_S3_REGION="${AWS_REGION}"
+export DOCKER_REGISTRY_S3_ENDPOINT="s3.${AWS_REGION}.amazonaws.com"
+export DOCKER_REGISTRY_S3_BUCKET="${CLUSTER_NAME}-docker-registry"
+export DOCKER_REGISTRY_S3_ENCRYPT="false"
+export DOCKER_REGISTRY_S3_SECURE="false"
+export DOCKER_REGISTRY_HOST="docker-registry.${BASE_DOMAIN}"
+
+export JENKINS_INSTALLED="true"
+export JENKINS_USERNAME="admin"
+export JENKINS_PASSWORD="password"
+export JENKINS_HOST="jenkins.${BASE_DOMAIN}"
