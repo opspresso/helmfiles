@@ -4,7 +4,7 @@ repositories:
 
 releases:
   - name: argo-events
-    namespace: devops
+    namespace: argo
     chart: argo/argo-events
     version: "0.6.0"
     installed: true

@@ -4,7 +4,7 @@ repositories:
 
 releases:
   - name: argo
-    namespace: devops
+    namespace: argo
     chart: argo/argo
     version: "0.6.3"
     installed: true
