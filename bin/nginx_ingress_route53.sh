@@ -5,7 +5,7 @@ if [ "x${COUNT}" == "x0" ]; then
     kubectl create ns kube-ingress
 fi
 
-ELB_DNS_NAME=$(kubectl get svc -n kube-ingress | grep nginx-ingress-tcp-controller | grep LoadBalancer | awk '{print $4}')
+ELB_DNS_NAME=$(kubectl get svc -n kube-ingress | grep nginx-ingress-controller | grep LoadBalancer | awk '{print $4}')
 echo "ELB_DNS_NAME: ${ELB_DNS_NAME}"
 
 if [ -z ${ELB_DNS_NAME} ]; then
