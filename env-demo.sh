@@ -5,7 +5,8 @@ export AWS_REGION="ap-northeast-2"
 
 export CLUSTER_NAME="seoul-dev-demo-eks"
 
-export BASE_DOMAIN="demo.mzdev.be"
+export ROOT_DOMAIN="mzdev.be"
+export BASE_DOMAIN="demo.${ROOT_DOMAIN}"
 
 # kube-ingress
 export CERT_MANAGER_INSTALLED="true"

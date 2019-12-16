@@ -5,7 +5,8 @@ export AWS_REGION="ap-northeast-2"
 
 export CLUSTER_NAME="seoul-dev-spot-eks"
 
-export BASE_DOMAIN="spot.mzdev.be"
+export ROOT_DOMAIN="mzdev.be"
+export BASE_DOMAIN="spot.${ROOT_DOMAIN}"
 
 # kube-ingress
 export CERT_MANAGER_INSTALLED="true"
@@ -31,7 +32,7 @@ export METRICS_SERVER_INSTALLED="true"
 export PROMETHEUS_INSTALLED="true"
 
 export GRAFANA_INSTALLED="true"
-export GRAFANA_HOST="grafana-monitor.${BASE_DOMAIN}"
+export GRAFANA_HOST="grafana.${BASE_DOMAIN}"
 
 # argo
 export ARGO_INSTALLED="true"
