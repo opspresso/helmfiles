@@ -33,14 +33,14 @@ export PROMETHEUS_INSTALLED="true"
 export GRAFANA_INSTALLED="true"
 export GRAFANA_HOST="grafana-monitor.${BASE_DOMAIN}"
 
-# devops
+# argo
 export ARGO_INSTALLED="true"
-export ARGO_INGRESS_HOST="argo-devops.${BASE_DOMAIN}"
+export ARGO_INGRESS_HOST="argo.${BASE_DOMAIN}"
 export ARGO_IAM_ROLE="${CLUSTER_NAME}-argo"
 export ARGO_BUCKET="${CLUSTER_NAME}-argo"
 
 export ARGO_CD_INSTALLED="true"
-export ARGO_CD_INGRESS_HOST="argocd-devops.${BASE_DOMAIN}"
+export ARGO_CD_INGRESS_HOST="argocd.${BASE_DOMAIN}"
 export ARGO_CD_PASSWORD='$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2'
 
 export ARGO_EVENTS_INSTALLED="true"
