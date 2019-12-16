@@ -15,17 +15,3 @@ helmfiles:
   # monitor
   - releases/prometheus.yaml
   - releases/grafana.yaml
-
-  # argo
-  - releases/argo.yaml
-  - releases/argo-cd.yaml
-  # - releases/argo-events.yaml
-  # - releases/argo-rollouts.yaml
-
-  # devops
-  - releases/chartmuseum.yaml
-  - releases/docker-registry.yaml
-  # - releases/harbor.yaml
-  # - releases/jenkins.yaml
-  # - releases/sonarqube.yaml
-  # - releases/sonatype-nexus.yaml
