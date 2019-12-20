@@ -6,9 +6,14 @@ releases:
   - name: argo
     namespace: argo
     chart: argo/argo
-    version: "0.6.3"
+    version: "0.6.4"
     installed: true
     wait: true
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "/bin/sh"
+        args: ["-c", "../bin/versions.sh", "argo/argo"]
     values:
       - nameOverride: argo
 
