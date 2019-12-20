@@ -1,0 +1,10 @@
+# Ordered list of releases.
+
+helmfiles:
+  # devops
+  - releases/chartmuseum.yaml
+  - releases/docker-registry.yaml
+  # - releases/harbor.yaml
+  # - releases/jenkins.yaml
+  # - releases/sonarqube.yaml
+  # - releases/sonatype-nexus.yaml
