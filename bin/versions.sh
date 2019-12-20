@@ -21,6 +21,6 @@ fi
 
 LATEST=$(helm search ${REPO} -o json | REPO="${REPO}" jq -r '[.[] | select(.Name==env.REPO)][0] | "\(.Version)"')
 
-if [ "${VERSION}" != "" ]; then
+if [ "${LATEST}" != "" ]; then
     printf '# %-20s : %-25s \n' "latest chart version" "${NAME}-${LATEST}"
 fi
