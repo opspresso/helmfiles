@@ -69,3 +69,6 @@ releases:
             argo-cd:
               url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
               datasource: Prometheus
+            argo-rollouts:
+              url: https://raw.githubusercontent.com/argoproj/argo-rollouts/master/examples/dashboard.json
+              datasource: Prometheus
