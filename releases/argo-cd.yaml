@@ -3,25 +3,21 @@ repositories:
     url: https://argoproj.github.io/argo-helm
 
 releases:
-  - name: argo-cd
-    namespace: argo
+  - name: argocd
+    namespace: argo-cd
     chart: argo/argo-cd
     version: "1.5.1"
     installed: true
     wait: true
-    hooks:
-      # - events: ["presync"]
-      #   showlogs: true
-      #   command: "/bin/sh"
-      #   args: ["-c", "../bin/versions.sh", "argo/argo-cd"]
-      - events: ["postsync"]
-        showlogs: true
-        command: "/bin/sh"
-        args:
-          [
-            "-c",
-            "kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml",
-          ]
+    # hooks:
+    #   - events: ["postsync"]
+    #     showlogs: true
+    #     command: "/bin/sh"
+    #     args:
+    #       [
+    #         "-c",
+    #         "kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml",
+    #       ]
     values:
       - nameOverride: argocd
 
