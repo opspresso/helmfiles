@@ -14,6 +14,14 @@ releases:
         showlogs: true
         command: "/bin/sh"
         args: ["-c", "../bin/versions.sh", "argo/argo-cd"]
+      - events: ["postsync"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          [
+            "-c",
+            "kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml",
+          ]
     values:
       - nameOverride: argocd
 
