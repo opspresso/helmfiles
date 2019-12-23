@@ -13,6 +13,4 @@ releases:
       - nameOverride: prometheus
 
         kubeStateMetrics:
-          ## If false, kube-state-metrics will not be installed
-          ##
           enabled: false
