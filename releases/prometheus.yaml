@@ -12,5 +12,15 @@ releases:
     values:
       - nameOverride: prometheus
 
+        server:
+          enabled: true
+          persistentVolume:
+            enabled: false
+
+        alertmanager:
+          enabled: false
+          persistentVolume:
+            enabled: false
+
         kubeStateMetrics:
           enabled: false
