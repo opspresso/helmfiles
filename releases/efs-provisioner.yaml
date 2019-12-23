@@ -12,9 +12,9 @@ releases:
     values:
       - nameOverride: efs-provisioner
 
-        podAnnotations:
-          cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          iam.amazonaws.com/role: '{{ env "EFS_PROVISIONER_IAM_ROLE" }}'
+        # podAnnotations:
+        #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        #   iam.amazonaws.com/role: '{{ env "EFS_PROVISIONER_IAM_ROLE" }}'
 
         efsProvisioner:
           efsFileSystemId: '{{ requiredEnv "EFS_FILE_SYSTEM_ID" }}'

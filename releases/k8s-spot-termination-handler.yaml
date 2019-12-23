@@ -8,7 +8,7 @@ releases:
     chart: stable/k8s-spot-termination-handler
     version: "1.4.8"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: k8s-spot-termination-handler
 

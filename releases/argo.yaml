@@ -8,7 +8,7 @@ releases:
     chart: argo/argo
     version: "0.6.4"
     installed: true
-    wait: true
+    # wait: true
     # hooks:
     #   - events: ["presync"]
     #     showlogs: true

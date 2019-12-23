@@ -8,7 +8,7 @@ releases:
     chart: stable/sonatype-nexus
     version: "1.21.2"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: sonatype-nexus
 

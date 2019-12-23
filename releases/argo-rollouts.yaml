@@ -8,7 +8,7 @@ releases:
     chart: incubator/raw
     version: "0.1.0"
     installed: true
-    wait: true
+    # wait: true
     force: true
     recreatePods: true
     hooks:

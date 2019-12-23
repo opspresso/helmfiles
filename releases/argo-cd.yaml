@@ -8,7 +8,7 @@ releases:
     chart: argo/argo-cd
     version: "1.5.1"
     installed: true
-    wait: true
+    # wait: true
     # hooks:
     #   - events: ["postsync"]
     #     showlogs: true

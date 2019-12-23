@@ -8,7 +8,7 @@ releases:
     chart: stable/prometheus-adapter
     version: "1.4.0"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: prometheus-adapter
 

@@ -8,19 +8,21 @@ releases:
     chart: stable/prometheus
     version: "9.7.2"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: prometheus
 
         server:
           enabled: true
           persistentVolume:
-            enabled: false
+            enabled: true
+            storageClass: "efs"
 
         alertmanager:
           enabled: false
           persistentVolume:
-            enabled: false
+            enabled: true
+            storageClass: "efs"
 
         kubeStateMetrics:
           enabled: false

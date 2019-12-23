@@ -11,6 +11,7 @@ helmfiles:
   - releases/kube-state-metrics.yaml
   - releases/cluster-autoscaler.yaml
   - releases/cluster-overprovisioner.yaml
+  - releases/efs-provisioner.yaml
 
   # monitor
   - releases/prometheus.yaml

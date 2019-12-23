@@ -8,6 +8,6 @@ releases:
     chart: stable/cluster-overprovisioner
     version: "0.2.6"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: cluster-overprovisioner

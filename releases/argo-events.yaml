@@ -8,6 +8,6 @@ releases:
     chart: argo/argo-events
     version: "0.6.0"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: argo-events

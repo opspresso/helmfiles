@@ -8,7 +8,7 @@ releases:
     chart: stable/grafana
     version: "4.2.2"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: grafana
 
@@ -27,6 +27,10 @@ releases:
             - secretName: grafana-tls
               hosts:
                 - '{{ requiredEnv "GRAFANA_HOST" }}'
+
+        persistence:
+          enabled: true
+          storageClassName: "efs"
 
         datasources:
           datasources.yaml:
