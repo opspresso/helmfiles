@@ -33,9 +33,9 @@ releases:
             STORAGE_AMAZON_REGION: '{{ requiredEnv "CHARTMUSEUM_STORAGE_AMAZON_REGION" }}'
           # secret:
           #   ### Required: CHARTMUSEUM_BASIC_AUTH_USER; e.g. server
-          #   BASIC_AUTH_USER: '{{ requiredEnv "CHARTMUSEUM_BASIC_AUTH_USER" }}'
+          #   BASIC_AUTH_USER: '{{ env "CHARTMUSEUM_BASIC_AUTH_USER" }}'
           #   ### Required: CHARTMUSEUM_BASIC_AUTH_PASS; e.g. 924426A5-DA22-4A10-9FB1-418761684372
-          #   BASIC_AUTH_PASS: '{{ requiredEnv "CHARTMUSEUM_BASIC_AUTH_PASS" }}'
+          #   BASIC_AUTH_PASS: '{{ env "CHARTMUSEUM_BASIC_AUTH_PASS" }}'
 
         ingress:
           enabled: true
