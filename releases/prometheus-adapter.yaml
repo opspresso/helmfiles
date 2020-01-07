@@ -17,7 +17,7 @@ releases:
           port: 80
 
         rules:
-          default: false
+          # default: false
           custom:
             - metricsQuery: sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)
               name:
