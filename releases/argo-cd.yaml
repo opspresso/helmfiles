@@ -25,6 +25,13 @@ releases:
           extraArgs:
             insecure: true
 
+          metrics:
+            enabled: true
+            service:
+              annotations:
+                prometheus.io/scrape: "true"
+                prometheus.io/port: "8083"
+
           ingress:
             enabled: true
             annotations:
