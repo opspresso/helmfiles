@@ -36,9 +36,16 @@ export EFS_FILE_SYSTEM_ID="$(aws efs describe-file-systems --creation-token ${CL
 export PROMETHEUS_INSTALLED="true"
 export PROMETHEUS_INGRESS_ENABLED="true"
 export PROMETHEUS_HOST="prometheus.${BASE_DOMAIN}"
+export PROMETHEUS_PV_ENABLED="true"
+export PROMETHEUS_PV_SC="efs"
+export PROMETHEUS_ALERT_MANAGER_ENABLED="false"
+export PROMETHEUS_KUBE_STATE_METRICS="false"
 
 export GRAFANA_INSTALLED="true"
+export GRAFANA_INGRESS_ENABLED="true"
 export GRAFANA_HOST="grafana.${BASE_DOMAIN}"
+# export GRAFANA_PV_ENABLED="false"
+# export GRAFANA_PV_SC="efs"
 
 # argo
 export ARGO_INSTALLED="true"

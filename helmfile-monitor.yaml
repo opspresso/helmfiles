@@ -1,0 +1,7 @@
+# Ordered list of releases.
+
+helmfiles:
+  # monitor
+  - releases/prometheus.yaml
+  - releases/prometheus-adapter.yaml
+  - releases/grafana.yaml
