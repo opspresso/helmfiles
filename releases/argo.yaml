@@ -29,11 +29,11 @@ releases:
               nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
               cert-manager.io/cluster-issuer: "letsencrypt-prod"
             hosts:
-              - '{{ requiredEnv "ARGO_INGRESS_HOST" }}'
+              - '{{ env "ARGO_INGRESS_HOST" }}'
             tls:
               - secretName: argo-ui-tls
                 hosts:
-                  - '{{ requiredEnv "ARGO_INGRESS_HOST" }}'
+                  - '{{ env "ARGO_INGRESS_HOST" }}'
 
         useDefaultArtifactRepo: true
         useStaticCredentials: false

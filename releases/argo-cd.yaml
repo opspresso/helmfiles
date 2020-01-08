@@ -39,11 +39,11 @@ releases:
               nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
               cert-manager.io/cluster-issuer: "letsencrypt-prod"
             hosts:
-              - '{{ requiredEnv "ARGO_CD_INGRESS_HOST" }}'
+              - '{{ env "ARGO_CD_INGRESS_HOST" }}'
             tls:
               - secretName: argocd-server-tls
                 hosts:
-                  - '{{ requiredEnv "ARGO_CD_INGRESS_HOST" }}'
+                  - '{{ env "ARGO_CD_INGRESS_HOST" }}'
 
           config:
             repositories: |

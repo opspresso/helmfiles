@@ -19,10 +19,10 @@ releases:
 
         env:
           open:
-            DEBUG: '{{ env "CHARTMUSEUM_DEBUG" | default "false" }}'
-            DISABLE_API: '{{ env "CHARTMUSEUM_DISABLE_API" | default "true" }}'
-            DISABLE_METRICS: '{{ env "CHARTMUSEUM_DISABLE_METRICS" | default "true" }}'
-            ALLOW_OVERWRITE: '{{ env "CHARTMUSEUM_ALLOW_OVERWRITE" | default "false" }}'
+            DEBUG: false
+            # DISABLE_API: false
+            # DISABLE_METRICS: false
+            # ALLOW_OVERWRITE: true
             # use amazon s3 storage as backend
             STORAGE: "amazon"
             ### Required: CHARTMUSEUM_STORAGE_AMAZON_BUCKET;
@@ -46,7 +46,7 @@ releases:
             ingress.kubernetes.io/proxy-body-size: 500m
             cert-manager.io/cluster-issuer: "letsencrypt-prod"
           hosts:
-            - name: '{{ requiredEnv "CHARTMUSEUM_HOST" }}'
+            - name: '{{ env "CHARTMUSEUM_HOST" }}'
               path: /
               tls: true
               tlsSecret: chartmuseum-tls

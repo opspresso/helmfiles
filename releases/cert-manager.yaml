@@ -24,7 +24,7 @@ releases:
       - nameOverride: cert-manager
 
         rbac:
-          create: '{{ env "CERT_MANAGER_RBAC_ENABLED" | default "false" }}'
+          create: true
 
         ingressShim:
           defaultIssuerName: letsencrypt-prod

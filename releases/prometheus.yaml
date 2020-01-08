@@ -15,7 +15,7 @@ releases:
         server:
           enabled: true
           ingress:
-            enabled: '{{ env "PROMETHEUS_INGRESS_ENABLED" | default "false" }}'
+            enabled: true
             annotations:
               kubernetes.io/ingress.class: nginx
               nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -27,14 +27,14 @@ releases:
                 hosts:
                   - '{{ env "PROMETHEUS_HOST" }}'
           persistentVolume:
-            enabled: '{{ env "PROMETHEUS_PV_ENABLED" | default "false" }}'
-            storageClass: '{{ env "PROMETHEUS_PV_SC" | default "gp2" }}'
+            enabled: true
+            storageClass: "efs"
 
         alertmanager:
-          enabled: '{{ env "PROMETHEUS_ALERT_MANAGER_ENABLED" | default "false" }}'
+          enabled: false
           persistentVolume:
-            enabled: '{{ env "PROMETHEUS_PV_ENABLED" | default "false" }}'
-            storageClass: '{{ env "PROMETHEUS_PV_SC" | default "gp2" }}'
+            enabled: true
+            storageClass: "efs"
 
         kubeStateMetrics:
-          enabled: '{{ env "PROMETHEUS_KUBE_STATE_METRICS" | default "false" }}'
+          enabled: false
