@@ -34,6 +34,8 @@ export EFS_FILE_SYSTEM_ID="$(aws efs describe-file-systems --creation-token ${CL
 
 # monitor
 export PROMETHEUS_INSTALLED="true"
+export PROMETHEUS_INGRESS_ENABLED="true"
+export PROMETHEUS_HOST="prometheus.${BASE_DOMAIN}"
 
 export GRAFANA_INSTALLED="true"
 export GRAFANA_HOST="grafana.${BASE_DOMAIN}"

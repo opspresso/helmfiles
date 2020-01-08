@@ -14,6 +14,20 @@ releases:
 
         server:
           enabled: true
+          server:
+            ingress:
+              enabled: '{{ env "PROMETHEUS_INGRESS_ENABLED" | default "false" }}'
+              annotations:
+                kubernetes.io/ingress.class: nginx
+                nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+                cert-manager.io/cluster-issuer: "letsencrypt-prod"
+              hosts:
+                - '{{ env "PROMETHEUS_HOST" }}'
+              tls:
+                - secretName: prometheus-tls
+                  hosts:
+                    - '{{ env "PROMETHEUS_HOST" }}'
+
           persistentVolume:
             enabled: true
             storageClass: "efs"
