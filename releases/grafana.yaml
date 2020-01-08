@@ -70,7 +70,7 @@ releases:
             jmx-overview:
               # https://grafana.com/dashboards/11526
               gnetId: 11526
-              revision: 2
+              revision: 3
               datasource: Prometheus
             nginx-ingress:
               url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
