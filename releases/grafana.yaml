@@ -65,7 +65,7 @@ releases:
             kube-deployment:
               # https://grafana.com/dashboards/9679
               gnetId: 9679
-              revision: 7
+              revision: 8
               datasource: Prometheus
             jmx-overview:
               # https://grafana.com/dashboards/11526
