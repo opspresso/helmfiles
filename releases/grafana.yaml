@@ -67,6 +67,11 @@ releases:
               gnetId: 9679
               revision: 6
               datasource: Prometheus
+            jmx-overview:
+              # https://grafana.com/dashboards/3066
+              gnetId: 3066
+              revision: 1
+              datasource: Prometheus
             nginx-ingress:
               url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
               datasource: Prometheus
