@@ -1,0 +1,13 @@
+repositories:
+  - name: codecentric
+    url: https://codecentric.github.io/helm-charts
+
+releases:
+  - name: keycloak
+    namespace: kube-system
+    chart: codecentric/keycloak
+    version: "6.1.0"
+    installed: true
+    # wait: true
+    values:
+      - nameOverride: keycloak
