@@ -6,7 +6,7 @@ releases:
   - name: argo
     namespace: argo
     chart: argo/argo
-    version: "0.6.4"
+    version: "0.6.5"
     installed: true
     # wait: true
     # hooks:

@@ -8,7 +8,7 @@ releases:
     chart: stable/efs-provisioner
     version: "0.8.0"
     installed: true
-    wait: true
+    # wait: true
     values:
       - nameOverride: efs-provisioner
 
