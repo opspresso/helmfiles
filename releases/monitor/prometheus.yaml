@@ -27,14 +27,14 @@ releases:
                 hosts:
                   - '{{ env "PROMETHEUS_HOST" }}'
           persistentVolume:
-            enabled: true
-            storageClass: "efs"
+            enabled: false
+            # storageClass: "efs"
 
         alertmanager:
           enabled: false
           persistentVolume:
-            enabled: true
-            storageClass: "efs"
+            enabled: false
+            # storageClass: "efs"
 
         kubeStateMetrics:
           enabled: false

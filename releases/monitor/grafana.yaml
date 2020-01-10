@@ -30,7 +30,7 @@ releases:
 
         persistence:
           enabled: false
-          storageClass: "efs"
+          # storageClass: "efs"
 
         datasources:
           datasources.yaml:

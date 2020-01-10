@@ -2,6 +2,6 @@
 
 helmfiles:
   # monitor
-  - releases/prometheus.yaml
-  - releases/prometheus-adapter.yaml
-  - releases/grafana.yaml
+  - releases/monitor/prometheus.yaml
+  - releases/monitor/prometheus-adapter.yaml
+  - releases/monitor/grafana.yaml
