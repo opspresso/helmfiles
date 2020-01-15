@@ -6,14 +6,14 @@ releases:
   - name: argo
     namespace: argo
     chart: argo/argo
-    version: "0.6.4"
+    version: "0.6.5"
     installed: true
-    wait: true
-    hooks:
-      - events: ["presync"]
-        showlogs: true
-        command: "/bin/sh"
-        args: ["-c", "../bin/versions.sh", "argo/argo"]
+    # wait: true
+    # hooks:
+    #   - events: ["presync"]
+    #     showlogs: true
+    #     command: "/bin/sh"
+    #     args: ["-c", "../bin/versions.sh", "argo/argo"]
     values:
       - nameOverride: argo
 
@@ -29,11 +29,11 @@ releases:
               nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
               cert-manager.io/cluster-issuer: "letsencrypt-prod"
             hosts:
-              - '{{ requiredEnv "ARGO_INGRESS_HOST" }}'
+              - '{{ env "ARGO_INGRESS_HOST" }}'
             tls:
               - secretName: argo-ui-tls
                 hosts:
-                  - '{{ requiredEnv "ARGO_INGRESS_HOST" }}'
+                  - '{{ env "ARGO_INGRESS_HOST" }}'
 
         useDefaultArtifactRepo: true
         useStaticCredentials: false

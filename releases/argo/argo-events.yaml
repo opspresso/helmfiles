@@ -1,0 +1,13 @@
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: argo-events
+    namespace: argo-events
+    chart: argo/argo-events
+    version: "0.6.1"
+    installed: true
+    # wait: true
+    values:
+      - nameOverride: argo-events

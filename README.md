@@ -26,5 +26,9 @@ bash ./bin/helm_init.sh
 
 ```bash
 helmfile sync
+
 helmfile -f helmfile-argo.yaml sync
+helmfile -f helmfile-devops.yaml sync
+helmfile -f helmfile-keycloak.yaml sync
+helmfile -f helmfile-monitor.yaml sync
 ```

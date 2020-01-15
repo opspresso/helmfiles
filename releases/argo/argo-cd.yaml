@@ -3,23 +3,34 @@ repositories:
     url: https://argoproj.github.io/argo-helm
 
 releases:
-  - name: argo-cd
-    namespace: argo
+  - name: argocd
+    namespace: argo-cd
     chart: argo/argo-cd
-    version: "1.5.1"
+    version: "1.6.0"
     installed: true
-    wait: true
-    hooks:
-      - events: ["presync"]
-        showlogs: true
-        command: "/bin/sh"
-        args: ["-c", "../bin/versions.sh", "argo/argo-cd"]
+    # wait: true
+    # hooks:
+    #   - events: ["postsync"]
+    #     showlogs: true
+    #     command: "/bin/sh"
+    #     args:
+    #       [
+    #         "-c",
+    #         "kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml",
+    #       ]
     values:
       - nameOverride: argocd
 
         server:
           extraArgs:
             insecure: true
+
+          metrics:
+            enabled: true
+            service:
+              annotations:
+                prometheus.io/scrape: "true"
+                prometheus.io/port: "8083"
 
           ingress:
             enabled: true
@@ -28,11 +39,11 @@ releases:
               nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
               cert-manager.io/cluster-issuer: "letsencrypt-prod"
             hosts:
-              - '{{ requiredEnv "ARGO_CD_INGRESS_HOST" }}'
+              - '{{ env "ARGO_CD_INGRESS_HOST" }}'
             tls:
               - secretName: argocd-server-tls
                 hosts:
-                  - '{{ requiredEnv "ARGO_CD_INGRESS_HOST" }}'
+                  - '{{ env "ARGO_CD_INGRESS_HOST" }}'
 
           config:
             repositories: |

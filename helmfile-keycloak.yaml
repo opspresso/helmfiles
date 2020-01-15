@@ -1,0 +1,5 @@
+# Ordered list of releases.
+
+helmfiles:
+  # keycloak
+  - releases/keycloak/keycloak.yaml

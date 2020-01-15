@@ -6,15 +6,16 @@ releases:
   - name: jenkins
     namespace: devops
     chart: stable/jenkins
-    version: "1.9.8"
-    installed: { { env "JENKINS_INSTALLED" | default "false" } }
-    wait: true
+    version: "1.9.10"
+    installed: true
+    # wait: true
     values:
       - nameOverride: jenkins
 
         master:
           adminUser: '{{ env "JENKINS_USERNAME" | default "admin" }}'
           adminPassword: '{{ env "JENKINS_PASSWORD" | default "password" }}'
+
           resources:
             requests:
               cpu: 1000m
@@ -22,11 +23,14 @@ releases:
             limits:
               cpu: 2000m
               memory: 4Gi
+
           # PodAnnotations:
           #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+
           hostNetworking: true
           javaOpts: "-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Seoul"
           # serviceType: ClusterIP
+
           ingress:
             enabled: true
             annotations:
@@ -38,6 +42,7 @@ releases:
               - secretName: jenkins-tls
                 hosts:
                   - '{{ requiredEnv "JENKINS_HOST" }}'
+
           overwritePlugins: true
           installPlugins:
             # https://github.com/helm/charts/blob/master/stable/jenkins/values.yaml
@@ -59,3 +64,11 @@ releases:
             - ldap:latest
             # https://plugins.jenkins.io/google-login
             - google-login:latest
+
+        persistence:
+          enabled: true
+          storageClass: "efs"
+
+        rbac:
+          create: true
+          readSecrets: true
