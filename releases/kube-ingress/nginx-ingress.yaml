@@ -13,7 +13,7 @@ releases:
       - events: ["postsync"]
         showlogs: true
         command: "/bin/sh"
-        args: ["-c", "../bin/nginx_ingress_route53.sh"]
+        args: ["-c", "../../bin/nginx_ingress_route53.sh"]
     values:
       - nameOverride: nginx-ingress
 
