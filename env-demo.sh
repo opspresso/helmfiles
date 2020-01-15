@@ -24,6 +24,11 @@ export PROMETHEUS_HOST="prometheus.${BASE_DOMAIN}"
 
 export GRAFANA_HOST="grafana.${BASE_DOMAIN}"
 
+# keycloak
+export KEYCLOAK_USERNAME="admin"
+export KEYCLOAK_PASSWORD="password"
+export KEYCLOAK_HOST="keycloak.${BASE_DOMAIN}"
+
 # argo
 export ARGO_INGRESS_HOST="argo.${BASE_DOMAIN}"
 export ARGO_IAM_ROLE="${CLUSTER_NAME}-argo"
