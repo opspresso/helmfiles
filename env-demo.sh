@@ -3,7 +3,7 @@
 # common
 export AWS_REGION="ap-northeast-2"
 
-export CLUSTER_NAME="seoul-dev-demo-eks"
+export CLUSTER_NAME="dev-demo-eks"
 
 export ROOT_DOMAIN="mzdev.be"
 export BASE_DOMAIN="demo.${ROOT_DOMAIN}"
