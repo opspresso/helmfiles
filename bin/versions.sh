@@ -6,7 +6,6 @@ LIST=/tmp/helm-list
 helm list | awk '{print $1" "$9}' > ${LIST}
 
 cat ${LIST} | awk '{print $2}'
-echo
 
 # helm 3
 # URL="https://hub.helm.sh/charts/${REPO}"
@@ -17,6 +16,7 @@ while read VAR; do
 
     REPO=${ARR[0]}
 
-    helm search ${REPO} -o json | REPO="${REPO}" jq -r '[.[] | select(.Name==env.REPO)][0] | "\(.Version)"'
+    echo
+    helm search ${REPO} | grep "\/${REPO}"
 
 done < ${LIST}

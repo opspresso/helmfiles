@@ -12,3 +12,14 @@ helmfiles:
   # - releases/kube-system/cluster-autoscaler.yaml
   # - releases/kube-system/cluster-overprovisioner.yaml
   # - releases/kube-system/efs-provisioner.yaml
+
+  # argo
+  - releases/argo/argo.yaml
+  - releases/argo/argo-cd.yaml
+  - releases/argo/argo-events.yaml
+  - releases/argo/argo-rollouts.yaml
+
+  # monitor
+  - releases/monitor/prometheus.yaml
+  - releases/monitor/prometheus-adapter.yaml
+  - releases/monitor/grafana.yaml
