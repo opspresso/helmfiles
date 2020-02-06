@@ -2,4 +2,4 @@
 
 helmfiles:
   # keycloak
-  - releases/keycloak/keycloak.yaml
+  - releases/keycloak.yaml

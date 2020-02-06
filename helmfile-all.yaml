@@ -2,24 +2,24 @@
 
 helmfiles:
   # kube-ingress
-  - releases/kube-ingress/cert-manager.yaml
-  - releases/kube-ingress/nginx-ingress.yaml
+  - releases/cert-manager.yaml
+  - releases/nginx-ingress.yaml
 
   # kube-system
-  - releases/kube-system/kube2iam.yaml
-  - releases/kube-system/metrics-server.yaml
-  - releases/kube-system/kube-state-metrics.yaml
-  # - releases/kube-system/cluster-autoscaler.yaml
-  # - releases/kube-system/cluster-overprovisioner.yaml
-  # - releases/kube-system/efs-provisioner.yaml
+  - releases/kube2iam.yaml
+  - releases/metrics-server.yaml
+  - releases/kube-state-metrics.yaml
+  # - releases/cluster-autoscaler.yaml
+  # - releases/cluster-overprovisioner.yaml
+  # - releases/efs-provisioner.yaml
 
   # argo
-  - releases/argo/argo.yaml
-  - releases/argo/argo-cd.yaml
-  - releases/argo/argo-events.yaml
-  - releases/argo/argo-rollouts.yaml
+  - releases/argo.yaml
+  - releases/argo-cd.yaml
+  - releases/argo-events.yaml
+  - releases/argo-rollouts.yaml
 
   # monitor
-  - releases/monitor/prometheus.yaml
-  - releases/monitor/prometheus-adapter.yaml
-  - releases/monitor/grafana.yaml
+  - releases/prometheus.yaml
+  - releases/prometheus-adapter.yaml
+  - releases/grafana.yaml
