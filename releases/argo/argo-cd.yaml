@@ -6,7 +6,7 @@ releases:
   - name: argocd
     namespace: argo-cd
     chart: argo/argo-cd
-    version: "1.6.3"
+    version: "1.7.3"
     installed: true
     # wait: true
     # hooks:
