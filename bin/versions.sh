@@ -1,26 +1,22 @@
 #!/bin/bash
 
-REPO=${1}
-
-if [ -z "${REPO}" ]; then
-    exit 0
-fi
-
-NAME=$(echo $REPO | cut -d'/' -f2)
+LIST=/tmp/helm-list
 
 # installed chart version
-VERSION=$(helm list | grep "${NAME}" | head -1 | awk '{print $9}')
+helm list | awk '{print $1" "$9}' > ${LIST}
 
-if [ "${VERSION}" != "" ]; then
-    printf '# %-20s : %-25s \n' "installed version" "${VERSION}"
-fi
+cat ${LIST} | awk '{print $2}'
+echo
 
 # helm 3
 # URL="https://hub.helm.sh/charts/${REPO}"
 # LATEST=$(helm search hub ${NAME} -o json | URL="${URL}" jq -r '[.[] | select(.url==env.URL)][0] | "\(.version)"')
 
-LATEST=$(helm search ${REPO} -o json | REPO="${REPO}" jq -r '[.[] | select(.Name==env.REPO)][0] | "\(.Version)"')
+while read VAR; do
+    ARR=(${VAR})
 
-if [ "${LATEST}" != "" ]; then
-    printf '# %-20s : %-25s \n' "latest chart version" "${NAME}-${LATEST}"
-fi
+    REPO=${ARR[0]}
+
+    helm search ${REPO} -o json | REPO="${REPO}" jq -r '[.[] | select(.Name==env.REPO)][0] | "\(.Version)"'
+
+done < ${LIST}
