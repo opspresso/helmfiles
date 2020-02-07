@@ -6,7 +6,7 @@ releases:
   - name: k8s-spot-termination-handler
     namespace: kube-system
     chart: stable/k8s-spot-termination-handler
-    version: "1.4.8"
+    version: ~1.4.8
     installed: true
     # wait: true
     values:

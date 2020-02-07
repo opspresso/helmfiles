@@ -6,7 +6,7 @@ releases:
   - name: kube2iam
     namespace: kube-system
     chart: stable/kube2iam
-    version: "2.1.0"
+    version: ~2.1.0
     installed: true
     # wait: true
     values:

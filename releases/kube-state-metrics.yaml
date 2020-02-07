@@ -6,7 +6,7 @@ releases:
   - name: kube-state-metrics
     namespace: kube-system
     chart: stable/kube-state-metrics
-    version: "2.6.4"
+    version: ~2.6.4
     installed: true
     wait: true
     values:

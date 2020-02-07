@@ -6,7 +6,7 @@ releases:
   - name: cluster-overprovisioner
     namespace: kube-system
     chart: stable/cluster-overprovisioner
-    version: "0.2.6"
+    version: ~0.2.6
     installed: true
     # wait: true
     values:

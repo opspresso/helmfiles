@@ -6,7 +6,7 @@ releases:
   - name: keycloak
     namespace: keycloak
     chart: codecentric/keycloak
-    version: "6.1.0"
+    version: ~6.1.0
     installed: true
     # wait: true
     values:

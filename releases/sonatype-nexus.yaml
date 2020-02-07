@@ -6,7 +6,7 @@ releases:
   - name: sonatype-nexus
     namespace: devops
     chart: stable/sonatype-nexus
-    version: "1.21.2"
+    version: ~1.21.2
     installed: true
     # wait: true
     values:

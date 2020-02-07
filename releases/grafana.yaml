@@ -6,7 +6,7 @@ releases:
   - name: grafana
     namespace: monitor
     chart: stable/grafana
-    version: "4.6.3"
+    version: ~4.6.3
     installed: true
     # wait: true
     values:
