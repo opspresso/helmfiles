@@ -40,3 +40,4 @@ configs:
   secret:
     createSecret: true
     argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
+    argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
