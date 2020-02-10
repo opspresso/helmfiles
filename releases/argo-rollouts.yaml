@@ -2,6 +2,14 @@ repositories:
   - name: incubator
     url: https://kubernetes-charts-incubator.storage.googleapis.com
 
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
 releases:
   - name: argo-rollouts
     namespace: argo-rollouts
@@ -21,13 +29,4 @@ releases:
             "kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml",
           ]
     values:
-      - resources:
-          - apiVersion: v1
-            kind: ConfigMap
-            metadata:
-              labels:
-                app: argo-rollouts
-                app.kubernetes.io/name: argo-rollouts
-              name: argo-rollouts
-            data:
-              NAME: argo-rollouts
+      - ../values/argo-rollouts.yaml.gotmpl

@@ -4,6 +4,14 @@ repositories:
   - name: incubator
     url: https://kubernetes-charts-incubator.storage.googleapis.com
 
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
 releases:
   - name: cert-manager
     namespace: kube-ingress
@@ -21,41 +29,15 @@ releases:
             "kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.13/deploy/manifests/00-crds.yaml",
           ]
     values:
-      - nameOverride: cert-manager
-
-        rbac:
-          create: true
-
-        ingressShim:
-          defaultIssuerName: letsencrypt-prod
-          defaultIssuerKind: ClusterIssuer
+      - ../values/cert-manager.yaml.gotmpl
 
   - name: cert-manager-issuers
     namespace: kube-ingress
     chart: incubator/raw
-    version: "0.1.0"
+    version: ~0.1.0
     installed: true
     wait: true
     force: true
     recreatePods: true
     values:
-      - resources:
-          - apiVersion: cert-manager.io/v1alpha2
-            kind: ClusterIssuer
-            metadata:
-              name: letsencrypt-prod
-            spec:
-              acme:
-                # The ACME server URL
-                server: https://acme-v02.api.letsencrypt.org/directory
-                # Email address used for ACME registration
-                email: '{{ requiredEnv "CERT_MANAGER_ISSUER_EMAIL" }}'
-                # Name of a secret used to store the ACME account private key
-                privateKeySecretRef:
-                  name: letsencrypt-prod
-                solvers:
-                  # An empty 'selector' means that this solver matches all domains
-                  - selector: {}
-                    http01:
-                      ingress:
-                        class: nginx
+      - ../values/cert-manager-issuers.yaml.gotmpl

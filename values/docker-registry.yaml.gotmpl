@@ -1,0 +1,34 @@
+nameOverride: docker-registry
+
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "docker-registry.iam-role" | default "" }}'
+
+storage: s3
+
+s3:
+  region: '{{ .Values | getOrNil "docker-registry.s3.region" | default "" }}'
+  bucket: '{{ .Values | getOrNil "docker-registry.s3.bucket" | default "" }}'
+  encrypt: '{{ .Values | getOrNil "docker-registry.s3.encrypt" | default "false" }}'
+  secure: '{{ .Values | getOrNil "docker-registry.s3.secure" | default "false" }}'
+
+secrets:
+  s3:
+    accessKey: ""
+    secretKey: ""
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
+    ingress.kubernetes.io/proxy-body-size: 500m
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - '{{ .Values | getOrNil "docker-registry.domain" | default "docker-registry.example.com" }}'
+  path: /
+  tls:
+    - secretName: docker-registry-tls
+      hosts:
+        - '{{ .Values | getOrNil "docker-registry.domain" | default "docker-registry.example.com" }}'

@@ -2,6 +2,14 @@ repositories:
   - name: argo
     url: https://argoproj.github.io/argo-helm
 
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
 releases:
   - name: argo
     namespace: argo
@@ -9,36 +17,5 @@ releases:
     version: ~0.6.5
     installed: true
     # wait: true
-    # hooks:
-    #   - events: ["presync"]
-    #     showlogs: true
-    #     command: "/bin/sh"
-    #     args: ["-c", "../bin/versions.sh", "argo/argo"]
     values:
-      - nameOverride: argo
-
-        controller:
-          podAnnotations:
-            iam.amazonaws.com/role: '{{ env "ARGO_IAM_ROLE" }}'
-
-        ui:
-          ingress:
-            enabled: true
-            annotations:
-              kubernetes.io/ingress.class: nginx
-              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-              cert-manager.io/cluster-issuer: "letsencrypt-prod"
-            hosts:
-              - '{{ env "ARGO_INGRESS_HOST" }}'
-            tls:
-              - secretName: argo-ui-tls
-                hosts:
-                  - '{{ env "ARGO_INGRESS_HOST" }}'
-
-        useDefaultArtifactRepo: true
-        useStaticCredentials: false
-
-        artifactRepository:
-          s3:
-            bucket: '{{ env "ARGO_BUCKET" }}'
-            endpoint: s3.amazonaws.com
+      - ../values/argo.yaml.gotmpl

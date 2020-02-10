@@ -1,0 +1,5 @@
+nameOverride: k8s-spot-termination-handler
+
+clusterName: '{{ .Values | getOrNil "cluster.name" | default "" }}'
+
+slackUrl: '{{ .Values | getOrNil "k8s-spot-termination-handler.slackUrl" | default "" }}'

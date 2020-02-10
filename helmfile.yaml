@@ -1,5 +1,13 @@
 # Ordered list of releases.
 
+environments:
+  default:
+    values:
+      - environments/default.yaml
+  eks-demo:
+    values:
+      - environments/eks-demo.yaml
+
 helmfiles:
   # kube-ingress
   - releases/cert-manager.yaml
@@ -12,3 +20,8 @@ helmfiles:
   # - releases/cluster-autoscaler.yaml
   # - releases/cluster-overprovisioner.yaml
   # - releases/efs-provisioner.yaml
+
+  # monitor
+  - releases/prometheus.yaml
+  - releases/prometheus-adapter.yaml
+  - releases/grafana.yaml

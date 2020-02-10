@@ -8,6 +8,8 @@ brew install helm
 brew install helmfile
 
 pip install --upgrade --user awscli
+
+helm plugin install https://github.com/databus23/helm-diff --version master
 ```
 
 ## helm init
@@ -16,19 +18,16 @@ pip install --upgrade --user awscli
 bash ./bin/helm_init.sh
 ```
 
-## set env
+## helmfile apply
 
 ```bash
-. ./env-demo.sh
+helmfile -e eks-demo apply
+
+helmfile -f helmfile-all.yaml -e eks-demo apply
+helmfile -f helmfile-argo.yaml -e eks-demo apply
+helmfile -f helmfile-devops.yaml -e eks-demo apply
+helmfile -f helmfile-keycloak.yaml -e eks-demo apply
+helmfile -f helmfile-monitor.yaml -e eks-demo apply
 ```
 
-## helmfile sync
-
-```bash
-helmfile sync
-
-helmfile -f helmfile-argo.yaml sync
-helmfile -f helmfile-devops.yaml sync
-helmfile -f helmfile-keycloak.yaml sync
-helmfile -f helmfile-monitor.yaml sync
-```
+* <https://github.com/roboll/helmfile/>

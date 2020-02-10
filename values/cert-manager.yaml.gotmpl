@@ -1,0 +1,8 @@
+nameOverride: cert-manager
+
+rbac:
+  create: true
+
+ingressShim:
+  defaultIssuerName: letsencrypt-prod
+  defaultIssuerKind: ClusterIssuer

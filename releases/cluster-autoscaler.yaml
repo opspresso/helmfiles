@@ -2,6 +2,14 @@ repositories:
   - name: stable
     url: https://kubernetes-charts.storage.googleapis.com
 
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
 releases:
   - name: cluster-autoscaler
     namespace: kube-system
@@ -10,29 +18,4 @@ releases:
     installed: true
     # wait: true
     values:
-      - nameOverride: cluster-autoscaler
-
-        awsRegion: '{{ requiredEnv "AWS_REGION" }}'
-
-        autoDiscovery:
-          enabled: true
-          clusterName: '{{ requiredEnv "CLUSTER_NAME" }}'
-
-        extraArgs:
-          v: 4
-          stderrthreshold: info
-          logtostderr: true
-          expander: most-pods
-          scale-down-enabled: true
-          scale-down-utilization-threshold: 0.75
-          skip-nodes-with-local-storage: false
-          skip-nodes-with-system-pods: false
-
-        podAnnotations:
-          iam.amazonaws.com/role: '{{ env "CLUSTER_AUTOSCALER_IAM_ROLE" }}'
-
-        sslCertPath: /etc/ssl/certs/ca-bundle.crt
-
-        rbac:
-          create: true
-          pspEnabled: true
+      - ../values/cluster-autoscaler.yaml.gotmpl

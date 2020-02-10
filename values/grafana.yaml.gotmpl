@@ -1,0 +1,71 @@
+nameOverride: grafana
+
+adminUser: '{{ .Values | getOrNil "grafana.username" | default "admin" }}'
+adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}'
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - '{{ .Values | getOrNil "grafana.domain" | default "grafana.example.com" }}'
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - '{{ .Values | getOrNil "grafana.domain" | default "grafana.example.com" }}'
+
+persistence:
+  enabled: false
+  # storageClass: "efs"
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server
+        access: proxy
+        isDefault: true
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: default
+        orgId: 1
+        folder: ""
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    kube-cluster:
+      # https://grafana.com/dashboards/9797
+      gnetId: 9797
+      revision: 7
+      datasource: Prometheus
+    kube-deployment:
+      # https://grafana.com/dashboards/9679
+      gnetId: 9679
+      revision: 8
+      datasource: Prometheus
+    jmx-overview:
+      # https://grafana.com/dashboards/11526
+      gnetId: 11526
+      revision: 4
+      datasource: Prometheus
+    nginx-ingress:
+      url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
+      datasource: Prometheus
+    argo-cd:
+      url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
+      datasource: Prometheus
+    argo-rollouts:
+      url: https://raw.githubusercontent.com/argoproj/argo-rollouts/master/examples/dashboard.json
+      datasource: Prometheus

@@ -2,6 +2,14 @@ repositories:
   - name: stable
     url: https://kubernetes-charts.storage.googleapis.com
 
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
 releases:
   - name: docker-registry
     namespace: devops
@@ -10,38 +18,4 @@ releases:
     installed: true
     # wait: true
     values:
-      - nameOverride: docker-registry
-
-        podAnnotations:
-          cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-          iam.amazonaws.com/role: '{{ env "DOCKER_REGISTRY_IAM_ROLE" }}'
-
-        storage: s3
-
-        s3:
-          region: '{{ requiredEnv "DOCKER_REGISTRY_S3_REGION" }}'
-          regionEndpoint: '{{ requiredEnv "DOCKER_REGISTRY_S3_ENDPOINT" }}'
-          bucket: '{{ requiredEnv "DOCKER_REGISTRY_S3_BUCKET" }}'
-          encrypt: '{{ env "DOCKER_REGISTRY_S3_ENCRYPT" | default "false" }}'
-          secure: '{{ env "DOCKER_REGISTRY_S3_SECURE" | default "false" }}'
-
-        secrets:
-          s3:
-            accessKey: ""
-            secretKey: ""
-
-        ingress:
-          enabled: true
-          annotations:
-            kubernetes.io/ingress.class: nginx
-            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-            nginx.ingress.kubernetes.io/proxy-body-size: 500m
-            ingress.kubernetes.io/proxy-body-size: 500m
-            cert-manager.io/cluster-issuer: "letsencrypt-prod"
-          hosts:
-            - '{{ requiredEnv "DOCKER_REGISTRY_HOST" }}'
-          path: /
-          tls:
-            - secretName: docker-registry-tls
-              hosts:
-                - '{{ requiredEnv "DOCKER_REGISTRY_HOST" }}'
+      - ../values/docker-registry.yaml.gotmpl

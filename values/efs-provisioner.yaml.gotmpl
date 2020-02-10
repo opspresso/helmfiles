@@ -1,0 +1,19 @@
+nameOverride: efs-provisioner
+
+# podAnnotations:
+#   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+#   iam.amazonaws.com/role: '{{ .Values | getOrNil "efs-provisioner.iam-role" | default "" }}'
+
+efsProvisioner:
+  efsFileSystemId: '{{ .Values | getOrNil "efs-provisioner.efsFileSystemId" | default "" }}'
+  awsRegion: '{{ .Values | getOrNil "aws.region" | default "" }}'
+  path: /shared
+  provisionerName: '{{ .Values | getOrNil "efs-provisioner.provisionerName" | default "aws-efs" }}'
+  storageClass:
+    name: '{{ .Values | getOrNil "efs-provisioner.storageClass.name" | default "efs" }}'
+    isDefault: '{{ .Values | getOrNil "efs-provisioner.storageClass.isDefault" | default "false" }}'
+    gidAllocate:
+      enabled: '{{ .Values | getOrNil "efs-provisioner.storageClass.gidAllocate.enabled" | default "true" }}'
+      gidMin: '{{ .Values | getOrNil "efs-provisioner.storageClass.gidAllocate.gidMin" | default "40000" }}'
+      gidMax: '{{ .Values | getOrNil "efs-provisioner.storageClass.gidAllocate.gidMax" | default "50000" }}'
+    reclaimPolicy: '{{ .Values | getOrNil "efs-provisioner.storageClass.reclaimPolicy" | default "Delete" }}'

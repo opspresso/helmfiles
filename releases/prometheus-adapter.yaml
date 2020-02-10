@@ -2,6 +2,14 @@ repositories:
   - name: stable
     url: https://kubernetes-charts.storage.googleapis.com
 
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
 releases:
   - name: prometheus-adapter
     namespace: monitor
@@ -10,25 +18,4 @@ releases:
     installed: true
     # wait: true
     values:
-      - nameOverride: prometheus-adapter
-
-        prometheus:
-          url: http://prometheus-server
-          port: 80
-
-        rules:
-          # default: false
-          custom:
-            - metricsQuery: sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)
-              name:
-                as: ${1}_per_second
-                matches: ^(.*)_total
-              resources:
-                overrides:
-                  namespace:
-                    resource: namespace
-                  pod:
-                    resource: pod
-                  service:
-                    resource: service
-              seriesQuery: http_requests_total{namespace!="",pod!=""}
+      - ../values/prometheus-adapter.yaml.gotmpl

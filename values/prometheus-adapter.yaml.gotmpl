@@ -1,0 +1,22 @@
+nameOverride: prometheus-adapter
+
+prometheus:
+  url: http://prometheus-server
+  port: 80
+
+rules:
+  # default: false
+  custom:
+    - metricsQuery: sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)
+      name:
+        as: ${1}_per_second
+        matches: ^(.*)_total
+      resources:
+        overrides:
+          namespace:
+            resource: namespace
+          pod:
+            resource: pod
+          service:
+            resource: service
+      seriesQuery: http_requests_total{namespace!="",pod!=""}
