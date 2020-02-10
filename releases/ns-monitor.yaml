@@ -1,6 +1,6 @@
 repositories:
-  - name: argo
-    url: https://argoproj.github.io/argo-helm
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:
@@ -11,7 +11,7 @@ environments:
       - ../environments/eks-demo.yaml
 
 releases:
-  - name: ns-argo
+  - name: ns-monitor
     namespace: default
     chart: incubator/raw
     version: ~0.1.0
@@ -23,13 +23,4 @@ releases:
           - apiVersion: v1
             kind: Namespace
             metadata:
-              name: argo
-
-  - name: argo
-    namespace: argo
-    chart: argo/argo
-    version: ~0.6.5
-    installed: true
-    # wait: true
-    values:
-      - ../values/argo.yaml.gotmpl
+              name: monitor

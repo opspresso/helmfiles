@@ -12,12 +12,6 @@ pip install --upgrade --user awscli
 helm plugin install https://github.com/databus23/helm-diff --version master
 ```
 
-## helm init
-
-```bash
-bash ./bin/helm_init.sh
-```
-
 ## helmfile apply
 
 ```bash

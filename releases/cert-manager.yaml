@@ -35,7 +35,7 @@ releases:
     version: ~0.1.0
     installed: true
     wait: true
-    force: true
-    recreatePods: true
+    # force: true
+    # recreatePods: true
     values:
       - ../values/cert-manager-issuers.yaml.gotmpl

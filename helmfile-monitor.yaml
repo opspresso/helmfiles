@@ -9,6 +9,9 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
+  # namespaces
+  - releases/ns-monitor.yaml
+
   # monitor
   - releases/prometheus.yaml
   - releases/prometheus-adapter.yaml

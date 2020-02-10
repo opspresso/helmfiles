@@ -11,18 +11,25 @@ environments:
       - ../environments/eks-demo.yaml
 
 releases:
+  - name: ns-keycloak
+    namespace: default
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    wait: true
+    force: true
+    values:
+      - resources:
+          - apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: keycloak
+
   - name: keycloak
     namespace: keycloak
     chart: codecentric/keycloak
     version: ~6.1.0
     installed: true
     # wait: true
-    hooks:
-      - events: ["presync"]
-        showlogs: true
-        command: "/bin/sh"
-        args:
-          - -c
-          - kubectl create ns keycloak
     values:
       - ../values/keycloak.yaml.gotmpl
