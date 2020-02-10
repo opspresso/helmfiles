@@ -9,6 +9,10 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
+  # namespaces
+  - releases/ns-kube-ingress.yaml
+  - releases/ns-monitor.yaml
+
   # kube-ingress
   - releases/cert-manager.yaml
   - releases/nginx-ingress.yaml

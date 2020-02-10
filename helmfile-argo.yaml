@@ -9,6 +9,9 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
+  # namespaces
+  - releases/ns-argo.yaml
+
   # argo
   - releases/argo.yaml
   - releases/argo-cd.yaml
