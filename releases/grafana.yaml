@@ -1,0 +1,21 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: grafana
+    namespace: monitor
+    chart: stable/grafana
+    version: ~4.6.3
+    installed: true
+    # wait: true
+    values:
+      - ../values/grafana.yaml.gotmpl

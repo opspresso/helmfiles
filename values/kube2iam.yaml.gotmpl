@@ -1,0 +1,17 @@
+nameOverride: kube2iam
+
+aws:
+  region: '{{ .Values | getOrNil "aws.region" | default "" }}'
+
+extraArgs:
+  auto-discover-base-arn: true
+  auto-discover-default-role: true
+  # base-role-arn: BASE_ROLE_ARN
+  # default-role: DEFAULT_ROLE
+
+host:
+  iptables: true
+  interface: eni+
+
+rbac:
+  create: true

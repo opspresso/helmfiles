@@ -1,0 +1,28 @@
+repositories:
+  - name: codecentric
+    url: https://codecentric.github.io/helm-charts
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: keycloak
+    namespace: keycloak
+    chart: codecentric/keycloak
+    version: ~6.1.0
+    installed: true
+    # wait: true
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          - -c
+          - kubectl create ns keycloak
+    values:
+      - ../values/keycloak.yaml.gotmpl

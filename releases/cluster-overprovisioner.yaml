@@ -1,0 +1,21 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: cluster-overprovisioner
+    namespace: kube-system
+    chart: stable/cluster-overprovisioner
+    version: ~0.2.6
+    installed: true
+    # wait: true
+    values:
+      - ../values/cluster-overprovisioner.yaml.gotmpl

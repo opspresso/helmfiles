@@ -1,0 +1,6 @@
+# common
+cluster:
+  name: default
+
+aws:
+  region: ap-northeast-2

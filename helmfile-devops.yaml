@@ -1,10 +1,18 @@
 # Ordered list of releases.
 
+environments:
+  default:
+    values:
+      - environments/default.yaml
+  eks-demo:
+    values:
+      - environments/eks-demo.yaml
+
 helmfiles:
   # devops
-  - releases/devops/chartmuseum.yaml
-  - releases/devops/docker-registry.yaml
-  # - releases/devops/harbor.yaml
-  - releases/devops/jenkins.yaml
-  # - releases/devops/sonarqube.yaml
-  # - releases/devops/sonatype-nexus.yaml
+  - releases/chartmuseum.yaml
+  - releases/docker-registry.yaml
+  # - releases/harbor.yaml
+  - releases/jenkins.yaml
+  # - releases/sonarqube.yaml
+  # - releases/sonatype-nexus.yaml

@@ -1,0 +1,28 @@
+nameOverride: prometheus
+
+server:
+  enabled: true
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    hosts:
+      - '{{ .Values | getOrNil "prometheus.domain" | default "prometheus.example.com" }}'
+    tls:
+      - secretName: prometheus-tls
+        hosts:
+          - '{{ .Values | getOrNil "prometheus.domain" | default "prometheus.example.com" }}'
+  persistentVolume:
+    enabled: false
+    # storageClass: "efs"
+
+alertmanager:
+  enabled: false
+  persistentVolume:
+    enabled: false
+    # storageClass: "efs"
+
+kubeStateMetrics:
+  enabled: false

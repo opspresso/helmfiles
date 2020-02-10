@@ -1,8 +1,16 @@
 # Ordered list of releases.
 
+environments:
+  default:
+    values:
+      - environments/default.yaml
+  eks-demo:
+    values:
+      - environments/eks-demo.yaml
+
 helmfiles:
   # argo
-  - releases/argo/argo.yaml
-  - releases/argo/argo-cd.yaml
-  - releases/argo/argo-events.yaml
-  - releases/argo/argo-rollouts.yaml
+  - releases/argo.yaml
+  - releases/argo-cd.yaml
+  # - releases/argo-events.yaml
+  - releases/argo-rollouts.yaml

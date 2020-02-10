@@ -1,0 +1,21 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: k8s-spot-termination-handler
+    namespace: kube-system
+    chart: stable/k8s-spot-termination-handler
+    version: ~1.4.8
+    installed: true
+    # wait: true
+    values:
+      - ../values/k8s-spot-termination-handler.yaml.gotmpl

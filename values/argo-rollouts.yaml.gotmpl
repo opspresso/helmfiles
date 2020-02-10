@@ -1,0 +1,10 @@
+resources:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      labels:
+        app: argo-rollouts
+        app.kubernetes.io/name: argo-rollouts
+      name: argo-rollouts
+    data:
+      NAME: argo-rollouts

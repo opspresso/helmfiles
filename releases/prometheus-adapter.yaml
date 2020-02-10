@@ -1,0 +1,21 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: prometheus-adapter
+    namespace: monitor
+    chart: stable/prometheus-adapter
+    version: ~2.0.1
+    installed: true
+    # wait: true
+    values:
+      - ../values/prometheus-adapter.yaml.gotmpl

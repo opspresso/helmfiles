@@ -1,0 +1,21 @@
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: metrics-server
+    namespace: kube-system
+    chart: stable/metrics-server
+    version: ~2.9.0
+    installed: true
+    wait: true
+    values:
+      - ../values/metrics-server.yaml.gotmpl

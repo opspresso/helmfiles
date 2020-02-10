@@ -1,0 +1,41 @@
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../environments/default.yaml
+  eks-demo:
+    values:
+      - ../environments/eks-demo.yaml
+
+releases:
+  - name: cert-manager
+    namespace: kube-ingress
+    chart: jetstack/cert-manager
+    version: ~v0.13.0
+    installed: true
+    wait: true
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          - -c
+          - kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.13/deploy/manifests/00-crds.yaml
+    values:
+      - ../values/cert-manager.yaml.gotmpl
+
+  - name: cert-manager-issuers
+    namespace: kube-ingress
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    wait: true
+    force: true
+    recreatePods: true
+    values:
+      - ../values/cert-manager-issuers.yaml.gotmpl

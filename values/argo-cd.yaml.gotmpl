@@ -1,0 +1,43 @@
+nameOverride: argocd
+
+server:
+  extraArgs:
+    insecure: true
+
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8083"
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    hosts:
+      - '{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
+    tls:
+      - secretName: argocd-server-tls
+        hosts:
+          - '{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
+
+  config:
+    repositories: |
+      - name: env-demo
+        type: git
+        url: https://github.com/opspresso/argocd-env-demo
+      - name: stable
+        type: helm
+        url: https://kubernetes-charts.storage.googleapis.com
+      - name: argo
+        type: helm
+        url: https://argoproj.github.io/argo-helm
+
+configs:
+  secret:
+    createSecret: true
+    argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
+    argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'

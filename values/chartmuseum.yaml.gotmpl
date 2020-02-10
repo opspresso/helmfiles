@@ -1,0 +1,40 @@
+fullnameOverride: chartmuseum
+
+replica:
+  annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "chartmuseum.iam-role" | default "" }}'
+
+env:
+  open:
+    DEBUG: false
+    # DISABLE_API: false
+    # DISABLE_METRICS: false
+    # ALLOW_OVERWRITE: true
+    # use amazon s3 storage as backend
+    STORAGE: "amazon"
+    ### Required: CHARTMUSEUM_STORAGE_AMAZON_BUCKET;
+    STORAGE_AMAZON_BUCKET: '{{ .Values | getOrNil "chartmuseum.storage.amazon.bucket" | default "cluster-name-chartmuseum" }}'
+    ### Required: CHARTMUSEUM_STORAGE_AMAZON_PREFIX; e.g. /
+    STORAGE_AMAZON_PREFIX: '{{ .Values | getOrNil "chartmuseum.storage.amazon.prefix" | default "/" }}'
+    ### Required: CHARTMUSEUM_STORAGE_AMAZON_REGION; e.g. us-west-2
+    STORAGE_AMAZON_REGION: '{{ .Values | getOrNil "chartmuseum.storage.amazon.region" | default "us-west-2" }}'
+  # secret:
+  #   ### Required: CHARTMUSEUM_BASIC_AUTH_USER; e.g. server
+  #   BASIC_AUTH_USER: '{{ .Values | getOrNil "chartmuseum.basic.auth.user" | default "server" }}'
+  #   ### Required: CHARTMUSEUM_BASIC_AUTH_PASS; e.g. 924426A5-DA22-4A10-9FB1-418761684372
+  #   BASIC_AUTH_PASS: '{{ .Values | getOrNil "chartmuseum.basic.auth.pass" | default "924426A5-DA22-4A10-9FB1-418761684372" }}'
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
+    ingress.kubernetes.io/proxy-body-size: 500m
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - name: '{{ .Values | getOrNil "chartmuseum.domain" | default "chartmuseum.example.com" }}'
+      path: /
+      tls: true
+      tlsSecret: chartmuseum-tls

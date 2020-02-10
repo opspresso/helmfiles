@@ -1,0 +1,26 @@
+nameOverride: cluster-autoscaler
+
+autoDiscovery:
+  enabled: true
+  clusterName: '{{ .Values | getOrNil "cluster.name" | default "" }}'
+
+awsRegion: '{{ .Values | getOrNil "aws.region" | default "ap-northeast-2" }}'
+
+extraArgs:
+  v: 4
+  stderrthreshold: info
+  logtostderr: true
+  expander: most-pods
+  scale-down-enabled: true
+  scale-down-utilization-threshold: 0.75
+  skip-nodes-with-local-storage: false
+  skip-nodes-with-system-pods: false
+
+podAnnotations:
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "cluster-autoscaler.iam-role" | default "" }}'
+
+sslCertPath: /etc/ssl/certs/ca-bundle.crt
+
+rbac:
+  create: true
+  pspEnabled: true
