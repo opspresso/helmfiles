@@ -10,8 +10,6 @@ environments:
 
 helmfiles:
   # namespaces
-  - releases/ns-argo.yaml
-  - releases/ns-keycloak.yaml
   - releases/ns-kube-ingress.yaml
   - releases/ns-monitor.yaml
 

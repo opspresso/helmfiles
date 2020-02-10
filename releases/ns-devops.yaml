@@ -11,16 +11,16 @@ environments:
       - ../environments/eks-demo.yaml
 
 releases:
-  - name: ns-keycloak
+  - name: ns-devops
     namespace: default
     chart: incubator/raw
     version: ~0.1.0
     installed: true
     wait: true
-    force: true
+    # force: true
     values:
       - resources:
           - apiVersion: v1
             kind: Namespace
             metadata:
-              name: keycloak
+              name: devops

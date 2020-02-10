@@ -11,6 +11,20 @@ environments:
       - ../environments/eks-demo.yaml
 
 releases:
+  - name: ns-argo
+    namespace: default
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    wait: true
+    # force: true
+    values:
+      - resources:
+          - apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: argo
+
   - name: argo
     namespace: argo
     chart: argo/argo
