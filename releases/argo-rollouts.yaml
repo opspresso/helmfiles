@@ -24,9 +24,7 @@ releases:
         showlogs: true
         command: "/bin/sh"
         args:
-          [
-            "-c",
-            "kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml",
-          ]
+          - -c
+          - kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
     values:
       - ../values/argo-rollouts.yaml.gotmpl
