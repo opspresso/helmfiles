@@ -5,17 +5,17 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: efs-provisioner
+  - name: cluster-autoscaler
     namespace: kube-system
-    chart: stable/efs-provisioner
-    version: ~0.10.2
+    chart: stable/cluster-autoscaler
+    version: ~6.4.0
     installed: true
     # wait: true
     values:
-      - ../values/efs-provisioner.yaml.gotmpl
+      - cluster-autoscaler.yaml.gotmpl

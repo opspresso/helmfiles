@@ -9,13 +9,11 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
-  # namespaces
-  - releases/ns-devops.yaml
-
   # devops
-  - releases/chartmuseum.yaml
-  - releases/docker-registry.yaml
-  # - releases/harbor.yaml
-  - releases/jenkins.yaml
-  # - releases/sonarqube.yaml
-  # - releases/sonatype-nexus.yaml
+  - releases/devops/ns-devops.yaml
+  - releases/devops/chartmuseum.yaml
+  - releases/devops/docker-registry.yaml
+  # - releases/devops/harbor.yaml
+  - releases/devops/jenkins.yaml
+  # - releases/devops/sonarqube.yaml
+  # - releases/devops/sonatype-nexus.yaml

@@ -5,17 +5,17 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: prometheus-adapter
+  - name: grafana
     namespace: monitor
-    chart: stable/prometheus-adapter
-    version: ~2.0.1
+    chart: stable/grafana
+    version: ~4.6.3
     installed: true
     # wait: true
     values:
-      - ../values/prometheus-adapter.yaml.gotmpl
+      - grafana.yaml.gotmpl

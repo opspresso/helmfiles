@@ -5,17 +5,17 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: cluster-overprovisioner
+  - name: efs-provisioner
     namespace: kube-system
-    chart: stable/cluster-overprovisioner
-    version: ~0.2.6
+    chart: stable/efs-provisioner
+    version: ~0.10.2
     installed: true
     # wait: true
     values:
-      - ../values/cluster-overprovisioner.yaml.gotmpl
+      - efs-provisioner.yaml.gotmpl

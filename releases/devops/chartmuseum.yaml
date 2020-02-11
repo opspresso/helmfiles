@@ -5,17 +5,17 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: jenkins
+  - name: chartmuseum
     namespace: devops
-    chart: stable/jenkins
-    version: ~1.9.10
+    chart: stable/chartmuseum
+    version: ~2.6.0
     installed: true
     # wait: true
     values:
-      - ../values/jenkins.yaml.gotmpl
+      - chartmuseum.yaml.gotmpl

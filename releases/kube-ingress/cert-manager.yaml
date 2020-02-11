@@ -7,10 +7,10 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
   - name: cert-manager
@@ -27,7 +27,7 @@ releases:
           - -c
           - kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.13/deploy/manifests/00-crds.yaml
     values:
-      - ../values/cert-manager.yaml.gotmpl
+      - cert-manager.yaml.gotmpl
 
   - name: cert-manager-issuers
     namespace: kube-ingress
@@ -38,4 +38,4 @@ releases:
     # force: true
     # recreatePods: true
     values:
-      - ../values/cert-manager-issuers.yaml.gotmpl
+      - cert-manager-issuers.yaml.gotmpl

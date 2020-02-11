@@ -5,13 +5,13 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: ns-argo-events
+  - name: ns-argo
     namespace: default
     chart: incubator/raw
     version: ~0.1.0
@@ -23,13 +23,13 @@ releases:
           - apiVersion: v1
             kind: Namespace
             metadata:
-              name: argo-events
+              name: argo
 
-  - name: argo-events
-    namespace: argo-events
-    chart: argo/argo-events
-    version: ~0.7.0
+  - name: argo
+    namespace: argo
+    chart: argo/argo
+    version: ~0.6.5
     installed: true
     # wait: true
     values:
-      - ../values/argo-events.yaml.gotmpl
+      - argo.yaml.gotmpl

@@ -5,22 +5,22 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: ns-kube-ingress
+  - name: ns-monitor
     namespace: default
     chart: incubator/raw
     version: ~0.1.0
     installed: true
     wait: true
-    force: true
+    # force: true
     values:
       - resources:
           - apiVersion: v1
             kind: Namespace
             metadata:
-              name: kube-ingress
+              name: monitor

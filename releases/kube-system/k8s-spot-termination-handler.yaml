@@ -5,10 +5,10 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
   - name: k8s-spot-termination-handler
@@ -18,4 +18,4 @@ releases:
     installed: true
     # wait: true
     values:
-      - ../values/k8s-spot-termination-handler.yaml.gotmpl
+      - k8s-spot-termination-handler.yaml.gotmpl
