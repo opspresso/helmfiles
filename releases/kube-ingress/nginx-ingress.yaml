@@ -17,10 +17,12 @@ releases:
     version: ~1.30.0
     installed: true
     wait: true
-    hooks:
-      - events: ["postsync"]
-        showlogs: true
-        command: "/bin/sh"
-        args: ["-c", "../../bin/nginx_ingress_route53.sh"]
+    # hooks:
+    #   - events: ["postsync"]
+    #     showlogs: true
+    #     command: "/bin/sh"
+    #     args:
+    #       - -c
+    #       - ../../bin/nginx_ingress_route53.sh
     values:
       - nginx-ingress.yaml.gotmpl
