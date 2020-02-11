@@ -13,7 +13,7 @@ helmfiles:
   - releases/kube-ingress/ns-kube-ingress.yaml
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/nginx-ingress.yaml
-  # - releases/kube-ingress/external-dns.yaml
+  - releases/kube-ingress/external-dns.yaml
 
   # kube-system
   - releases/kube-system/kube2iam.yaml
