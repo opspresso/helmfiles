@@ -12,6 +12,9 @@ cert-manager:
 nginx-ingress:
   controller:
     kind: DaemonSet
+  external-dns:
+    hostname: demo.mzdev.be
+    ttl: 300
 
 # kube-system
 cluster-autoscaler:

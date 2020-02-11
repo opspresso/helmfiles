@@ -5,10 +5,10 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
   - name: docker-registry
@@ -18,4 +18,4 @@ releases:
     installed: true
     # wait: true
     values:
-      - ../values/docker-registry.yaml.gotmpl
+      - docker-registry.yaml.gotmpl

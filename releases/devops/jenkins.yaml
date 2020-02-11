@@ -5,17 +5,17 @@ repositories:
 environments:
   default:
     values:
-      - ../environments/default.yaml
+      - ../../environments/default.yaml
   eks-demo:
     values:
-      - ../environments/eks-demo.yaml
+      - ../../environments/eks-demo.yaml
 
 releases:
-  - name: grafana
-    namespace: monitor
-    chart: stable/grafana
-    version: ~4.6.3
+  - name: jenkins
+    namespace: devops
+    chart: stable/jenkins
+    version: ~1.9.10
     installed: true
     # wait: true
     values:
-      - ../values/grafana.yaml.gotmpl
+      - jenkins.yaml.gotmpl
