@@ -23,6 +23,9 @@ helmfiles:
   # - releases/kube-system/cluster-overprovisioner.yaml
   # - releases/kube-system/efs-provisioner.yaml
 
+  # keycloak
+  - releases/keycloak/keycloak.yaml
+
   # argo
   - releases/argo/argo.yaml
   - releases/argo/argo-cd.yaml
