@@ -1,0 +1,11 @@
+nameOverride: external-dns
+
+sources:
+  - service
+#  - ingress
+
+podAnnotations:
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "external-dns.iam-role" | default "" }}'
+
+rbac:
+  create: true

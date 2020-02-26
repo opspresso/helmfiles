@@ -13,15 +13,18 @@ nginx-ingress:
   controller:
     kind: DaemonSet
   external-dns:
-    hostname: demo.mzdev.be
-    ttl: 300
+    hostname: "*.demo.mzdev.be"
+    ttl: "300"
+
+external-dns:
+  iam-role: eks-demo-worker-route53
 
 # kube-system
 cluster-autoscaler:
-  iam-role: eks-demo-autoscaling
+  iam-role: eks-demo-worker-asg
 
 efs-provisioner:
-  iam-role: eks-demo-efs
+  iam-role: eks-demo-worker-efs
 
 # monitor
 grafana:
@@ -36,7 +39,7 @@ prometheus:
 argo:
   domain: argo.demo.mzdev.be
   bucket: eks-demo-argo
-  iam-role: eks-demo-argo
+  iam-role: eks-demo-worker-bucket
 
 argo-cd:
   username: admin
