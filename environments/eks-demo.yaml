@@ -54,3 +54,22 @@ keycloak:
   username: admin
   password: password
   domain: keycloak.demo.mzdev.be
+
+# devops
+jenkins:
+  domain: jenkins.demo.mzdev.be
+
+chartmuseum:
+  domain: chartmuseum.demo.mzdev.be
+  iam-role: eks-demo-worker-bucket
+  storage:
+    amazon:
+      region: ap-northeast-2
+      bucket: eks-demo-chartmuseum
+
+docker-registry:
+  domain: registry.demo.mzdev.be
+  iam-role: eks-demo-worker-bucket
+  s3:
+    region: ap-northeast-2
+    bucket: eks-demo-registry
