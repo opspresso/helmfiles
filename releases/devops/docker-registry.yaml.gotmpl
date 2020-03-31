@@ -12,10 +12,10 @@ s3:
   encrypt: '{{ .Values | getOrNil "docker-registry.s3.encrypt" | default "false" }}'
   secure: '{{ .Values | getOrNil "docker-registry.s3.secure" | default "false" }}'
 
-# secrets:
-#   s3:
-#     accessKey: ""
-#     secretKey: ""
+secrets:
+  s3:
+    accessKey: ""
+    secretKey: ""
 
 ingress:
   enabled: true
