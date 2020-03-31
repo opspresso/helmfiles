@@ -38,7 +38,7 @@ prometheus:
 # argo
 argo:
   domain: argo.demo.mzdev.be
-  bucket: eks-demo-argo
+  bucket: eks-demo-argo-1
   iam-role: eks-demo-worker-bucket
 
 argo-cd:
@@ -65,11 +65,11 @@ chartmuseum:
   storage:
     amazon:
       region: ap-northeast-2
-      bucket: eks-demo-chartmuseum
+      bucket: eks-demo-chartmuseum-1
 
 docker-registry:
   domain: registry.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
   s3:
     region: ap-northeast-2
-    bucket: eks-demo-registry
+    bucket: eks-demo-registry-1
