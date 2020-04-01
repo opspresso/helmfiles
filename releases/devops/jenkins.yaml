@@ -12,7 +12,7 @@ environments:
 
 releases:
   - name: jenkins-env
-    namespace: kube-ingress
+    namespace: devops
     chart: incubator/raw
     version: ~0.1.0
     installed: true
