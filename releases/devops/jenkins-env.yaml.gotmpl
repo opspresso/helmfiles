@@ -3,17 +3,19 @@ resources:
     kind: Secret
     metadata:
       name: jenkins-env
-      labels:
-        "jenkins.io/credentials-type": "secretFile"
-      annotations:
-        "jenkins.io/credentials-description" : "secret file credential from Kubernetes"
     type: Opaque
     stringData:
-      filename: jenkins-env.txt
-    data:
-      BASE_DOMAIN: '{{ .Values | getOrNil "base.domain" | b64enc | default "" }}'
-      SLACK_TOKEN: '{{ .Values | getOrNil "slack.token" | b64enc | default "" }}'
-      JENKINS_DOMAIN: '{{ .Values | getOrNil "jenkins.domain" | b64enc | default "" }}'
-      CHARTMUSEUM_DOMAIN: '{{ .Values | getOrNil "chartmuseum.domain" | b64enc | default "" }}'
-      REGISTRY_DOMAIN: '{{ .Values | getOrNil "docker-registry.domain" | b64enc | default "" }}'
-      NEXUS_DOMAIN: '{{ .Values | getOrNil "sonatype-nexus.domain" | b64enc | default "" }}'
+      env.yaml: |-
+        BASE_DOMAIN: '{{ .Values | getOrNil "base.domain" | default "" }}'
+        SLACK_TOKEN: '{{ .Values | getOrNil "slack.token" | default "" }}'
+        JENKINS_DOMAIN: '{{ .Values | getOrNil "jenkins.domain" | default "" }}'
+        CHARTMUSEUM_DOMAIN: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
+        REGISTRY_DOMAIN: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
+        NEXUS_DOMAIN: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
+      env.sh: |-
+        BASE_DOMAIN='{{ .Values | getOrNil "base.domain" | default "" }}'
+        SLACK_TOKEN='{{ .Values | getOrNil "slack.token" | default "" }}'
+        JENKINS_DOMAIN='{{ .Values | getOrNil "jenkins.domain" | default "" }}'
+        CHARTMUSEUM_DOMAIN='{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
+        REGISTRY_DOMAIN='{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
+        NEXUS_DOMAIN='{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'

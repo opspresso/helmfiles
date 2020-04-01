@@ -61,19 +61,6 @@ rbac:
   readSecrets: true
 
 agent:
-  envVars:
-    - name: BASE_DOMAIN
-      value: '{{ .Values | getOrNil "base.domain" | default "" }}'
-    - name: SLACK_TOKEN
-      value: '{{ .Values | getOrNil "slack.token" | default "" }}'
-    - name: JENKINS_DOMAIN
-      value: '{{ .Values | getOrNil "jenkins.domain" | default "" }}'
-    - name: CHARTMUSEUM_DOMAIN
-      value: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
-    - name: REGISTRY_DOMAIN
-      value: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
-    - name: NEXUS_DOMAIN
-      value: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
   volumes:
     - type: Secret
       secretName: jenkins-env
