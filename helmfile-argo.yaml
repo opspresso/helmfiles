@@ -12,5 +12,5 @@ helmfiles:
   # argo
   - releases/argo/argo.yaml
   - releases/argo/argo-cd.yaml
-  # - releases/argo/argo-events.yaml
   - releases/argo/argo-rollouts.yaml
+  # - releases/argo/argo-events.yaml

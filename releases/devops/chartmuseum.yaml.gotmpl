@@ -18,7 +18,7 @@ env:
     ### Required: CHARTMUSEUM_STORAGE_AMAZON_PREFIX; e.g. /
     STORAGE_AMAZON_PREFIX: '{{ .Values | getOrNil "chartmuseum.storage.amazon.prefix" | default "/" }}'
     ### Required: CHARTMUSEUM_STORAGE_AMAZON_REGION; e.g. us-west-2
-    STORAGE_AMAZON_REGION: '{{ .Values | getOrNil "chartmuseum.storage.amazon.region" | default "us-west-2" }}'
+    STORAGE_AMAZON_REGION: '{{ .Values | getOrNil "chartmuseum.storage.amazon.region" | default "ap-northeast-2" }}'
   # secret:
   #   ### Required: CHARTMUSEUM_BASIC_AUTH_USER; e.g. server
   #   BASIC_AUTH_USER: '{{ .Values | getOrNil "chartmuseum.basic.auth.user" | default "server" }}'

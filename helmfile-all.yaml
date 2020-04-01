@@ -21,7 +21,7 @@ helmfiles:
   - releases/kube-system/kube-state-metrics.yaml
   - releases/kube-system/cluster-autoscaler.yaml
   - releases/kube-system/cluster-overprovisioner.yaml
-  # - releases/kube-system/efs-provisioner.yaml
+  - releases/kube-system/efs-provisioner.yaml
 
   # keycloak
   - releases/keycloak/keycloak.yaml
@@ -29,8 +29,8 @@ helmfiles:
   # argo
   - releases/argo/argo.yaml
   - releases/argo/argo-cd.yaml
-  # - releases/argo/argo-events.yaml
   - releases/argo/argo-rollouts.yaml
+  # - releases/argo/argo-events.yaml
 
   # monitor
   - releases/monitor/ns-monitor.yaml

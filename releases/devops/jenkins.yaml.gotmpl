@@ -12,12 +12,15 @@ master:
       cpu: 2000m
       memory: 3Gi
 
-  # PodAnnotations:
-  #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  sidecars:
+    configAutoReload:
+      enabled: true
+
+  podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 
   hostNetworking: true
   javaOpts: "-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Seoul"
-  # serviceType: ClusterIP
 
   ingress:
     enabled: true
@@ -53,10 +56,12 @@ master:
     # https://plugins.jenkins.io/google-login
     - google-login:latest
 
-# persistence:
-#   enabled: true
-#   storageClass: "efs"
-
 rbac:
   create: true
   readSecrets: true
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 20Gi
+  storageClass: "efs"

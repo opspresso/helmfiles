@@ -25,6 +25,7 @@ cluster-autoscaler:
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
+  efsFileSystemId: "fs-1798c376"
 
 # monitor
 grafana:
@@ -38,7 +39,7 @@ prometheus:
 # argo
 argo:
   domain: argo.demo.mzdev.be
-  bucket: eks-demo-argo-1
+  bucket: eks-demo-argo-2
   iam-role: eks-demo-worker-bucket
 
 argo-cd:
@@ -65,11 +66,11 @@ chartmuseum:
   storage:
     amazon:
       region: ap-northeast-2
-      bucket: eks-demo-chartmuseum-1
+      bucket: eks-demo-chartmuseum-2
 
 docker-registry:
   domain: registry.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
   s3:
     region: ap-northeast-2
-    bucket: eks-demo-registry-1
+    bucket: eks-demo-registry-2

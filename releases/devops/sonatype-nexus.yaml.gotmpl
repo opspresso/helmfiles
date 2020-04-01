@@ -11,8 +11,8 @@ nexus:
     limits:
       cpu: 2000m
       memory: 3Gi
-  # podAnnotations:
-  #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   livenessProbe:
     initialDelaySeconds: 100
     periodSeconds: 30
@@ -42,3 +42,9 @@ ingress:
   tls:
     enabled: true
     secretName: sonatype-nexus-tls
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  storageSize: 50Gi
+  storageClass: "efs"

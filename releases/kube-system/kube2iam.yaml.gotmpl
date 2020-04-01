@@ -1,7 +1,7 @@
 nameOverride: kube2iam
 
 aws:
-  region: '{{ .Values | getOrNil "aws.region" | default "" }}'
+  region: '{{ .Values | getOrNil "aws.region" | default "ap-northeast-2" }}'
 
 extraArgs:
   auto-discover-base-arn: true
