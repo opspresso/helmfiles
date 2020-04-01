@@ -12,6 +12,14 @@ master:
       cpu: 2000m
       memory: 3Gi
 
+  containerEnv:
+    - name: chartmuseum_domain
+      value: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
+    - name: registry_domain
+      value: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
+    - name: nexus_domain
+      value: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
+
   sidecars:
     configAutoReload:
       enabled: true
@@ -64,4 +72,4 @@ persistence:
   enabled: true
   accessMode: ReadWriteOnce
   size: 20Gi
-  storageClass: "efs"
+  storageClass: '{{ .Values | getOrNil "jenkins.persistence.storageClass" | default "" }}'

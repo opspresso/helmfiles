@@ -59,6 +59,8 @@ keycloak:
 # devops
 jenkins:
   domain: jenkins.demo.mzdev.be
+  persistence:
+    storageClass: "efs"
 
 chartmuseum:
   domain: chartmuseum.demo.mzdev.be
@@ -74,3 +76,8 @@ docker-registry:
   s3:
     region: ap-northeast-2
     bucket: eks-demo-registry-2
+
+sonatype-nexus:
+  domain: nexus.demo.mzdev.be
+  persistence:
+    storageClass: "efs"

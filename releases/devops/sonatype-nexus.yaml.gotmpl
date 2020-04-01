@@ -47,4 +47,4 @@ persistence:
   enabled: true
   accessMode: ReadWriteOnce
   storageSize: 50Gi
-  storageClass: "efs"
+  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "" }}'
