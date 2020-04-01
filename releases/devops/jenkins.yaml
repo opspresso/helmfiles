@@ -11,6 +11,17 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
+  - name: jenkins-env
+    namespace: kube-ingress
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    # wait: true
+    # force: true
+    # recreatePods: true
+    values:
+      - jenkins-env.yaml.gotmpl
+
   - name: jenkins
     namespace: devops
     chart: stable/jenkins

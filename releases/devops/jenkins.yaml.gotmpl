@@ -74,6 +74,10 @@ agent:
       value: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
     - name: NEXUS_DOMAIN
       value: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
+  volumes:
+    - type: Secret
+      secretName: jenkins-env
+      mountPath: /var/jenkins
 
 persistence:
   enabled: true
