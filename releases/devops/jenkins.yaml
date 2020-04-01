@@ -12,7 +12,7 @@ environments:
 
 releases:
   - name: jenkins-env
-    namespace: devops
+    namespace: default
     chart: incubator/raw
     version: ~0.1.0
     installed: true
@@ -30,3 +30,14 @@ releases:
     # wait: true
     values:
       - jenkins.yaml.gotmpl
+
+  - name: jenkins-role
+    namespace: devops
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    # wait: true
+    # force: true
+    # recreatePods: true
+    values:
+      - jenkins-role.yaml.gotmpl

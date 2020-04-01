@@ -5,17 +5,23 @@ resources:
       name: jenkins-env
     type: Opaque
     stringData:
-      env.yaml: |-
-        BASE_DOMAIN: '{{ .Values | getOrNil "base.domain" | default "" }}'
-        SLACK_TOKEN: '{{ .Values | getOrNil "slack.token" | default "" }}'
-        JENKINS_DOMAIN: '{{ .Values | getOrNil "jenkins.domain" | default "" }}'
-        CHARTMUSEUM_DOMAIN: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
-        REGISTRY_DOMAIN: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
-        NEXUS_DOMAIN: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
-      env.sh: |-
-        BASE_DOMAIN='{{ .Values | getOrNil "base.domain" | default "" }}'
-        SLACK_TOKEN='{{ .Values | getOrNil "slack.token" | default "" }}'
-        JENKINS_DOMAIN='{{ .Values | getOrNil "jenkins.domain" | default "" }}'
-        CHARTMUSEUM_DOMAIN='{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
-        REGISTRY_DOMAIN='{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
-        NEXUS_DOMAIN='{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
+      groovy: |-
+        #!/usr/bin/groovy
+        import groovy.transform.Field
+        @Field
+        def cluster = "{{ .Values | getOrNil "cluster.name" | default "" }}"
+        @Field
+        def role = "devops"
+        @Field
+        def base_domain = "{{ .Values | getOrNil "base.domain" | default "" }}"
+        @Field
+        def slack_token = "{{ .Values | getOrNil "slack.token" | default "" }}"
+        @Field
+        def jenkins = "{{ .Values | getOrNil "jenkins.domain" | default "" }}"
+        @Field
+        def chartmuseum = "{{ .Values | getOrNil "chartmuseum.domain" | default "" }}"
+        @Field
+        def registry = "{{ .Values | getOrNil "docker-registry.domain" | default "" }}"
+        @Field
+        def nexus = "{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}"
+        return this

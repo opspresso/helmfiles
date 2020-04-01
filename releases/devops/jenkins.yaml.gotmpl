@@ -60,11 +60,11 @@ rbac:
   create: true
   readSecrets: true
 
-agent:
-  volumes:
-    - type: Secret
-      secretName: jenkins-env
-      mountPath: /var/jenkins
+# agent:
+#   volumes:
+#     - type: Secret
+#       secretName: jenkins-env
+#       mountPath: /var/jenkins
 
 persistence:
   enabled: true
