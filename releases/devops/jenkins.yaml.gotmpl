@@ -12,14 +12,6 @@ master:
       cpu: 2000m
       memory: 3Gi
 
-  containerEnv:
-    - name: chartmuseum_domain
-      value: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
-    - name: registry_domain
-      value: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
-    - name: nexus_domain
-      value: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
-
   sidecars:
     configAutoReload:
       enabled: true
@@ -67,6 +59,15 @@ master:
 rbac:
   create: true
   readSecrets: true
+
+agent:
+  envVars:
+    - name: CHARTMUSEUM_DOMAIN
+      value: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
+    - name: REGISTRY_DOMAIN
+      value: '{{ .Values | getOrNil "docker-registry.domain" | default "" }}'
+    - name: NEXUS_DOMAIN
+      value: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}'
 
 persistence:
   enabled: true
