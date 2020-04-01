@@ -9,7 +9,7 @@ base:
   domain: demo.mzdev.be
 
 slack:
-  token: "slack-token-string"
+  token: ""
 
 # kube-ingress
 cert-manager:
