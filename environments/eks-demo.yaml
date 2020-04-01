@@ -28,13 +28,17 @@ efs-provisioner:
   efsFileSystemId: "fs-1798c376"
 
 # monitor
+prometheus:
+  domain: prometheus.demo.mzdev.be
+  persistence:
+    storageClass: "efs"
+
 grafana:
   username: admin
   password: password
   domain: grafana.demo.mzdev.be
-
-prometheus:
-  domain: prometheus.demo.mzdev.be
+  persistence:
+    storageClass: "efs"
 
 # argo
 argo:

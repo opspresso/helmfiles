@@ -17,8 +17,8 @@ ingress:
         - '{{ .Values | getOrNil "grafana.domain" | default "grafana.example.com" }}'
 
 persistence:
-  enabled: false
-  # storageClass: "efs"
+  enabled: true
+  storageClassName: '{{ .Values | getOrNil "grafana.persistence.storageClass" | default "" }}'
 
 datasources:
   datasources.yaml:
