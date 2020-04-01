@@ -62,6 +62,12 @@ rbac:
 
 agent:
   envVars:
+    - name: BASE_DOMAIN
+      value: '{{ .Values | getOrNil "base.domain" | default "" }}'
+    - name: SLACK_TOKEN
+      value: '{{ .Values | getOrNil "slack.token" | default "" }}'
+    - name: JENKINS_DOMAIN
+      value: '{{ .Values | getOrNil "jenkins.domain" | default "" }}'
     - name: CHARTMUSEUM_DOMAIN
       value: '{{ .Values | getOrNil "chartmuseum.domain" | default "" }}'
     - name: REGISTRY_DOMAIN

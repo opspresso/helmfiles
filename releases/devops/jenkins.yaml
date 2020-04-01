@@ -19,14 +19,3 @@ releases:
     # wait: true
     values:
       - jenkins.yaml.gotmpl
-
-  - name: jenkins-variables
-    namespace: devops
-    chart: incubator/raw
-    version: ~0.1.0
-    installed: true
-    # wait: true
-    # force: true
-    # recreatePods: true
-    values:
-      - jenkins-variables.yaml.gotmpl

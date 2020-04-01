@@ -5,6 +5,12 @@ cluster:
 aws:
   region: ap-northeast-2
 
+base:
+  domain: demo.mzdev.be
+
+slack:
+  token: ""
+
 # kube-ingress
 cert-manager:
   issuer-email: me@nalbam.com
