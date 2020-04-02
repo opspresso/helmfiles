@@ -3,6 +3,9 @@ nameOverride: nginx-ingress
 controller:
   kind: '{{ .Values | getOrNil "nginx-ingress.controller.kind" | default "Deployment" }}'
   config:
+    proxy-protocol: "true"
+    real-ip-header: "proxy_protocol"
+    set-real-ip-from: "0.0.0.0/0"
     use-forwarded-headers: "true"
   service:
     annotations:

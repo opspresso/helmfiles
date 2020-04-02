@@ -48,7 +48,7 @@ grafana:
   oic:
     client:
       id: grafana
-      secret: a4bac363-498d-4ef3-b284-f8ee75d0f1d6
+      secret: 4e15c3f8-8c24-4c3a-b8fa-b0db57b8318e
     server:
       token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
