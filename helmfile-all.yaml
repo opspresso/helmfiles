@@ -23,6 +23,9 @@ helmfiles:
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress.yaml
 
+  # keycloak
+  - releases/keycloak/keycloak.yaml
+
   # monitor
   - releases/monitor/ns-monitor.yaml
   - releases/monitor/prometheus.yaml
@@ -43,6 +46,3 @@ helmfiles:
   - releases/devops/sonatype-nexus.yaml
   # - releases/devops/harbor.yaml
   # - releases/devops/sonarqube.yaml
-
-  # keycloak
-  - releases/keycloak/keycloak.yaml

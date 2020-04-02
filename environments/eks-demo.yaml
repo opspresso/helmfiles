@@ -45,6 +45,14 @@ grafana:
   domain: grafana.demo.mzdev.be
   persistence:
     storageClass: "efs"
+  oic:
+    client:
+      id: grafana
+      secret: a4bac363-498d-4ef3-b284-f8ee75d0f1d6
+    server:
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 # argo
 argo:
@@ -71,6 +79,14 @@ jenkins:
   domain: jenkins.demo.mzdev.be
   persistence:
     storageClass: "efs"
+  oic:
+    client:
+      id: jenkins
+      secret: 40877b9b-e52d-4109-ad3f-474e8aa69506
+    server:
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 chartmuseum:
   domain: chartmuseum.demo.mzdev.be

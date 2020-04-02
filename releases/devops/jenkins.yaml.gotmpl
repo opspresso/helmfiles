@@ -57,16 +57,20 @@ master:
     - google-login:latest
     # https://plugins.jenkins.io/oic-auth
     - oic-auth:latest
+  securityRealm: |-
+    <securityRealm class="org.jenkinsci.plugins.oic.OicSecurityRealm" plugin="oic-auth@1.0">
+      <clientId>{{ .Values | getOrNil "jenkins.oic.client.id" | default "" }}</clientId>
+      <clientSecret>{{ .Values | getOrNil "jenkins.oic.client.secret" | default "" }}</clientSecret>
+      <tokenServerUrl>{{ .Values | getOrNil "jenkins.oic.server.token" | default "" }}</tokenServerUrl>
+      <authorizationServerUrl>{{ .Values | getOrNil "jenkins.oic.server.auth" | default "" }}</authorizationServerUrl>
+      <userInfoServerUrl>{{ .Values | getOrNil "jenkins.oic.server.userinfo" | default "" }}</userInfoServerUrl>
+      <userNameField>preferred_username</userNameField>
+      <scopes>openid email</scopes>
+    </securityRealm>
 
 rbac:
   create: true
   readSecrets: true
-
-# agent:
-#   volumes:
-#     - type: Secret
-#       secretName: jenkins-env
-#       mountPath: /var/jenkins
 
 persistence:
   enabled: true

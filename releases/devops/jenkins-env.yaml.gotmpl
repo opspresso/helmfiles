@@ -9,9 +9,9 @@ resources:
         #!/usr/bin/groovy
         import groovy.transform.Field
         @Field
-        def cluster = "{{ .Values | getOrNil "cluster.name" | default "" }}"
-        @Field
         def role = "devops"
+        @Field
+        def cluster = "{{ .Values | getOrNil "cluster.name" | default "" }}"
         @Field
         def base_domain = "{{ .Values | getOrNil "base.domain" | default "" }}"
         @Field

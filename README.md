@@ -22,6 +22,8 @@ helmfile -f helmfile-argo.yaml -e eks-demo apply
 helmfile -f helmfile-devops.yaml -e eks-demo apply
 helmfile -f helmfile-keycloak.yaml -e eks-demo apply
 helmfile -f helmfile-monitor.yaml -e eks-demo apply
+
+helmfile -f helmfile-jenkins.yaml -e eks-demo delete
 ```
 
 * <https://github.com/roboll/helmfile/>

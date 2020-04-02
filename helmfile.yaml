@@ -23,8 +23,5 @@ helmfiles:
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress.yaml
 
-  # monitor
-  - releases/monitor/ns-monitor.yaml
-  - releases/monitor/prometheus.yaml
-  - releases/monitor/prometheus-adapter.yaml
-  - releases/monitor/grafana.yaml
+  # keycloak
+  - releases/keycloak/keycloak.yaml
