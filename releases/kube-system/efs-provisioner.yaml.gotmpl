@@ -1,12 +1,12 @@
 nameOverride: efs-provisioner
 
-# podAnnotations:
-#   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-#   iam.amazonaws.com/role: '{{ .Values | getOrNil "efs-provisioner.iam-role" | default "" }}'
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "efs-provisioner.iam-role" | default "" }}'
 
 efsProvisioner:
   efsFileSystemId: '{{ .Values | getOrNil "efs-provisioner.efsFileSystemId" | default "" }}'
-  awsRegion: '{{ .Values | getOrNil "aws.region" | default "" }}'
+  awsRegion: '{{ .Values | getOrNil "aws.region" | default "ap-northeast-2" }}'
   path: /shared
   provisionerName: '{{ .Values | getOrNil "efs-provisioner.provisionerName" | default "aws-efs" }}'
   storageClass:

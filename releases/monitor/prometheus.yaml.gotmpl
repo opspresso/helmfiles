@@ -3,7 +3,7 @@ nameOverride: prometheus
 server:
   enabled: true
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -15,14 +15,14 @@ server:
         hosts:
           - '{{ .Values | getOrNil "prometheus.domain" | default "prometheus.example.com" }}'
   persistentVolume:
-    enabled: false
-    # storageClass: "efs"
+    enabled: true
+    storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
 
 alertmanager:
-  enabled: false
+  enabled: true
   persistentVolume:
-    enabled: false
-    # storageClass: "efs"
+    enabled: true
+    storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
 
 kubeStateMetrics:
   enabled: false

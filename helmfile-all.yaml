@@ -9,31 +9,40 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
-  # kube-ingress
-  - releases/kube-ingress/ns-kube-ingress.yaml
-  - releases/kube-ingress/cert-manager.yaml
-  - releases/kube-ingress/nginx-ingress.yaml
-  - releases/kube-ingress/external-dns.yaml
-
   # kube-system
   - releases/kube-system/kube2iam.yaml
   - releases/kube-system/metrics-server.yaml
   - releases/kube-system/kube-state-metrics.yaml
-  # - releases/kube-system/cluster-autoscaler.yaml
-  # - releases/kube-system/cluster-overprovisioner.yaml
-  # - releases/kube-system/efs-provisioner.yaml
+  - releases/kube-system/cluster-autoscaler.yaml
+  - releases/kube-system/cluster-overprovisioner.yaml
+  - releases/kube-system/efs-provisioner.yaml
+
+  # kube-ingress
+  - releases/kube-ingress/ns-kube-ingress.yaml
+  - releases/kube-ingress/cert-manager.yaml
+  - releases/kube-ingress/external-dns.yaml
+  - releases/kube-ingress/nginx-ingress.yaml
 
   # keycloak
   - releases/keycloak/keycloak.yaml
-
-  # argo
-  - releases/argo/argo.yaml
-  - releases/argo/argo-cd.yaml
-  # - releases/argo/argo-events.yaml
-  - releases/argo/argo-rollouts.yaml
 
   # monitor
   - releases/monitor/ns-monitor.yaml
   - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/grafana.yaml
+
+  # argo
+  - releases/argo/argo.yaml
+  - releases/argo/argo-cd.yaml
+  - releases/argo/argo-rollouts.yaml
+  # - releases/argo/argo-events.yaml
+
+  # devops
+  - releases/devops/ns-devops.yaml
+  - releases/devops/chartmuseum.yaml
+  - releases/devops/docker-registry.yaml
+  - releases/devops/jenkins.yaml
+  - releases/devops/sonatype-nexus.yaml
+  # - releases/devops/harbor.yaml
+  # - releases/devops/sonarqube.yaml

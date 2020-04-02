@@ -5,6 +5,12 @@ cluster:
 aws:
   region: ap-northeast-2
 
+base:
+  domain: demo.mzdev.be
+
+slack:
+  token: ""
+
 # kube-ingress
 cert-manager:
   issuer-email: me@nalbam.com
@@ -25,20 +31,33 @@ cluster-autoscaler:
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
+  efsFileSystemId: "fs-1798c376"
 
 # monitor
+prometheus:
+  domain: prometheus.demo.mzdev.be
+  persistence:
+    storageClass: "efs"
+
 grafana:
   username: admin
   password: password
   domain: grafana.demo.mzdev.be
-
-prometheus:
-  domain: prometheus.demo.mzdev.be
+  persistence:
+    storageClass: "efs"
+  oic:
+    client:
+      id: grafana
+      secret: 4e15c3f8-8c24-4c3a-b8fa-b0db57b8318e
+    server:
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 # argo
 argo:
   domain: argo.demo.mzdev.be
-  bucket: eks-demo-argo
+  bucket: eks-demo-argo-2
   iam-role: eks-demo-worker-bucket
 
 argo-cd:
@@ -54,3 +73,37 @@ keycloak:
   username: admin
   password: password
   domain: keycloak.demo.mzdev.be
+
+# devops
+jenkins:
+  domain: jenkins.demo.mzdev.be
+  persistence:
+    storageClass: "efs"
+  oic:
+    client:
+      id: jenkins
+      secret: 40877b9b-e52d-4109-ad3f-474e8aa69506
+    server:
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+
+chartmuseum:
+  domain: chartmuseum.demo.mzdev.be
+  iam-role: eks-demo-worker-bucket
+  storage:
+    amazon:
+      region: ap-northeast-2
+      bucket: eks-demo-chartmuseum-2
+
+docker-registry:
+  domain: registry.demo.mzdev.be
+  iam-role: eks-demo-worker-bucket
+  s3:
+    region: ap-northeast-2
+    bucket: eks-demo-registry-2
+
+sonatype-nexus:
+  domain: nexus.demo.mzdev.be
+  persistence:
+    storageClass: "efs"

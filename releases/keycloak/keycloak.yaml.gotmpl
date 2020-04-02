@@ -17,3 +17,7 @@ keycloak:
       - secretName: keycloak-tls
         hosts:
           - '{{ .Values | getOrNil "keycloak.domain" | default "keycloak.example.com" }}'
+
+  extraEnv: |
+    - name: PROXY_ADDRESS_FORWARDING
+      value: "true"

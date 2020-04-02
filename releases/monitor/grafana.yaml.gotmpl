@@ -16,9 +16,28 @@ ingress:
       hosts:
         - '{{ .Values | getOrNil "grafana.domain" | default "grafana.example.com" }}'
 
+grafana.ini:
+  server:
+    root_url: 'https://{{ .Values | getOrNil "grafana.domain" | default "" }}/'
+  auth:
+    disable_login_form: true
+  auth.generic_oauth:
+    enabled: true
+    client_id: '{{ .Values | getOrNil "grafana.oic.client.id" | default "" }}'
+    client_secret: '{{ .Values | getOrNil "grafana.oic.client.secret" | default "" }}'
+    scopes: "openid email"
+    auth_url: '{{ .Values | getOrNil "grafana.oic.server.auth" | default "" }}'
+    token_url: '{{ .Values | getOrNil "grafana.oic.server.token" | default "" }}'
+    api_url: '{{ .Values | getOrNil "grafana.oic.server.userinfo" | default "" }}'
+    allow_sign_up: "true"
+
+sidecar:
+  dashboards:
+    enabled: true
+
 persistence:
-  enabled: false
-  # storageClass: "efs"
+  enabled: true
+  storageClassName: '{{ .Values | getOrNil "grafana.persistence.storageClass" | default "" }}'
 
 datasources:
   datasources.yaml:

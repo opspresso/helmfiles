@@ -13,7 +13,7 @@ helmfiles:
   - releases/devops/ns-devops.yaml
   - releases/devops/chartmuseum.yaml
   - releases/devops/docker-registry.yaml
-  # - releases/devops/harbor.yaml
   - releases/devops/jenkins.yaml
+  - releases/devops/sonatype-nexus.yaml
+  # - releases/devops/harbor.yaml
   # - releases/devops/sonarqube.yaml
-  # - releases/devops/sonatype-nexus.yaml

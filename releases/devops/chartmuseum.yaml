@@ -14,7 +14,7 @@ releases:
   - name: chartmuseum
     namespace: devops
     chart: stable/chartmuseum
-    version: ~2.6.0
+    version: ~2.7.1
     installed: true
     # wait: true
     values:

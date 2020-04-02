@@ -1,0 +1,27 @@
+resources:
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: jenkins-env
+    type: Opaque
+    stringData:
+      groovy: |-
+        #!/usr/bin/groovy
+        import groovy.transform.Field
+        @Field
+        def role = "devops"
+        @Field
+        def cluster = "{{ .Values | getOrNil "cluster.name" | default "" }}"
+        @Field
+        def base_domain = "{{ .Values | getOrNil "base.domain" | default "" }}"
+        @Field
+        def slack_token = "{{ .Values | getOrNil "slack.token" | default "" }}"
+        @Field
+        def jenkins = "{{ .Values | getOrNil "jenkins.domain" | default "" }}"
+        @Field
+        def chartmuseum = "{{ .Values | getOrNil "chartmuseum.domain" | default "" }}"
+        @Field
+        def registry = "{{ .Values | getOrNil "docker-registry.domain" | default "" }}"
+        @Field
+        def nexus = "{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}"
+        return this

@@ -11,11 +11,33 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
+  - name: jenkins-env
+    namespace: default
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    # wait: true
+    # force: true
+    # recreatePods: true
+    values:
+      - jenkins-env.yaml.gotmpl
+
   - name: jenkins
     namespace: devops
     chart: stable/jenkins
-    version: ~1.9.10
+    version: ~1.9.24
     installed: true
     # wait: true
     values:
       - jenkins.yaml.gotmpl
+
+  - name: jenkins-role
+    namespace: devops
+    chart: incubator/raw
+    version: ~0.1.0
+    installed: true
+    # wait: true
+    # force: true
+    # recreatePods: true
+    values:
+      - jenkins-role.yaml.gotmpl

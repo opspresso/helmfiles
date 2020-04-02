@@ -14,7 +14,7 @@ releases:
   - name: nginx-ingress
     namespace: kube-ingress
     chart: stable/nginx-ingress
-    version: ~1.30.0
+    version: ~1.30.3
     installed: true
     wait: true
     # hooks:
