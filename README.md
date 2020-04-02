@@ -23,7 +23,8 @@ helmfile -f helmfile-devops.yaml -e eks-demo apply
 helmfile -f helmfile-keycloak.yaml -e eks-demo apply
 helmfile -f helmfile-monitor.yaml -e eks-demo apply
 
-helmfile -f helmfile-jenkins.yaml -e eks-demo delete
+helmfile -f helmfile-grafana.yaml -e eks-demo apply
+helmfile -f helmfile-jenkins.yaml -e eks-demo apply
 ```
 
 * <https://github.com/roboll/helmfile/>
