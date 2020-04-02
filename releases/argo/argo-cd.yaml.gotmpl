@@ -41,3 +41,7 @@ configs:
     createSecret: true
     argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
     argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
+
+# sso
+# https://argoproj.github.io/argo-cd/operator-manual/user-management/#2-configure-argo-cd-for-sso
+# https://github.com/dexidp/dex/blob/master/Documentation/connectors/oidc.md
