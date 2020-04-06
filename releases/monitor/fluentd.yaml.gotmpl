@@ -1,6 +1,6 @@
 nameOverride: fluentd
 
-# useStatefulSet:
+useStatefulSet: true
 
 output:
   host: '{{ .Values | getOrNil "fluentd.host" | default "es.example.com" }}'
