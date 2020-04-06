@@ -54,6 +54,10 @@ grafana:
       auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
       userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
+fluentd:
+  host: es-demo.mzdev.be
+  port: 80
+
 # argo
 argo:
   domain: argo.demo.mzdev.be
