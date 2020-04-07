@@ -1,8 +1,8 @@
 nameOverride: argocd
 
-server:
+controller:
   extraArgs:
-    insecure: true
+    - --insecure
 
   metrics:
     enabled: true

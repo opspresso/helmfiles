@@ -30,7 +30,7 @@ releases:
   - name: cert-manager-issuers
     namespace: kube-ingress
     chart: incubator/raw
-    version: ~0.1.0
+    version: ~0.2.3
     installed: true
     # wait: true
     # force: true
