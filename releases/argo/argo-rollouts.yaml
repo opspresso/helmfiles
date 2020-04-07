@@ -1,4 +1,6 @@
 repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
   - name: incubator
     url: https://kubernetes-charts-incubator.storage.googleapis.com
 
