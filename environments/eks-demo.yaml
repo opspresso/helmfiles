@@ -63,14 +63,14 @@ elasticsearch:
   domain: elasticsearch.demo.mzdev.be
   persistence:
     storageClass: efs
-  esJavaOpts: "-Xmx350m -Xms350m"
+  esJavaOpts: "-Xmx512m -Xms512m"
   resources:
     requests:
       cpu: 200m
-      memory: 700M
+      memory: 1G
     limits:
-      cpu: 250m
-      memory: 700M
+      cpu: 220m
+      memory: 1G
 
 kibana:
   domain: kibana.demo.mzdev.be
@@ -81,7 +81,7 @@ kibana:
       cpu: 200m
       memory: 700M
     limits:
-      cpu: 250m
+      cpu: 220m
       memory: 700M
 
 # argo
