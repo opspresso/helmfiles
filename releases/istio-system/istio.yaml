@@ -11,16 +11,13 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: ns-devops
-    namespace: default
+  - name: istio
+    namespace: istio-system
     chart: incubator/raw
     version: ~0.2.3
     installed: true
-    wait: true
+    # wait: true
     # force: true
+    # recreatePods: true
     values:
-      - resources:
-          - apiVersion: v1
-            kind: Namespace
-            metadata:
-              name: devops
+      - istio-demo.yaml

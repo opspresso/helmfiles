@@ -37,14 +37,14 @@ efs-provisioner:
 prometheus:
   domain: prometheus.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
 
 grafana:
   username: admin
   password: password
   domain: grafana.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
   oic:
     client:
       id: grafana
@@ -55,8 +55,34 @@ grafana:
       userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 fluentd:
-  host: es-demo.mzdev.be
-  port: 80
+  host: elasticsearch-master.elastic.svc.cluster.local
+  port: 9200
+
+# elastic
+elasticsearch:
+  domain: elasticsearch.demo.mzdev.be
+  persistence:
+    storageClass: efs
+  esJavaOpts: "-Xmx350m -Xms350m"
+  resources:
+    requests:
+      cpu: 200m
+      memory: 700M
+    limits:
+      cpu: 250m
+      memory: 700M
+
+kibana:
+  domain: kibana.demo.mzdev.be
+  persistence:
+    storageClass: efs
+  resources:
+    requests:
+      cpu: 200m
+      memory: 700M
+    limits:
+      cpu: 250m
+      memory: 700M
 
 # argo
 argo:
@@ -79,19 +105,6 @@ keycloak:
   domain: keycloak.demo.mzdev.be
 
 # devops
-jenkins:
-  domain: jenkins.demo.mzdev.be
-  persistence:
-    storageClass: "efs"
-  oic:
-    client:
-      id: jenkins
-      secret: 23a2c36f-d4b2-4566-97bf-5ee53899111c
-    server:
-      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
-
 chartmuseum:
   domain: chartmuseum.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
@@ -107,7 +120,34 @@ docker-registry:
     region: ap-northeast-2
     bucket: eks-demo-registry-2
 
+jenkins:
+  domain: jenkins.demo.mzdev.be
+  persistence:
+    storageClass: efs
+  oic:
+    client:
+      id: jenkins
+      secret: 23a2c36f-d4b2-4566-97bf-5ee53899111c
+    server:
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2G
+    limits:
+      cpu: 550m
+      memory: 2G
+
 sonatype-nexus:
   domain: nexus.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
+  resources:
+    requests:
+      cpu: 300m
+      memory: 2G
+    limits:
+      cpu: 330m
+      memory: 2G

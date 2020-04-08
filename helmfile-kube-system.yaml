@@ -15,4 +15,4 @@ helmfiles:
   - releases/kube-system/kube-state-metrics.yaml
   - releases/kube-system/cluster-autoscaler.yaml
   - releases/kube-system/cluster-overprovisioner.yaml
-  # - releases/kube-system/efs-provisioner.yaml
+  - releases/kube-system/efs-provisioner.yaml

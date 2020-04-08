@@ -1,0 +1,31 @@
+clusterName: "elasticsearch"
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - '{{ .Values | getOrNil "elasticsearch.domain" | default "elasticsearch.example.com" }}'
+  tls:
+    - secretName: elasticsearch-tls
+      hosts:
+        - '{{ .Values | getOrNil "elasticsearch.domain" | default "elasticsearch.example.com" }}'
+
+esJavaOpts: '{{ .Values | getOrNil "elasticsearch.esJavaOpts" | default "-Xmx1g -Xms1g" }}'
+
+resources:
+  requests:
+    cpu: '{{ .Values | getOrNil "elasticsearch.resources.requests.cpu" | default "1000m" }}'
+    memory: '{{ .Values | getOrNil "elasticsearch.resources.requests.memory" | default "2G" }}'
+  limits:
+    cpu: '{{ .Values | getOrNil "elasticsearch.resources.limits.cpu" | default "1000m" }}'
+    memory: '{{ .Values | getOrNil "elasticsearch.resources.limits.memory" | default "2G" }}'
+
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: '{{ .Values | getOrNil "elasticsearch.persistence.storageClass" | default "standard" }}'
+  resources:
+    requests:
+      storage: '{{ .Values | getOrNil "elasticsearch.persistence.storageSize" | default "10Gi" }}'

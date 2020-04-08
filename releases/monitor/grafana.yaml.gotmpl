@@ -37,7 +37,8 @@ sidecar:
 
 persistence:
   enabled: true
-  storageClassName: '{{ .Values | getOrNil "grafana.persistence.storageClass" | default "" }}'
+  storageClassName: '{{ .Values | getOrNil "grafana.persistence.storageClass" | default "default" }}'
+  size: '{{ .Values | getOrNil "grafana.persistence.storageSize" | default "10Gi" }}'
 
 datasources:
   datasources.yaml:

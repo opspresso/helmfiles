@@ -6,13 +6,15 @@ statefulset:
 nexus:
   resources:
     requests:
-      cpu: 1000m
-      memory: 3Gi
+      cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.requests.cpu" | default "1000m" }}'
+      memory: '{{ .Values | getOrNil "sonatype-nexus.resources.requests.memory" | default "3Gi" }}'
     limits:
-      cpu: 2000m
-      memory: 3Gi
+      cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.cpu" | default "1200m" }}'
+      memory: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.memory" | default "3Gi" }}'
+
   podAnnotations:
     cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+
   livenessProbe:
     initialDelaySeconds: 100
     periodSeconds: 30
@@ -46,5 +48,5 @@ ingress:
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
-  storageSize: 50Gi
-  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "" }}'
+  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "default" }}'
+  storageSize: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageSize" | default "20Gi" }}'

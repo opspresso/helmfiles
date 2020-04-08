@@ -6,11 +6,11 @@ master:
 
   resources:
     requests:
-      cpu: 1000m
-      memory: 3Gi
+      cpu: '{{ .Values | getOrNil "jenkins.resources.requests.cpu" | default "1000m" }}'
+      memory: '{{ .Values | getOrNil "jenkins.resources.requests.memory" | default "3Gi" }}'
     limits:
-      cpu: 2000m
-      memory: 3Gi
+      cpu: '{{ .Values | getOrNil "jenkins.resources.limits.cpu" | default "1200m" }}'
+      memory: '{{ .Values | getOrNil "jenkins.resources.limits.memory" | default "3Gi" }}'
 
   sidecars:
     configAutoReload:
@@ -57,6 +57,7 @@ master:
     - google-login:latest
     # https://plugins.jenkins.io/oic-auth
     - oic-auth:latest
+
   securityRealm: |-
     <securityRealm class="org.jenkinsci.plugins.oic.OicSecurityRealm" plugin="oic-auth@1.0">
       <clientId>{{ .Values | getOrNil "jenkins.oic.client.id" | default "" }}</clientId>
@@ -68,6 +69,10 @@ master:
       <scopes>openid email</scopes>
     </securityRealm>
 
+  jobs: {}
+  #  test: |-
+  #    <<xml here>>
+
 rbac:
   create: true
   readSecrets: true
@@ -75,5 +80,5 @@ rbac:
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
-  size: 20Gi
-  storageClass: '{{ .Values | getOrNil "jenkins.persistence.storageClass" | default "" }}'
+  storageClass: '{{ .Values | getOrNil "jenkins.persistence.storageClass" | default "default" }}'
+  size: '{{ .Values | getOrNil "jenkins.persistence.storageSize" | default "20Gi" }}'

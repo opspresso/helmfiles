@@ -19,12 +19,14 @@ server:
   persistentVolume:
     enabled: true
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
+    size: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "8Gi" }}'
 
 alertmanager:
   enabled: true
   persistentVolume:
     enabled: true
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
+    size: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "2Gi" }}'
 
 podSecurityPolicy:
   enabled: true

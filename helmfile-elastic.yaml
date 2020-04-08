@@ -9,8 +9,6 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
-  # monitor
-  - releases/monitor/prometheus.yaml
-  - releases/monitor/prometheus-adapter.yaml
-  - releases/monitor/grafana.yaml
-  - releases/monitor/fluentd.yaml
+  # elastic
+  - releases/elastic/elasticsearch.yaml
+  - releases/elastic/kibana.yaml
