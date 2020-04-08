@@ -22,3 +22,6 @@ resources:
   limits:
     cpu: '{{ .Values | getOrNil "kibana.resources.limits.cpu" | default "1000m" }}'
     memory: '{{ .Values | getOrNil "kibana.resources.limits.memory" | default "2G" }}'
+
+# https://search-guard.com/kibana-openid-keycloak/
+# https://www.elastic.co/guide/en/elasticsearch/reference/7.5/oidc-guide-authentication.html
