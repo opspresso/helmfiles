@@ -6,11 +6,11 @@ master:
 
   resources:
     requests:
-      cpu: 1000m
-      memory: 3Gi
+      cpu: '{{ .Values | getOrNil "jenkins.resources.requests.cpu" | default "1000m" }}'
+      memory: '{{ .Values | getOrNil "jenkins.resources.requests.memory" | default "3Gi" }}'
     limits:
-      cpu: 1200m
-      memory: 3Gi
+      cpu: '{{ .Values | getOrNil "jenkins.resources.limits.cpu" | default "1200m" }}'
+      memory: '{{ .Values | getOrNil "jenkins.resources.limits.memory" | default "3Gi" }}'
 
   sidecars:
     configAutoReload:

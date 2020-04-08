@@ -3,8 +3,9 @@ nameOverride: fluentd
 # useStatefulSet: true
 
 output:
-  host: '{{ .Values | getOrNil "fluentd.host" | default "es.example.com" }}'
-  port: '{{ .Values | getOrNil "fluentd.port" | default "80" }}'
+  host: '{{ .Values | getOrNil "fluentd.host" | default "elasticsearch.example.com" }}'
+  port: '{{ .Values | getOrNil "fluentd.port" | default "9200" }}'
+  scheme: '{{ .Values | getOrNil "fluentd.scheme" | default "http" }}'
 
 metrics:
   enabled: true

@@ -29,7 +29,7 @@ helmfiles:
   - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/grafana.yaml
-  # - releases/monitor/fluentd.yaml
+  - releases/monitor/fluentd.yaml
 
   # argo
   - releases/argo/argo.yaml
