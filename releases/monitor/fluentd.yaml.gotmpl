@@ -1,0 +1,10 @@
+nameOverride: fluentd
+
+# useStatefulSet: true
+
+output:
+  host: '{{ .Values | getOrNil "fluentd.host" | default "es.example.com" }}'
+  port: '{{ .Values | getOrNil "fluentd.port" | default "80" }}'
+
+metrics:
+  enabled: true

@@ -13,6 +13,7 @@ s3:
   secure: '{{ .Values | getOrNil "docker-registry.s3.secure" | default "false" }}'
 
 secrets:
+  haSharedSecret: "secret-string-287463"
   s3:
     accessKey: ""
     secretKey: ""

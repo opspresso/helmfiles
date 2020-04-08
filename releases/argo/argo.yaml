@@ -14,7 +14,7 @@ releases:
   - name: ns-argo
     namespace: default
     chart: incubator/raw
-    version: ~0.1.0
+    version: ~0.2.3
     installed: true
     wait: true
     # force: true
@@ -28,7 +28,7 @@ releases:
   - name: argo
     namespace: argo
     chart: argo/argo
-    version: ~0.6.8
+    version: ~0.7.3
     installed: true
     # wait: true
     values:

@@ -2,6 +2,8 @@ nameOverride: prometheus
 
 server:
   enabled: true
+  global:
+    scrape_interval: 30s
   ingress:
     enabled: false
     annotations:
@@ -23,6 +25,9 @@ alertmanager:
   persistentVolume:
     enabled: true
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
+
+podSecurityPolicy:
+  enabled: true
 
 kubeStateMetrics:
   enabled: false

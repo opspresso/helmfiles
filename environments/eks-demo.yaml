@@ -48,11 +48,15 @@ grafana:
   oic:
     client:
       id: grafana
-      secret: 4e15c3f8-8c24-4c3a-b8fa-b0db57b8318e
+      secret: 9a3084e9-5272-4efc-a9d0-304615868a5e
     server:
       token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
       userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+
+fluentd:
+  host: es-demo.mzdev.be
+  port: 80
 
 # argo
 argo:
@@ -82,7 +86,7 @@ jenkins:
   oic:
     client:
       id: jenkins
-      secret: 40877b9b-e52d-4109-ad3f-474e8aa69506
+      secret: 23a2c36f-d4b2-4566-97bf-5ee53899111c
     server:
       token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
