@@ -1,0 +1,16 @@
+# Ordered list of releases.
+
+environments:
+  default:
+    values:
+      - environments/default.yaml
+  eks-demo:
+    values:
+      - environments/eks-demo.yaml
+
+helmfiles:
+  # kube-ingress
+  - releases/kube-ingress/ns-kube-ingress.yaml
+  - releases/kube-ingress/cert-manager.yaml
+  - releases/kube-ingress/external-dns.yaml
+  - releases/kube-ingress/nginx-ingress.yaml
