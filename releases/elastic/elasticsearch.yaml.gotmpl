@@ -13,7 +13,7 @@ ingress:
       hosts:
         - '{{ .Values | getOrNil "elasticsearch.domain" | default "elasticsearch.example.com" }}'
 
-esJavaOpts: "-Xmx128m -Xms128m"
+esJavaOpts: '{{ .Values | getOrNil "elasticsearch.esJavaOpts" | default "-Xmx1g -Xms1g" }}'
 
 resources:
   requests:
@@ -28,4 +28,4 @@ volumeClaimTemplate:
   storageClassName: '{{ .Values | getOrNil "elasticsearch.persistence.storageClass" | default "standard" }}'
   resources:
     requests:
-      storage: 300M
+      storage: '{{ .Values | getOrNil "elasticsearch.persistence.storageSize" | default "10Gi" }}'

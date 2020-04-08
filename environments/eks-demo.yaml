@@ -37,14 +37,14 @@ efs-provisioner:
 prometheus:
   domain: prometheus.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
 
 grafana:
   username: admin
   password: password
   domain: grafana.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
   oic:
     client:
       id: grafana
@@ -62,7 +62,8 @@ fluentd:
 elasticsearch:
   domain: elasticsearch.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
+  esJavaOpts: "-Xmx350m -Xms350m"
   resources:
     requests:
       cpu: 200m
@@ -74,7 +75,7 @@ elasticsearch:
 kibana:
   domain: kibana.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
   resources:
     requests:
       cpu: 200m
@@ -122,7 +123,7 @@ docker-registry:
 jenkins:
   domain: jenkins.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
   oic:
     client:
       id: jenkins
@@ -142,11 +143,11 @@ jenkins:
 sonatype-nexus:
   domain: nexus.demo.mzdev.be
   persistence:
-    storageClass: "efs"
+    storageClass: efs
   resources:
     requests:
-      cpu: 200m
+      cpu: 300m
       memory: 2G
     limits:
-      cpu: 220m
+      cpu: 330m
       memory: 2G

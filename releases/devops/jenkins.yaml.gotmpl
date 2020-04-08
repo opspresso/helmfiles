@@ -80,5 +80,5 @@ rbac:
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
-  size: 20Gi
-  storageClass: '{{ .Values | getOrNil "jenkins.persistence.storageClass" | default "" }}'
+  storageClass: '{{ .Values | getOrNil "jenkins.persistence.storageClass" | default "default" }}'
+  size: '{{ .Values | getOrNil "jenkins.persistence.storageSize" | default "20Gi" }}'

@@ -48,5 +48,5 @@ ingress:
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
-  storageSize: 50Gi
-  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "" }}'
+  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "default" }}'
+  storageSize: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageSize" | default "20Gi" }}'
