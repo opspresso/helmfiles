@@ -57,6 +57,7 @@ master:
     - google-login:latest
     # https://plugins.jenkins.io/oic-auth
     - oic-auth:latest
+
   securityRealm: |-
     <securityRealm class="org.jenkinsci.plugins.oic.OicSecurityRealm" plugin="oic-auth@1.0">
       <clientId>{{ .Values | getOrNil "jenkins.oic.client.id" | default "" }}</clientId>
@@ -67,6 +68,10 @@ master:
       <userNameField>preferred_username</userNameField>
       <scopes>openid email</scopes>
     </securityRealm>
+
+  jobs: {}
+  #  test: |-
+  #    <<xml here>>
 
 rbac:
   create: true
