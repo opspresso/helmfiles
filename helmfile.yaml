@@ -18,13 +18,11 @@ helmfiles:
   # - releases/kube-system/efs-provisioner.yaml
 
   # kube-ingress
-  - releases/kube-ingress/ns-kube-ingress.yaml
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress.yaml
 
   # monitor
-  - releases/monitor/ns-monitor.yaml
   - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/grafana.yaml

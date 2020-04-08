@@ -18,7 +18,6 @@ helmfiles:
   - releases/kube-system/efs-provisioner.yaml
 
   # kube-ingress
-  - releases/kube-ingress/ns-kube-ingress.yaml
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress.yaml
@@ -27,7 +26,6 @@ helmfiles:
   - releases/keycloak/keycloak.yaml
 
   # monitor
-  - releases/monitor/ns-monitor.yaml
   - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/grafana.yaml
@@ -40,7 +38,6 @@ helmfiles:
   # - releases/argo/argo-events.yaml
 
   # devops
-  - releases/devops/ns-devops.yaml
   - releases/devops/chartmuseum.yaml
   - releases/devops/docker-registry.yaml
   - releases/devops/jenkins.yaml

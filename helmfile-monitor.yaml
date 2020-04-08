@@ -10,7 +10,6 @@ environments:
 
 helmfiles:
   # monitor
-  - releases/monitor/ns-monitor.yaml
   - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/grafana.yaml

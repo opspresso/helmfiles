@@ -10,7 +10,6 @@ environments:
 
 helmfiles:
   # devops
-  - releases/devops/ns-devops.yaml
   - releases/devops/chartmuseum.yaml
   - releases/devops/docker-registry.yaml
   - releases/devops/jenkins.yaml
