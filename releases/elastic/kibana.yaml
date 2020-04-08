@@ -1,0 +1,21 @@
+repositories:
+  - name: elastic
+    url: https://helm.elastic.co
+
+environments:
+  default:
+    values:
+      - ../../environments/default.yaml
+  eks-demo:
+    values:
+      - ../../environments/eks-demo.yaml
+
+releases:
+  - name: kibana
+    namespace: elastic
+    chart: elastic/kibana
+    version: ~7.6.2
+    installed: true
+    # wait: true
+    values:
+      - kibana.yaml.gotmpl
