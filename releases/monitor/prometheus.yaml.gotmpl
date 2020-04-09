@@ -5,7 +5,7 @@ server:
   global:
     scrape_interval: 30s
   ingress:
-    enabled: false
+    enabled: true
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
