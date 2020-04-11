@@ -5,7 +5,7 @@ prometheusOperator:
 
 grafana:
   enabled: false
-  adminPassword: password
+  adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}'
 
 # kubeStateMetrics:
 #   enabled: false
