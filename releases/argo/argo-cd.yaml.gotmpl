@@ -3,8 +3,8 @@ nameOverride: argocd
 controller:
   metrics:
     enabled: true
-#     serviceMonitor:
-#       enabled: true
+    serviceMonitor:
+      enabled: true
 
 server:
   extraArgs:
@@ -12,8 +12,8 @@ server:
 
   metrics:
     enabled: true
-#     serviceMonitor:
-#       enabled: true
+    serviceMonitor:
+      enabled: true
 
   ingress:
     enabled: true
@@ -41,12 +41,10 @@ server:
         type: helm
         url: https://argoproj.github.io/argo-helm
     oidc.config: |
-      name: sso
+      name: SSO
       clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
-
-installCRDs: false
 
 configs:
   secret:

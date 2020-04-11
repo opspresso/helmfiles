@@ -1,8 +1,6 @@
 repositories:
   - name: argo
     url: https://argoproj.github.io/argo-helm
-  - name: incubator
-    url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:
@@ -15,18 +13,9 @@ environments:
 releases:
   - name: argo-rollouts
     namespace: argo-rollouts
-    chart: incubator/raw
-    version: ~0.2.3
+    chart: argo/argo-rollouts
+    version: ~0.2.0
     installed: true
     # wait: true
-    force: true
-    recreatePods: true
-    hooks:
-      - events: ["postsync"]
-        showlogs: true
-        command: "/bin/sh"
-        args:
-          - -c
-          - kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
     values:
-      - argo-rollouts.yaml.gotmpl
+      - argo-events.yaml.gotmpl

@@ -16,6 +16,6 @@ releases:
     chart: stable/metrics-server
     version: ~2.10.2
     installed: true
-    wait: true
+    # wait: true
     values:
       - metrics-server.yaml.gotmpl

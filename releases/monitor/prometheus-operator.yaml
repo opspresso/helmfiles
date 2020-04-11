@@ -1,6 +1,8 @@
 repositories:
   - name: stable
     url: https://kubernetes-charts.storage.googleapis.com
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:
@@ -11,6 +13,20 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
+  - name: prometheus-operator-crds
+    namespace: monitor
+    chart: incubator/raw
+    version: ~0.2.3
+    installed: true
+    wait: true
+    values:
+      - prometheus-operator-0.37/monitoring.coreos.com_alertmanagers.yaml
+      - prometheus-operator-0.37/monitoring.coreos.com_podmonitors.yaml
+      - prometheus-operator-0.37/monitoring.coreos.com_prometheuses.yaml
+      - prometheus-operator-0.37/monitoring.coreos.com_prometheusrules.yaml
+      - prometheus-operator-0.37/monitoring.coreos.com_servicemonitors.yaml
+      - prometheus-operator-0.37/monitoring.coreos.com_thanosrulers.yaml
+
   - name: prometheus-operator
     namespace: monitor
     chart: stable/prometheus-operator
