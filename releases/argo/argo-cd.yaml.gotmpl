@@ -46,9 +46,9 @@ server:
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
 
-# configs:
-#   secret:
-#     createSecret: true
+configs:
+  secret:
+    createSecret: true
 #     argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
 #     argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
 
