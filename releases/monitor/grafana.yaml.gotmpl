@@ -25,10 +25,10 @@ grafana.ini:
     enabled: true
     client_id: '{{ .Values | getOrNil "grafana.oic.client.id" | default "" }}'
     client_secret: '{{ .Values | getOrNil "grafana.oic.client.secret" | default "" }}'
-    scopes: "openid email"
     auth_url: '{{ .Values | getOrNil "grafana.oic.server.auth" | default "" }}'
     token_url: '{{ .Values | getOrNil "grafana.oic.server.token" | default "" }}'
     api_url: '{{ .Values | getOrNil "grafana.oic.server.userinfo" | default "" }}'
+    scopes: "openid email"
     allow_sign_up: "true"
 
 sidecar:
@@ -46,7 +46,8 @@ datasources:
     datasources:
       - name: Prometheus
         type: prometheus
-        url: http://prometheus-server
+      # url: http://prometheus-server:80
+        url: http://prometheus-operator-prometheus:9090
         access: proxy
         isDefault: true
 
