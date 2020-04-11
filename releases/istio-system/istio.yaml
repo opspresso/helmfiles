@@ -17,7 +17,5 @@ releases:
     version: ~0.2.3
     installed: true
     # wait: true
-    # force: true
-    # recreatePods: true
     values:
       - istio-demo.yaml

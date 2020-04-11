@@ -13,21 +13,19 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: cert-manager-crds
-    namespace: kube-ingress
-    chart: incubator/raw
-    version: ~0.2.3
-    installed: true
-    wait: true
-    values:
-      - cert-manager-0.13/00-crds.yaml
-
   - name: cert-manager
     namespace: kube-ingress
     chart: jetstack/cert-manager
     version: ~v0.13.1
     installed: true
     wait: true
+    hooks:
+      - events: ["prepare"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          - -c
+          - kubectl apply --validate=false -f ./cert-manager-0.13/
     values:
       - cert-manager.yaml.gotmpl
 
@@ -38,4 +36,4 @@ releases:
     installed: true
     # wait: true
     values:
-      - cert-manager-issuers.yaml.gotmpl
+      - ./cert-manager/cert-manager-issuers.yaml.gotmpl

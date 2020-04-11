@@ -13,25 +13,19 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: prometheus-operator-crds
-    namespace: monitor
-    chart: incubator/raw
-    version: ~0.2.3
-    installed: true
-    wait: true
-    values:
-      - prometheus-operator-0.37/monitoring.coreos.com_alertmanagers.yaml
-      - prometheus-operator-0.37/monitoring.coreos.com_podmonitors.yaml
-      - prometheus-operator-0.37/monitoring.coreos.com_prometheuses.yaml
-      - prometheus-operator-0.37/monitoring.coreos.com_prometheusrules.yaml
-      - prometheus-operator-0.37/monitoring.coreos.com_servicemonitors.yaml
-      - prometheus-operator-0.37/monitoring.coreos.com_thanosrulers.yaml
-
   - name: prometheus-operator
     namespace: monitor
     chart: stable/prometheus-operator
     version: ~8.12.10
     installed: true
     # wait: true
+    hooks:
+      - events: ["prepare"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          - -c
+          # - pwd
+          - kubectl apply --validate=false -f ./prometheus-operator-0.37/
     values:
       - prometheus-operator.yaml.gotmpl

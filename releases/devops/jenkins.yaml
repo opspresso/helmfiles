@@ -19,10 +19,8 @@ releases:
     version: ~0.2.3
     installed: true
     # wait: true
-    # force: true
-    # recreatePods: true
     values:
-      - jenkins-env.yaml.gotmpl
+      - ./jenkins/jenkins-env.yaml.gotmpl
 
   - name: jenkins
     namespace: devops
@@ -39,7 +37,5 @@ releases:
     version: ~0.2.3
     installed: true
     # wait: true
-    # force: true
-    # recreatePods: true
     values:
-      - jenkins-role.yaml.gotmpl
+      - ./jenkins/jenkins-role.yaml.gotmpl
