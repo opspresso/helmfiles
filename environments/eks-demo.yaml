@@ -95,7 +95,7 @@ argo-cd:
   # password: "$(htpasswd -nbBC 10 '' 'password' | tr -d ':\n' | sed 's/$2y/$2a/')"
   password: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"
   # mod-time: "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-  mod-time: "2020-02-02"
+  mod-time: "2020-02-14"
   domain: argocd.demo.mzdev.be
   oic:
     client:
