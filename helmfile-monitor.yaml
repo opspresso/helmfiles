@@ -10,7 +10,8 @@ environments:
 
 helmfiles:
   # monitor
-  - releases/monitor/prometheus.yaml
-  - releases/monitor/prometheus-adapter.yaml
+  # - releases/monitor/prometheus.yaml
+  # - releases/monitor/prometheus-adapter.yaml
+  - releases/monitor/prometheus-operator.yaml
   - releases/monitor/grafana.yaml
   - releases/monitor/fluentd-elasticsearch.yaml
