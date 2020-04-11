@@ -45,6 +45,10 @@ server:
       clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
+    policy.csv: |
+      g, jyyu@mz.co.kr role:admin
+
+    scopes: '[email]'
 
 configs:
   secret:
