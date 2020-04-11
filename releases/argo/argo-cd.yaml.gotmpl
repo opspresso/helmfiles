@@ -1,15 +1,19 @@
 nameOverride: argocd
 
+controller:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
 server:
   extraArgs:
     - --insecure
 
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8083"
+    serviceMonitor:
+      enabled: true
 
   ingress:
     enabled: true
@@ -25,6 +29,7 @@ server:
           - '{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
 
   config:
+    url: 'https://{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
     repositories: |
       - name: env-demo
         type: git
@@ -35,6 +40,11 @@ server:
       - name: argo
         type: helm
         url: https://argoproj.github.io/argo-helm
+    oidc.config: |
+      name: sso
+      clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
+      clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
+      issuer: '{{ .Values | getOrNil "grafana.oic.server.issuer" | default "" }}'
 
 configs:
   secret:

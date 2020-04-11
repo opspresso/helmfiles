@@ -97,6 +97,12 @@ argo-cd:
   # mod-time: "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
   mod-time: "2020-02-02"
   domain: argocd.demo.mzdev.be
+  oic:
+    client:
+      id: argo-cd
+      secret: d15d2335-2cef-4eb1-bf36-40ac7583c711
+    server:
+      issuer: https://keycloak.demo.mzdev.be/auth/realms/demo
 
 # keycloak
 keycloak:
