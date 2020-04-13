@@ -1,5 +1,7 @@
 nameOverride: argocd
 
+installCRDs: true
+
 controller:
   metrics:
     enabled: true
@@ -20,20 +22,20 @@ server:
         release: prometheus-operator
 
   ingress:
-    enabled: true
+    enabled: {{ .Values | getOrNil "argo-cd.ingress.enabled" | default false }}
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
     hosts:
-      - '{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
+      - '{{ .Values | getOrNil "argo-cd.ingress.host" | default "argo-cd.example.com" }}'
     tls:
       - secretName: argocd-server-tls
         hosts:
-          - '{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
+          - '{{ .Values | getOrNil "argo-cd.ingress.host" | default "argo-cd.example.com" }}'
 
   config:
-    url: 'https://{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
+    url: 'https://{{ .Values | getOrNil "argo-cd.ingress.host" | default "argo-cd.example.com" }}'
 
     repositories: |
       - name: env-demo

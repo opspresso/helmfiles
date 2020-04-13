@@ -28,13 +28,13 @@ nexus:
 
 nexusProxy:
   env:
-    nexusHttpHost: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "nexus.example.com" }}'
+    nexusHttpHost: '{{ .Values | getOrNil "sonatype-nexus.ingress.host" | default "nexus.example.com" }}'
 
 nexusBackup:
   nexusAdminPassword: '{{ .Values | getOrNil "sonatype-nexus.password" | default "password" }}'
 
 ingress:
-  enabled: true
+  enabled: {{ .Values | getOrNil "sonatype-nexus.ingress.enabled" | default false }}
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
