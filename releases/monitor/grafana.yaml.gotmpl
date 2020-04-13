@@ -4,21 +4,21 @@ adminUser: '{{ .Values | getOrNil "grafana.username" | default "admin" }}'
 adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}'
 
 ingress:
-  enabled: true
+  enabled: {{ .Values | getOrNil "grafana.ingress.enabled" | default false }}
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - '{{ .Values | getOrNil "grafana.domain" | default "grafana.example.com" }}'
+    - '{{ .Values | getOrNil "grafana.ingress.host" | default "grafana.example.com" }}'
   tls:
     - secretName: grafana-tls
       hosts:
-        - '{{ .Values | getOrNil "grafana.domain" | default "grafana.example.com" }}'
+        - '{{ .Values | getOrNil "grafana.ingress.host" | default "grafana.example.com" }}'
 
 grafana.ini:
   server:
-    root_url: 'https://{{ .Values | getOrNil "grafana.domain" | default "" }}/'
+    root_url: 'https://{{ .Values | getOrNil "grafana.ingress.host" | default "" }}/'
   auth:
     disable_login_form: {{ .Values | getOrNil "grafana.disable_login_form" | default false }}
   auth.generic_oauth:
@@ -36,7 +36,7 @@ sidecar:
     enabled: true
 
 persistence:
-  enabled: true
+  enabled: {{ .Values | getOrNil "grafana.persistence.enabled" | default false }}
   storageClassName: '{{ .Values | getOrNil "grafana.persistence.storageClass" | default "default" }}'
   size: '{{ .Values | getOrNil "grafana.persistence.storageSize" | default "10Gi" }}'
 

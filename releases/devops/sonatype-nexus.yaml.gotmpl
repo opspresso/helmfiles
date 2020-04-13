@@ -1,7 +1,7 @@
-nameOverride: sonatype-nexus
+fullnameOverride: sonatype-nexus
 
-statefulset:
-  enabled: true
+# statefulset:
+#   enabled: true
 
 nexus:
   resources:
@@ -28,13 +28,13 @@ nexus:
 
 nexusProxy:
   env:
-    nexusHttpHost: '{{ .Values | getOrNil "sonatype-nexus.domain" | default "nexus.example.com" }}'
+    nexusHttpHost: '{{ .Values | getOrNil "sonatype-nexus.ingress.host" | default "nexus.example.com" }}'
 
 nexusBackup:
   nexusAdminPassword: '{{ .Values | getOrNil "sonatype-nexus.password" | default "password" }}'
 
 ingress:
-  enabled: true
+  enabled: {{ .Values | getOrNil "sonatype-nexus.ingress.enabled" | default false }}
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -46,7 +46,13 @@ ingress:
     secretName: sonatype-nexus-tls
 
 persistence:
-  enabled: true
-  accessMode: ReadWriteOnce
+  enabled: {{ .Values | getOrNil "sonatype-nexus.persistence.enabled" | default false }}
   storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "default" }}'
   storageSize: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageSize" | default "20Gi" }}'
+
+nexusBackup:
+  enabled: false
+  persistence:
+    enabled: {{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.enabled" | default false }}
+    storageClass: '{{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.storageClass" | default "default" }}'
+    storageSize: '{{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.storageSize" | default "20Gi" }}'

@@ -1,6 +1,6 @@
 repositories:
-  - name: stable
-    url: https://kubernetes-charts.storage.googleapis.com
+  - name: oteemocharts
+    url: https://oteemo.github.io/charts
 
 environments:
   default:
@@ -13,8 +13,8 @@ environments:
 releases:
   - name: sonatype-nexus
     namespace: devops
-    chart: stable/sonatype-nexus
-    version: ~1.23.1
+    chart: oteemocharts/sonatype-nexus
+    version: ~2.0.0
     installed: true
     # wait: true
     values:

@@ -1,22 +1,24 @@
 nameOverride: argo
 
+installCRD: true
+
 controller:
   podAnnotations:
     iam.amazonaws.com/role: '{{ .Values | getOrNil "argo.iam-role" | default "" }}'
 
 ui:
   ingress:
-    enabled: true
+    enabled: {{ .Values | getOrNil "argo.ingress.enabled" | default false }}
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
     hosts:
-      - '{{ .Values | getOrNil "argo.domain" | default "argo.example.com" }}'
+      - '{{ .Values | getOrNil "argo.ingress.host" | default "argo.example.com" }}'
     tls:
       - secretName: argo-ui-tls
         hosts:
-          - '{{ .Values | getOrNil "argo.domain" | default "argo.example.com" }}'
+          - '{{ .Values | getOrNil "argo.ingress.host" | default "argo.example.com" }}'
 
 useDefaultArtifactRepo: true
 useStaticCredentials: false

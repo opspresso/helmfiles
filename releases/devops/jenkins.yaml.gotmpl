@@ -23,16 +23,16 @@ master:
   javaOpts: "-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Seoul"
 
   ingress:
-    enabled: true
+    enabled: {{ .Values | getOrNil "jenkins.ingress.enabled" | default false }}
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    hostName: '{{ .Values | getOrNil "jenkins.domain" | default "jenkins.example.com" }}'
+    hostName: '{{ .Values | getOrNil "jenkins.ingress.host" | default "jenkins.example.com" }}'
     tls:
       - secretName: jenkins-tls
         hosts:
-          - '{{ .Values | getOrNil "jenkins.domain" | default "jenkins.example.com" }}'
+          - '{{ .Values | getOrNil "jenkins.ingress.host" | default "jenkins.example.com" }}'
 
   overwritePlugins: true
   installPlugins:
@@ -78,7 +78,6 @@ rbac:
   readSecrets: true
 
 persistence:
-  enabled: true
-  accessMode: ReadWriteOnce
+  enabled: {{ .Values | getOrNil "jenkins.persistence.enabled" | default false }}
   storageClass: '{{ .Values | getOrNil "jenkins.persistence.storageClass" | default "default" }}'
   size: '{{ .Values | getOrNil "jenkins.persistence.storageSize" | default "20Gi" }}'

@@ -26,7 +26,7 @@ env:
   #   BASIC_AUTH_PASS: '{{ .Values | getOrNil "chartmuseum.basic.auth.pass" | default "924426A5-DA22-4A10-9FB1-418761684372" }}'
 
 ingress:
-  enabled: true
+  enabled: {{ .Values | getOrNil "chartmuseum.ingress.enabled" | default false }}
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -34,7 +34,7 @@ ingress:
     ingress.kubernetes.io/proxy-body-size: 500m
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - name: '{{ .Values | getOrNil "chartmuseum.domain" | default "chartmuseum.example.com" }}'
+    - name: '{{ .Values | getOrNil "chartmuseum.ingress.host" | default "chartmuseum.example.com" }}'
       path: /
       tls: true
       tlsSecret: chartmuseum-tls

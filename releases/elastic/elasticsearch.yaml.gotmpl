@@ -1,17 +1,17 @@
 clusterName: "elasticsearch"
 
 ingress:
-  enabled: false
+  enabled: {{ .Values | getOrNil "elasticsearch.ingress.enabled" | default false }}
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
-    - '{{ .Values | getOrNil "elasticsearch.domain" | default "elasticsearch.example.com" }}'
+    - '{{ .Values | getOrNil "elasticsearch.ingress.host" | default "elasticsearch.example.com" }}'
   tls:
     - secretName: elasticsearch-tls
       hosts:
-        - '{{ .Values | getOrNil "elasticsearch.domain" | default "elasticsearch.example.com" }}'
+        - '{{ .Values | getOrNil "elasticsearch.ingress.host" | default "elasticsearch.example.com" }}'
 
 esJavaOpts: '{{ .Values | getOrNil "elasticsearch.esJavaOpts" | default "-Xmx1g -Xms1g" }}'
 

@@ -4,32 +4,20 @@ server:
   enabled: true
   global:
     scrape_interval: 30s
-  ingress:
-    enabled: false
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    hosts:
-      - '{{ .Values | getOrNil "prometheus.domain" | default "prometheus.example.com" }}'
-    tls:
-      - secretName: prometheus-tls
-        hosts:
-          - '{{ .Values | getOrNil "prometheus.domain" | default "prometheus.example.com" }}'
   persistentVolume:
-    enabled: true
+    enabled: {{ .Values | getOrNil "prometheus.persistence.enabled" | default false }}
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
     size: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "8Gi" }}'
 
 alertmanager:
   enabled: true
   persistentVolume:
-    enabled: true
+    enabled: {{ .Values | getOrNil "prometheus.persistence.enabled" | default false }}
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
     size: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "2Gi" }}'
 
 podSecurityPolicy:
   enabled: true
 
-# kubeStateMetrics:
-#   enabled: false
+kubeStateMetrics:
+  enabled: {{ .Values | getOrNil "prometheus.kubeStateMetrics.enabled" | default false }}

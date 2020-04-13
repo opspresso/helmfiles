@@ -15,6 +15,7 @@ helmfiles:
   # - releases/kube-system/kube-state-metrics.yaml
   - releases/kube-system/cluster-autoscaler.yaml
   - releases/kube-system/cluster-overprovisioner.yaml
+  - releases/kube-system/k8s-spot-termination-handler.yaml
   - releases/kube-system/efs-provisioner.yaml
 
   # kube-ingress

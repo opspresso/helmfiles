@@ -25,7 +25,6 @@ releases:
         command: "/bin/sh"
         args:
           - -c
-          # - pwd
           - kubectl apply --validate=false -f ./prometheus-operator-0.37/
     values:
       - prometheus-operator.yaml.gotmpl
