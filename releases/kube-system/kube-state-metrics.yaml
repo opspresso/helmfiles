@@ -16,6 +16,6 @@ releases:
     chart: stable/kube-state-metrics
     version: ~2.8.2
     installed: true
-    wait: true
+    # wait: true
     values:
       - kube-state-metrics.yaml.gotmpl

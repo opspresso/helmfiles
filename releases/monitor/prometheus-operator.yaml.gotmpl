@@ -1,4 +1,11 @@
 nameOverride: prometheus-operator
 
-kubeStateMetrics:
+prometheusOperator:
+  createCustomResource: false
+
+grafana:
   enabled: false
+  adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}'
+
+# kubeStateMetrics:
+#   enabled: false

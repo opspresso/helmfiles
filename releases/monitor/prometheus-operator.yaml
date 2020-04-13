@@ -1,6 +1,8 @@
 repositories:
   - name: stable
     url: https://kubernetes-charts.storage.googleapis.com
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:
@@ -17,5 +19,13 @@ releases:
     version: ~8.12.10
     installed: true
     # wait: true
+    hooks:
+      - events: ["prepare"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          - -c
+          # - pwd
+          - kubectl apply --validate=false -f ./prometheus-operator-0.37/
     values:
       - prometheus-operator.yaml.gotmpl

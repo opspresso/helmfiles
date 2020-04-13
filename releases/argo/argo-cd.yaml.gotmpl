@@ -1,15 +1,23 @@
 nameOverride: argocd
 
+controller:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus-operator
+
 server:
   extraArgs:
     - --insecure
 
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8083"
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus-operator
 
   ingress:
     enabled: true
@@ -25,6 +33,7 @@ server:
           - '{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
 
   config:
+    url: 'https://{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
     repositories: |
       - name: env-demo
         type: git
@@ -35,6 +44,13 @@ server:
       - name: argo
         type: helm
         url: https://argoproj.github.io/argo-helm
+    oidc.config: |
+      name: SSO
+      clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
+      clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
+      issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
+ #  policy.csv: |
+ #    g, jyyu@mz.co.kr role:admin
 
 configs:
   secret:
@@ -44,4 +60,4 @@ configs:
 
 # sso
 # https://argoproj.github.io/argo-cd/operator-manual/user-management/#2-configure-argo-cd-for-sso
-# https://github.com/dexidp/dex/blob/master/Documentation/connectors/oidc.md
+# https://argoproj.github.io/argo-cd/operator-manual/user-management/auth0/

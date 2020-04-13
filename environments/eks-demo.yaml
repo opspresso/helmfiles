@@ -42,6 +42,7 @@ prometheus:
 grafana:
   username: admin
   password: password
+  disable_login_form: false
   domain: grafana.demo.mzdev.be
   persistence:
     storageClass: efs
@@ -63,14 +64,14 @@ elasticsearch:
   domain: elasticsearch.demo.mzdev.be
   persistence:
     storageClass: efs
-  esJavaOpts: "-Xmx350m -Xms350m"
+  # esJavaOpts: "-Xmx512m -Xms512m"
   resources:
     requests:
-      cpu: 200m
-      memory: 700M
+      cpu: 300m
+      memory: 2G
     limits:
-      cpu: 250m
-      memory: 700M
+      cpu: 330m
+      memory: 2G
 
 kibana:
   domain: kibana.demo.mzdev.be
@@ -79,10 +80,10 @@ kibana:
   resources:
     requests:
       cpu: 200m
-      memory: 700M
+      memory: 1G
     limits:
-      cpu: 250m
-      memory: 700M
+      cpu: 220m
+      memory: 1G
 
 # argo
 argo:
@@ -95,8 +96,14 @@ argo-cd:
   # password: "$(htpasswd -nbBC 10 '' 'password' | tr -d ':\n' | sed 's/$2y/$2a/')"
   password: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"
   # mod-time: "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-  mod-time: "2020-02-02"
+  mod-time: "2020-02-14"
   domain: argocd.demo.mzdev.be
+  oic:
+    client:
+      id: argo-cd
+      secret: d15d2335-2cef-4eb1-bf36-40ac7583c711
+    server:
+      issuer: https://keycloak.demo.mzdev.be/auth/realms/demo
 
 # keycloak
 keycloak:
