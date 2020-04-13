@@ -14,7 +14,7 @@ releases:
   - name: prometheus
     namespace: monitor
     chart: stable/prometheus
-    version: ~11.0.4
+    version: ~11.1.0
     installed: true
     # wait: true
     values:
