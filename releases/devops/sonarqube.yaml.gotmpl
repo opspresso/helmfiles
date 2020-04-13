@@ -1,0 +1,44 @@
+fullnameOverride: sonarqube
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    ingress.kubernetes.io/proxy-body-size: "500m"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - name: '{{ .Values | getOrNil "sonarqube.domain" | default "sonarqube.example.com" }}'
+      path: /
+  tls:
+    - secretName: sonarqube-tls
+      hosts:
+        - '{{ .Values | getOrNil "sonarqube.domain" | default "sonarqube.example.com" }}'
+
+plugins:
+ install:
+   - "https://github.com/checkstyle/sonar-checkstyle/releases/download/4.30/checkstyle-sonar-plugin-4.30.jar"
+   - "https://github.com/jensgerdes/sonar-pmd/releases/download/3.2.1/sonar-pmd-plugin-3.2.1.jar"
+   - "https://github.com/SonarSource/SonarJS/releases/download/6.2.1.12157/sonar-javascript-plugin-6.2.1.12157.jar"
+   - "https://github.com/spotbugs/sonar-findbugs/releases/download/4.0.0/sonar-findbugs-plugin-4.0.0.jar"
+
+resources:
+  requests:
+    cpu: '{{ .Values | getOrNil "sonarqube.resources.requests.cpu" | default "1000m" }}'
+    memory: '{{ .Values | getOrNil "sonarqube.resources.requests.memory" | default "3Gi" }}'
+  limits:
+    cpu: '{{ .Values | getOrNil "sonarqube.resources.limits.cpu" | default "1200m" }}'
+    memory: '{{ .Values | getOrNil "sonarqube.resources.limits.memory" | default "3Gi" }}'
+
+persistence:
+  enabled: {{ .Values | getOrNil "sonarqube.persistence.enabled" | default false }}
+  storageClass: '{{ .Values | getOrNil "sonarqube.persistence.storageClass" | default "default" }}'
+  size: '{{ .Values | getOrNil "sonarqube.persistence.storageSize" | default "20Gi" }}'
+
+postgresql:
+  enabled: true
+  persistence:
+    enabled: {{ .Values | getOrNil "sonarqube.postgresql.persistence.enabled" | default false }}
+    storageClass: '{{ .Values | getOrNil "sonarqube.postgresql.persistence.storageClass" | default "default" }}'
+    size: '{{ .Values | getOrNil "sonarqube.postgresql.persistence.storageSize" | default "8Gi" }}'

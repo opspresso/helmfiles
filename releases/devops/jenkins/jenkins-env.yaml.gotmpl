@@ -24,4 +24,6 @@ resources:
         def registry = "{{ .Values | getOrNil "docker-registry.domain" | default "" }}"
         @Field
         def nexus = "{{ .Values | getOrNil "sonatype-nexus.domain" | default "" }}"
+        @Field
+        def sonarqube = "{{ .Values | getOrNil "sonarqube.domain" | default "" }}"
         return this

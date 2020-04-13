@@ -130,6 +130,7 @@ docker-registry:
 jenkins:
   domain: jenkins.demo.mzdev.be
   persistence:
+    enabled: true
     storageClass: efs
   oic:
     client:
@@ -150,7 +151,29 @@ jenkins:
 sonatype-nexus:
   domain: nexus.demo.mzdev.be
   persistence:
+    enabled: true
     storageClass: efs
+  nexusBackup:
+    persistence:
+      enabled: true
+      storageClass: efs
+  resources:
+    requests:
+      cpu: 300m
+      memory: 2G
+    limits:
+      cpu: 330m
+      memory: 2G
+
+sonarqube:
+  domain: sonarqube.demo.mzdev.be
+  persistence:
+    enabled: true
+    storageClass: efs
+  postgresql:
+    persistence:
+      enabled: true
+      storageClass: efs
   resources:
     requests:
       cpu: 300m
