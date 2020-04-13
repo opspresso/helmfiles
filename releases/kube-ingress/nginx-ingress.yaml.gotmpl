@@ -24,3 +24,7 @@ controller:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "10254"
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus-operator

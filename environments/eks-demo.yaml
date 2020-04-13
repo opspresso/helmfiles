@@ -42,6 +42,7 @@ prometheus:
 grafana:
   username: admin
   password: password
+  disable_login_form: false
   domain: grafana.demo.mzdev.be
   persistence:
     storageClass: efs
