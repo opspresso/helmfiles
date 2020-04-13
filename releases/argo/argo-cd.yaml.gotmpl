@@ -34,6 +34,7 @@ server:
 
   config:
     url: 'https://{{ .Values | getOrNil "argo-cd.domain" | default "argo-cd.example.com" }}'
+
     repositories: |
       - name: env-demo
         type: git
@@ -44,13 +45,23 @@ server:
       - name: argo
         type: helm
         url: https://argoproj.github.io/argo-helm
+
     oidc.config: |
       name: SSO
       clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
- #  policy.csv: |
- #    g, jyyu@mz.co.kr role:admin
+
+  rbacConfig:
+    policy.default: role:readonly
+    policy.csv: |
+      p, role:mz-admin, applications, *, */*, allow
+      p, role:mz-admin, certificates, *, *, allow
+      p, role:mz-admin, clusters, *, *, allow
+      p, role:mz-admin, projects, *, *, allow
+      p, role:mz-admin, repositories, *, *, allow
+
+      g, jyyu@mz.co.kr, role:mz-admin
 
 configs:
   secret:
