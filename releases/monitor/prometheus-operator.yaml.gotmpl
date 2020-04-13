@@ -3,9 +3,12 @@ nameOverride: prometheus-operator
 prometheusOperator:
   createCustomResource: false
 
+prometheus:
+  prometheusSpec:
+    scrapeInterval: "30s"
+
 grafana:
   enabled: false
-  adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}'
 
 # kubeStateMetrics:
 #   enabled: false
