@@ -39,7 +39,7 @@ prometheus:
     enabled: true
     storageClass: efs
   kubeStateMetrics:
-    enabled: false
+    enabled: true
 
 grafana:
   username: admin
