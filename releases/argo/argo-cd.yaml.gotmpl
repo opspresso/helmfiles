@@ -4,9 +4,9 @@ installCRDs: true
 
 controller:
   metrics:
-    enabled: true
+    enabled: {{ .Values | getOrNil "argo-cd.metrics.enabled" | default false }}
     serviceMonitor:
-      enabled: true
+      enabled: {{ .Values | getOrNil "argo-cd.metrics.enabled" | default false }}
       additionalLabels:
         release: prometheus-operator
 
@@ -62,7 +62,6 @@ server:
       p, role:mz-admin, clusters, *, *, allow
       p, role:mz-admin, projects, *, *, allow
       p, role:mz-admin, repositories, *, *, allow
-
       g, jyyu@mz.co.kr, role:mz-admin
 
 configs:
