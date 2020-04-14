@@ -12,3 +12,4 @@ helmfiles:
   # elastic
   - releases/elastic/elasticsearch.yaml
   - releases/elastic/kibana.yaml
+  - releases/elastic/fluentd-elasticsearch.yaml

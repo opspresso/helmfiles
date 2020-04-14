@@ -32,6 +32,6 @@ releases:
         command: "/bin/sh"
         args:
           - -c
-          - kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
+          - kubectl apply -n argo-rollouts -f ./argo-rollouts-0.8.0/
     values:
       - argo-rollouts.yaml.gotmpl

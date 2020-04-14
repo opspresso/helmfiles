@@ -1,6 +1,6 @@
 repositories:
-  - name: kiwigrid
-    url: https://kiwigrid.github.io
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
 
 environments:
   default:
@@ -11,11 +11,11 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: fluentd-elasticsearch
-    namespace: monitor
-    chart: kiwigrid/fluentd-elasticsearch
-    version: ~6.2.3
+  - name: fluentd
+    namespace: elastic
+    chart: stable/fluentd
+    version: ~2.4.0
     installed: true
     # wait: true
     values:
-      - fluentd-elasticsearch.yaml.gotmpl
+      - fluentd.yaml.gotmpl
