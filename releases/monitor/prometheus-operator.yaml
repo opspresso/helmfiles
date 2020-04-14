@@ -19,12 +19,12 @@ releases:
     version: ~8.12.0
     installed: true
     # wait: true
-    # hooks:
-    #   - events: ["prepare"]
-    #     showlogs: true
-    #     command: "/bin/sh"
-    #     args:
-    #       - -c
-    #       - kubectl apply --validate=false -f ./prometheus-operator-0.37/
+    hooks:
+      - events: ["prepare"]
+        showlogs: true
+        command: "/bin/sh"
+        args:
+          - -c
+          - kubectl apply --validate=false -f ./prometheus-operator-0.37/
     values:
       - prometheus-operator.yaml.gotmpl
