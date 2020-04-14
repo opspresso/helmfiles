@@ -12,3 +12,6 @@ helmfiles:
   # elastic
   - releases/elastic/elasticsearch.yaml
   - releases/elastic/kibana.yaml
+
+  # monitor
+  - releases/monitor/fluentd-elasticsearch.yaml

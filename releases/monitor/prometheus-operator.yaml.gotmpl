@@ -10,5 +10,5 @@ prometheus:
 grafana:
   enabled: false
 
-# kubeStateMetrics:
-#   enabled: false
+kubeStateMetrics:
+  enabled: {{ .Values | getOrNil "prometheus.kubeStateMetrics.enabled" | default false }}
