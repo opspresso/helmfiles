@@ -18,6 +18,12 @@ helmfiles:
   - releases/kube-system/k8s-spot-termination-handler.yaml
   - releases/kube-system/efs-provisioner.yaml
 
+  # monitor
+  # - releases/monitor/prometheus.yaml
+  # - releases/monitor/prometheus-adapter.yaml
+  - releases/monitor/prometheus-operator.yaml
+  - releases/monitor/grafana.yaml
+
   # kube-ingress
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/external-dns.yaml
@@ -25,12 +31,6 @@ helmfiles:
 
   # keycloak
   - releases/keycloak/keycloak.yaml
-
-  # monitor
-  # - releases/monitor/prometheus.yaml
-  # - releases/monitor/prometheus-adapter.yaml
-  - releases/monitor/prometheus-operator.yaml
-  - releases/monitor/grafana.yaml
 
   # argo
   - releases/argo/argo.yaml

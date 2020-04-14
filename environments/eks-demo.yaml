@@ -18,6 +18,8 @@ nginx-ingress:
   external-dns:
     hostname: "*.demo.mzdev.be"
     ttl: "300"
+  metrics:
+    enabled: true
 
 external-dns:
   iam-role: eks-demo-worker-route53
@@ -106,6 +108,8 @@ argo-cd:
   # password: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"
   # mod-time: "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
   # mod-time: "2020-02-14"
+  metrics:
+    enabled: true
   ingress:
     enabled: true
     host: argocd.demo.mzdev.be
