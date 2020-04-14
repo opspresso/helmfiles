@@ -17,14 +17,14 @@ controller:
       external-dns.alpha.kubernetes.io/hostname: '{{ .Values | getOrNil "nginx-ingress.external-dns.hostname" | default "" }}'
       external-dns.alpha.kubernetes.io/ttl: '{{ .Values | getOrNil "nginx-ingress.external-dns.ttl" | default "300" }}'
   stats:
-    enabled: true
+    enabled: {{ .Values | getOrNil "nginx-ingress.metrics.enabled" | default false }}
   metrics:
-    enabled: true
+    enabled: {{ .Values | getOrNil "nginx-ingress.metrics.enabled" | default false }}
     service:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "10254"
     serviceMonitor:
-      enabled: true
+      enabled: {{ .Values | getOrNil "nginx-ingress.metrics.enabled" | default false }}
       additionalLabels:
         release: prometheus-operator

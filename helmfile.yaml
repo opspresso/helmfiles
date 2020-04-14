@@ -18,13 +18,13 @@ helmfiles:
   - releases/kube-system/k8s-spot-termination-handler.yaml
   # - releases/kube-system/efs-provisioner.yaml
 
-  # kube-ingress
-  - releases/kube-ingress/cert-manager.yaml
-  - releases/kube-ingress/external-dns.yaml
-  - releases/kube-ingress/nginx-ingress.yaml
-
   # monitor
   # - releases/monitor/prometheus.yaml
   # - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/prometheus-operator.yaml
   - releases/monitor/grafana.yaml
+
+  # kube-ingress
+  - releases/kube-ingress/cert-manager.yaml
+  - releases/kube-ingress/external-dns.yaml
+  - releases/kube-ingress/nginx-ingress.yaml
