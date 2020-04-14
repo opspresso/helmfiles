@@ -4,9 +4,9 @@ installCRDs: true
 
 controller:
   metrics:
-    enabled: true
+    enabled: {{ .Values | getOrNil "argo-cd.metrics.enabled" | default false }}
     serviceMonitor:
-      enabled: true
+      enabled: {{ .Values | getOrNil "argo-cd.metrics.enabled" | default false }}
       additionalLabels:
         release: prometheus-operator
 
