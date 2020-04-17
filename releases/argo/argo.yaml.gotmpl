@@ -25,5 +25,5 @@ useStaticCredentials: false
 
 artifactRepository:
   s3:
-    bucket: '{{ .Values | getOrNil "argo.bucket" | default "" }}'
+    bucket: '{{ .Values | getOrNil "argo.bucket" | default "argo-bucket-name" }}'
     endpoint: s3.amazonaws.com
