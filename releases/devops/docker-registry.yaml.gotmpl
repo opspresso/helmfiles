@@ -8,7 +8,7 @@ storage: s3
 
 s3:
   region: '{{ .Values | getOrNil "docker-registry.s3.region" | default "ap-northeast-2" }}'
-  bucket: '{{ .Values | getOrNil "docker-registry.s3.bucket" | default "" }}'
+  bucket: '{{ .Values | getOrNil "docker-registry.s3.bucket" | default "docker-registry-bucket-name" }}'
   encrypt: '{{ .Values | getOrNil "docker-registry.s3.encrypt" | default "false" }}'
   secure: '{{ .Values | getOrNil "docker-registry.s3.secure" | default "false" }}'
 
