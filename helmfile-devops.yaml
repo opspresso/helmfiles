@@ -15,4 +15,4 @@ helmfiles:
   - releases/devops/jenkins.yaml
   - releases/devops/sonatype-nexus.yaml
   - releases/devops/sonarqube.yaml
-  # - releases/devops/harbor.yaml
+  - releases/devops/harbor.yaml

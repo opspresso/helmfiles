@@ -1,0 +1,21 @@
+repositories:
+  - name: harbor
+    url: https://helm.goharbor.io
+
+environments:
+  default:
+    values:
+      - ../../environments/default.yaml
+  eks-demo:
+    values:
+      - ../../environments/eks-demo.yaml
+
+releases:
+  - name: harbor
+    namespace: devops
+    chart: stable/harbor
+    version: ~1.3.0
+    installed: true
+    # wait: true
+    values:
+      - harbor.yaml.gotmpl

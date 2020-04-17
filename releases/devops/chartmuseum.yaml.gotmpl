@@ -13,7 +13,7 @@ env:
     ALLOW_OVERWRITE: true
 
     STORAGE: "amazon"
-    STORAGE_AMAZON_BUCKET: '{{ .Values | getOrNil "chartmuseum.storage.amazon.bucket" | default "cluster-name-chartmuseum" }}'
+    STORAGE_AMAZON_BUCKET: '{{ .Values | getOrNil "chartmuseum.storage.amazon.bucket" | default "chartmuseum-bucket-name" }}'
     STORAGE_AMAZON_PREFIX: '{{ .Values | getOrNil "chartmuseum.storage.amazon.prefix" | default "/" }}'
     STORAGE_AMAZON_REGION: '{{ .Values | getOrNil "chartmuseum.storage.amazon.region" | default "ap-northeast-2" }}'
 

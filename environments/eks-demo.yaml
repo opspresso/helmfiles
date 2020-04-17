@@ -208,3 +208,17 @@ sonarqube:
     limits:
       cpu: 330m
       memory: 2G
+
+harbor:
+  admin:
+    password: password
+  ingress:
+    host:
+      core: harbor-core.demo.mzdev.be
+      notary: harbor-notary.demo.mzdev.be
+  persistence:
+    storageClass: efs
+  storage:
+    amazon:
+      region: ap-northeast-2
+      bucket: eks-demo-harbor-2
