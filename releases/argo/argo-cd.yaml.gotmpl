@@ -53,16 +53,13 @@ server:
       clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
+      requestedScopes: ["openid", "profile", "email", "groups"]
+      requestedIDTokenClaims: {"groups": {"essential": true}}
 
   rbacConfig:
     policy.default: role:readonly
     policy.csv: |
-      p, role:mz-admin, applications, *, */*, allow
-      p, role:mz-admin, certificates, *, *, allow
-      p, role:mz-admin, clusters, *, *, allow
-      p, role:mz-admin, projects, *, *, allow
-      p, role:mz-admin, repositories, *, *, allow
-      g, jyyu@mz.co.kr, role:mz-admin
+      g, jyyu@mz.co.kr, role:admin
 
 # configs:
 #   secret:
