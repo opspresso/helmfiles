@@ -216,6 +216,7 @@ harbor:
     host:
       core: harbor-core.demo.mzdev.be
       notary: harbor-notary.demo.mzdev.be
+  iam-role: eks-demo-worker-bucket
   persistence:
     storageClass: efs
   storage:

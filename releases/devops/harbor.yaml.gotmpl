@@ -3,7 +3,7 @@ nameOverride: harbor
 expose:
   type: ingress
   tls:
-    enabled: false
+    enabled: true
     secretName: "harbor-core-tls"
     notarySecretName: "harbor-notary-tls"
   ingress:
@@ -22,11 +22,17 @@ externalURL: 'https://{{ .Values | getOrNil "harbor.ingress.host.core" | default
 
 harborAdminPassword: '{{ .Values | getOrNil "harbor.admin.password" | default "password" }}'
 
-# core:
-#   secretName: "harbor-core-secret"
+core:
+  podAnnotations:
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
 
-# notary:
-#   secretName: "harbor-notary-secret"
+registry:
+  podAnnotations:
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
+
+chartmuseum:
+  podAnnotations:
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
 
 persistence:
   enabled: true
