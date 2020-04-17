@@ -3,9 +3,9 @@ nameOverride: harbor
 expose:
   type: ingress
   tls:
-    enabled: true
-    secretName: ""
-    notarySecretName: ""
+    enabled: false
+    secretName: "harbor-core-tls"
+    notarySecretName: "harbor-notary-tls"
   ingress:
     hosts:
       core: '{{ .Values | getOrNil "harbor.ingress.host.core" | default "harbor-core.example.com" }}'
@@ -21,6 +21,12 @@ expose:
 externalURL: 'https://{{ .Values | getOrNil "harbor.ingress.host.core" | default "harbor-core.example.com" }}'
 
 harborAdminPassword: '{{ .Values | getOrNil "harbor.admin.password" | default "password" }}'
+
+# core:
+#   secretName: "harbor-core-secret"
+
+# notary:
+#   secretName: "harbor-notary-secret"
 
 persistence:
   enabled: true

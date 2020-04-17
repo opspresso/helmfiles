@@ -7,9 +7,9 @@ keycloak:
   ingress:
     enabled: {{ .Values | getOrNil "keycloak.ingress.enabled" | default false }}
     annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
       # ingress.kubernetes.io/affinity: cookie
     hosts:
       - '{{ .Values | getOrNil "keycloak.ingress.host" | default "keycloak.example.com" }}'

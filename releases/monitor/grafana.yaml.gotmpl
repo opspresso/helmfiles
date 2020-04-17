@@ -6,9 +6,9 @@ adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}
 ingress:
   enabled: {{ .Values | getOrNil "grafana.ingress.enabled" | default false }}
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - '{{ .Values | getOrNil "grafana.ingress.host" | default "grafana.example.com" }}'
   tls:

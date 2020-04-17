@@ -3,9 +3,9 @@ clusterName: "elasticsearch"
 ingress:
   enabled: {{ .Values | getOrNil "elasticsearch.ingress.enabled" | default false }}
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - '{{ .Values | getOrNil "elasticsearch.ingress.host" | default "elasticsearch.example.com" }}'
   tls:

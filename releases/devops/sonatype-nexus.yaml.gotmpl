@@ -36,11 +36,11 @@ nexusBackup:
 ingress:
   enabled: {{ .Values | getOrNil "sonatype-nexus.ingress.enabled" | default false }}
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    ingress.kubernetes.io/proxy-body-size: "500m"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "500m"
-    ingress.kubernetes.io/proxy-body-size: "500m"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   tls:
     enabled: true
     secretName: sonatype-nexus-tls

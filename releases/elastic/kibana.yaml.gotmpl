@@ -5,9 +5,9 @@ elasticsearchHosts: "http://elasticsearch-master:9200"
 ingress:
   enabled: {{ .Values | getOrNil "kibana.ingress.enabled" | default false }}
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - '{{ .Values | getOrNil "kibana.ingress.host" | default "kibana.example.com" }}'
   tls:
