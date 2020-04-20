@@ -226,8 +226,8 @@ harbor:
 
 # vault
 vault:
-  dev: true
-  replicaCount: 1
+  dev: false
+  replicaCount: 3
   ingress:
     enabled: true
     host: vault.demo.mzdev.be

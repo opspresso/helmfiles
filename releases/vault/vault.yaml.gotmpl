@@ -9,9 +9,11 @@ vault:
       s3:
         bucket: '{{ .Values | getOrNil "vault.storage.bucket" | default "vault-bucket-name" }}'
         region: '{{ .Values | getOrNil "vault.storage.region" | default "ap-northeast-2" }}'
-  extraEnv:
-    - name: VAULT_API_ADDR
-      value: 'https://{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
+  # extraEnv:
+  #   - name: VAULT_API_ADDR
+  #     value: 'https://{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
+  #   - name: VAULT_CLUSTER_ADDR
+  #     value: 'https://{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
 
 podAnnotations:
   iam.amazonaws.com/role: '{{ .Values | getOrNil "vault.iam-role" | default "" }}'
@@ -25,7 +27,7 @@ ingress:
   hosts:
     - '{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
   tls:
-    - secretName: argocd-server-tls
+    - secretName: vault-tls
       hosts:
         - '{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
 
@@ -35,6 +37,8 @@ serviceMonitor:
     prometheus-scraper: "default"
     release: prometheus-operator
 
+# https://learn.hashicorp.com/vault/getting-started/deploy#initializing-the-vault
 # k logs $(k get pod -n vault | grep Running | head -1 | cut -d' ' -f1) -n vault | grep 'Root Token'
 # k port-forward $(k get pod -n vault | grep Running | head -1 | cut -d' ' -f1) 8200 -n vault
 # export VAULT_ADDR='http://[::]:8200'
+# vault operator init
