@@ -1,0 +1,56 @@
+nameOverride: harbor
+
+expose:
+  type: ingress
+  tls:
+    enabled: true
+    secretName: "harbor-core-tls"
+    notarySecretName: "harbor-notary-tls"
+  ingress:
+    hosts:
+      core: '{{ .Values | getOrNil "harbor.ingress.host.core" | default "harbor-core.example.com" }}'
+      notary: '{{ .Values | getOrNil "harbor.ingress.host.notary" | default "harbor-notary.example.com" }}'
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
+externalURL: 'https://{{ .Values | getOrNil "harbor.ingress.host.core" | default "harbor-core.example.com" }}'
+
+harborAdminPassword: '{{ .Values | getOrNil "harbor.admin.password" | default "password" }}'
+
+core:
+  podAnnotations:
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
+
+registry:
+  podAnnotations:
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
+
+chartmuseum:
+  podAnnotations:
+    iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      storageClass: '{{ .Values | getOrNil "harbor.persistence.storageClass" | default "" }}'
+    chartmuseum:
+      storageClass: '{{ .Values | getOrNil "harbor.persistence.storageClass" | default "" }}'
+    jobservice:
+      storageClass: '{{ .Values | getOrNil "harbor.persistence.storageClass" | default "" }}'
+    database:
+      storageClass: '{{ .Values | getOrNil "harbor.persistence.storageClass" | default "" }}'
+    redis:
+      storageClass: '{{ .Values | getOrNil "harbor.persistence.storageClass" | default "" }}'
+    trivy:
+      storageClass: '{{ .Values | getOrNil "harbor.persistence.storageClass" | default "" }}'
+  imageChartStorage:
+    s3:
+      region: '{{ .Values | getOrNil "harbor.storage.amazon.region" | default "ap-northeast-2" }}'
+      bucket: '{{ .Values | getOrNil "harbor.storage.amazon.bucket" | default "harbor-bucket-name" }}'

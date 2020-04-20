@@ -46,7 +46,7 @@ prometheus:
 grafana:
   username: admin
   password: password
-  disable_login_form: false
+  disable_login_form: true
   ingress:
     enabled: true
     host: grafana.demo.mzdev.be
@@ -208,3 +208,18 @@ sonarqube:
     limits:
       cpu: 330m
       memory: 2G
+
+harbor:
+  admin:
+    password: password
+  ingress:
+    host:
+      core: harbor-core.demo.mzdev.be
+      notary: harbor-notary.demo.mzdev.be
+  iam-role: eks-demo-worker-bucket
+  persistence:
+    storageClass: efs
+  storage:
+    amazon:
+      region: ap-northeast-2
+      bucket: eks-demo-harbor-2

@@ -1,6 +1,6 @@
 repositories:
-  - name: stable
-    url: https://kubernetes-charts.storage.googleapis.com
+  - name: harbor
+    url: https://helm.goharbor.io
 
 environments:
   default:
@@ -11,11 +11,11 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: kube2iam
-    namespace: kube-system
-    chart: stable/kube2iam
-    version: ~2.2.0
+  - name: harbor
+    namespace: devops
+    chart: harbor/harbor
+    version: ~1.2.0
     installed: true
     # wait: true
     values:
-      - kube2iam.yaml.gotmpl
+      - harbor.yaml.gotmpl

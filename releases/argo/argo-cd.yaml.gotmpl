@@ -24,9 +24,9 @@ server:
   ingress:
     enabled: {{ .Values | getOrNil "argo-cd.ingress.enabled" | default false }}
     annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
     hosts:
       - '{{ .Values | getOrNil "argo-cd.ingress.host" | default "argo-cd.example.com" }}'
     tls:
@@ -53,22 +53,19 @@ server:
       clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
+      requestedScopes: ["openid", "profile", "email", "groups"]
+      requestedIDTokenClaims: {"groups": {"essential": true}}
 
   rbacConfig:
     policy.default: role:readonly
     policy.csv: |
-      p, role:mz-admin, applications, *, */*, allow
-      p, role:mz-admin, certificates, *, *, allow
-      p, role:mz-admin, clusters, *, *, allow
-      p, role:mz-admin, projects, *, *, allow
-      p, role:mz-admin, repositories, *, *, allow
-      g, jyyu@mz.co.kr, role:mz-admin
+      g, jyyu@mz.co.kr, role:admin
 
-configs:
-  secret:
-    createSecret: true
-    argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
-    argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
+# configs:
+#   secret:
+#     createSecret: true
+#     argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
+#     argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
 
 # sso
 # https://argoproj.github.io/argo-cd/operator-manual/user-management/#2-configure-argo-cd-for-sso

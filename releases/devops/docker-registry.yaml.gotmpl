@@ -8,7 +8,7 @@ storage: s3
 
 s3:
   region: '{{ .Values | getOrNil "docker-registry.s3.region" | default "ap-northeast-2" }}'
-  bucket: '{{ .Values | getOrNil "docker-registry.s3.bucket" | default "" }}'
+  bucket: '{{ .Values | getOrNil "docker-registry.s3.bucket" | default "docker-registry-bucket-name" }}'
   encrypt: '{{ .Values | getOrNil "docker-registry.s3.encrypt" | default "false" }}'
   secure: '{{ .Values | getOrNil "docker-registry.s3.secure" | default "false" }}'
 
@@ -21,11 +21,11 @@ secrets:
 ingress:
   enabled: {{ .Values | getOrNil "docker-registry.ingress.enabled" | default false }}
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    ingress.kubernetes.io/proxy-body-size: 500m
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: 500m
-    ingress.kubernetes.io/proxy-body-size: 500m
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - '{{ .Values | getOrNil "docker-registry.ingress.host" | default "docker-registry.example.com" }}'
   path: /

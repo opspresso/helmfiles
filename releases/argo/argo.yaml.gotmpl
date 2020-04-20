@@ -10,9 +10,9 @@ ui:
   ingress:
     enabled: {{ .Values | getOrNil "argo.ingress.enabled" | default false }}
     annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
     hosts:
       - '{{ .Values | getOrNil "argo.ingress.host" | default "argo.example.com" }}'
     tls:
@@ -25,5 +25,5 @@ useStaticCredentials: false
 
 artifactRepository:
   s3:
-    bucket: '{{ .Values | getOrNil "argo.bucket" | default "" }}'
+    bucket: '{{ .Values | getOrNil "argo.bucket" | default "argo-bucket-name" }}'
     endpoint: s3.amazonaws.com

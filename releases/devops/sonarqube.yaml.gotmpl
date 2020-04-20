@@ -3,11 +3,11 @@ fullnameOverride: sonarqube
 ingress:
   enabled: {{ .Values | getOrNil "sonarqube.ingress.enabled" | default false }}
   annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    ingress.kubernetes.io/proxy-body-size: "500m"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "500m"
-    ingress.kubernetes.io/proxy-body-size: "500m"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
   hosts:
     - name: '{{ .Values | getOrNil "sonarqube.ingress.host" | default "sonarqube.example.com" }}'
       path: /
@@ -16,11 +16,12 @@ ingress:
       hosts:
         - '{{ .Values | getOrNil "sonarqube.ingress.host" | default "sonarqube.example.com" }}'
 
-# plugins:
-#   install:
+plugins:
+  install:
 #     - "https://github.com/checkstyle/sonar-checkstyle/releases/download/4.30/checkstyle-sonar-plugin-4.30.jar"
 #     - "https://github.com/jensgerdes/sonar-pmd/releases/download/3.2.1/sonar-pmd-plugin-3.2.1.jar"
-#     - "https://github.com/SonarSource/SonarJS/releases/download/6.2.1.12157/sonar-javascript-plugin-6.2.1.12157.jar"
+#     - "https://binaries.sonarsource.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-6.2.0.12043.jar"
+#     - "https://binaries.sonarsource.com/Distribution/sonar-java-plugin/sonar-java-plugin-6.3.0.21585.jar"
 #     - "https://github.com/spotbugs/sonar-findbugs/releases/download/4.0.0/sonar-findbugs-plugin-4.0.0.jar"
 
 resources:
