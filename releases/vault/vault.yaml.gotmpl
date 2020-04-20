@@ -1,0 +1,30 @@
+nameOverride: vault
+
+ingress:
+  enabled: {{ .Values | getOrNil "vault.ingress.enabled" | default false }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  hosts:
+    - '{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
+  tls:
+    - secretName: argocd-server-tls
+      hosts:
+        - '{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
+
+podAnnotations:
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "vault.iam-role" | default "" }}'
+
+serviceMonitor:
+  enabled: {{ .Values | getOrNil "vault.metrics.enabled" | default false }}
+  additionalLabels:
+    prometheus-scraper: "default"
+    release: prometheus-operator
+
+vault:
+  config:
+    storage:
+      s3:
+        bucket: '{{ .Values | getOrNil "vault.storage.bucket" | default "vault-bucket-name" }}'
+        region: '{{ .Values | getOrNil "vault.storage.region" | default "ap-northeast-2" }}'

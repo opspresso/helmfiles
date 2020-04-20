@@ -223,3 +223,15 @@ harbor:
     amazon:
       region: ap-northeast-2
       bucket: eks-demo-harbor-2
+
+# vault
+vault:
+  ingress:
+    enabled: true
+    host: vault.demo.mzdev.be
+  metrics:
+    enabled: true
+  iam-role: eks-demo-worker-bucket
+  storage:
+    region: ap-northeast-2
+    bucket: eks-demo-vault-2

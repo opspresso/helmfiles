@@ -1,0 +1,21 @@
+repositories:
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../../environments/default.yaml
+  eks-demo:
+    values:
+      - ../../environments/eks-demo.yaml
+
+releases:
+  - name: vault
+    namespace: vault
+    chart: incubator/vault
+    version: ~0.23.0
+    installed: true
+    # wait: true
+    values:
+      - vault.yaml.gotmpl
