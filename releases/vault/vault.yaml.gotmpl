@@ -23,6 +23,7 @@ serviceMonitor:
     release: prometheus-operator
 
 vault:
+  dev: {{ .Values | getOrNil "vault.dev" | default true }}
   config:
     storage:
       s3:

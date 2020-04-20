@@ -226,6 +226,7 @@ harbor:
 
 # vault
 vault:
+  dev: true
   ingress:
     enabled: true
     host: vault.demo.mzdev.be
