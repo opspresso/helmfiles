@@ -16,7 +16,7 @@ releases:
   - name: cert-manager
     namespace: kube-ingress
     chart: jetstack/cert-manager
-    version: ~v0.13.0
+    version: ~v0.14.0
     installed: true
     wait: true
     hooks:

@@ -53,13 +53,22 @@ server:
       clientID: '{{ .Values | getOrNil "argo-cd.oic.client.id" | default "" }}'
       clientSecret: '{{ .Values | getOrNil "argo-cd.oic.client.secret" | default "" }}'
       issuer: '{{ .Values | getOrNil "argo-cd.oic.server.issuer" | default "" }}'
-      requestedScopes: ["openid", "profile", "email", "groups"]
-      requestedIDTokenClaims: {"groups": {"essential": true}}
+      requestedScopes:
+        - openid
+        - email
+        - profile
+        - roles
+    #   requestedIDTokenClaims:
+    #     email:
+    #       essential: true
+    #     groups:
+    #       essential: true
+    #       value: org:demo
 
   rbacConfig:
     policy.default: role:readonly
     policy.csv: |
-      g, jyyu@mz.co.kr, role:admin
+      g, demo:admin, role:admin
 
 # configs:
 #   secret:
@@ -68,5 +77,5 @@ server:
 #     argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
 
 # sso
-# https://argoproj.github.io/argo-cd/operator-manual/user-management/#2-configure-argo-cd-for-sso
+# https://argoproj.github.io/argo-cd/operator-manual/user-management/#existing-oidc-provider
 # https://argoproj.github.io/argo-cd/operator-manual/user-management/auth0/
