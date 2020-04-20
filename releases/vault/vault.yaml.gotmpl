@@ -1,5 +1,21 @@
 nameOverride: vault
 
+replicaCount: {{ .Values | getOrNil "vault.replicaCount" | default 3 }}
+
+vault:
+  dev: {{ .Values | getOrNil "vault.dev" | default false }}
+  config:
+    storage:
+      s3:
+        bucket: '{{ .Values | getOrNil "vault.storage.bucket" | default "vault-bucket-name" }}'
+        region: '{{ .Values | getOrNil "vault.storage.region" | default "ap-northeast-2" }}'
+  extraEnv:
+    - name: VAULT_API_ADDR
+      value: 'https://{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
+
+podAnnotations:
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "vault.iam-role" | default "" }}'
+
 ingress:
   enabled: {{ .Values | getOrNil "vault.ingress.enabled" | default false }}
   annotations:
@@ -13,19 +29,12 @@ ingress:
       hosts:
         - '{{ .Values | getOrNil "vault.ingress.host" | default "vault.example.com" }}'
 
-podAnnotations:
-  iam.amazonaws.com/role: '{{ .Values | getOrNil "vault.iam-role" | default "" }}'
-
 serviceMonitor:
   enabled: {{ .Values | getOrNil "vault.metrics.enabled" | default false }}
   additionalLabels:
     prometheus-scraper: "default"
     release: prometheus-operator
 
-vault:
-  dev: {{ .Values | getOrNil "vault.dev" | default true }}
-  config:
-    storage:
-      s3:
-        bucket: '{{ .Values | getOrNil "vault.storage.bucket" | default "vault-bucket-name" }}'
-        region: '{{ .Values | getOrNil "vault.storage.region" | default "ap-northeast-2" }}'
+# k logs $(k get pod -n vault | grep Running | head -1 | cut -d' ' -f1) -n vault | grep 'Root Token'
+# k port-forward $(k get pod -n vault | grep Running | head -1 | cut -d' ' -f1) 8200 -n vault
+# export VAULT_ADDR='http://[::]:8200'

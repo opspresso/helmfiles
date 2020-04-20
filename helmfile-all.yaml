@@ -45,3 +45,6 @@ helmfiles:
   - releases/devops/sonatype-nexus.yaml
   - releases/devops/sonarqube.yaml
   # - releases/devops/harbor.yaml
+
+  # vault
+  - releases/vault/vault.yaml
