@@ -4,12 +4,6 @@ keycloak:
   username: '{{ .Values | getOrNil "keycloak.username" | default "admin" }}'
   password: '{{ .Values | getOrNil "keycloak.password" | default "password" }}'
 
-  service:
-    annotations:
-      service.beta.kubernetes.io/aws-load-balancer-extra-security-groups: '{{ .Values | getOrNil "keycloak.service.extra-sg" | default "" }}'
-      external-dns.alpha.kubernetes.io/hostname: '{{ .Values | getOrNil "keycloak.service.external-dns" | default "" }}'
-    type: '{{ .Values | getOrNil "keycloak.service.type" | default "ClusterIP" }}'
-
   ingress:
     enabled: {{ .Values | getOrNil "keycloak.ingress.enabled" | default false }}
     annotations:

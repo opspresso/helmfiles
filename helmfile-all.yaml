@@ -42,6 +42,7 @@ helmfiles:
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress.yaml
+  - releases/kube-ingress/nginx-ingress-internal.yaml
 
   # keycloak
   - releases/keycloak/keycloak.yaml

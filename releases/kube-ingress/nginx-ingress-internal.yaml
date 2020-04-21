@@ -1,0 +1,21 @@
+# repositories:
+#   - name: stable
+#     url: https://kubernetes-charts.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../../environments/default.yaml
+  eks-demo:
+    values:
+      - ../../environments/eks-demo.yaml
+
+releases:
+  - name: nginx-ingress-internal
+    namespace: kube-ingress
+    chart: stable/nginx-ingress
+    version: ~1.36.0
+    installed: true
+    # wait: true
+    values:
+      - nginx-ingress-internal.yaml.gotmpl
