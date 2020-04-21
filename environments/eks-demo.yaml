@@ -49,7 +49,7 @@ keycloak:
   password: password
   ingress:
     enabled: true
-    host: keycloak.in.demo.mzdev.be
+    host: keycloak.demo.mzdev.be
 
 # monitor
 prometheus:
@@ -65,18 +65,18 @@ grafana:
   disable_login_form: true
   ingress:
     enabled: true
-    host: grafana.in.demo.mzdev.be
+    host: grafana.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
   oic:
     client:
       id: grafana
-      secret: 1c6cb41d-bf1b-4c11-b94d-0d659fbc2b6f
+      secret: 7cc105ad-ac36-43a3-913b-40e5c76d9f74
     server:
-      token: https://keycloak.in.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.in.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.in.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 fluentd:
   host: elasticsearch-master.elastic.svc.cluster.local
@@ -115,7 +115,7 @@ kibana:
 argo:
   ingress:
     enabled: true
-    host: argo.in.demo.mzdev.be
+    host: argo.demo.mzdev.be
   bucket: eks-demo-argo-2
   iam-role: eks-demo-worker-bucket
 
@@ -129,13 +129,13 @@ argo-cd:
     enabled: true
   ingress:
     enabled: true
-    host: argocd.in.demo.mzdev.be
+    host: argocd.demo.mzdev.be
   oic:
     client:
       id: argo-cd
-      secret: d530a8f2-a9f4-4827-a6dc-808c3ed511a4
+      secret: ba7471a6-f985-456b-85ea-40eb3eef936e
     server:
-      issuer: https://keycloak.in.demo.mzdev.be/auth/realms/demo
+      issuer: https://keycloak.demo.mzdev.be/auth/realms/demo
 
 # devops
 chartmuseum:
@@ -160,18 +160,18 @@ docker-registry:
 jenkins:
   ingress:
     enabled: true
-    host: jenkins.in.demo.mzdev.be
+    host: jenkins.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
   oic:
     client:
       id: jenkins
-      secret: c3ea5afc-24af-4a39-af09-77f2f024ae20
+      secret: e3e54c6d-db17-42e7-a983-b9405c4b16f4
     server:
-      token: https://keycloak.in.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.in.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.in.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
   resources:
     requests:
       cpu: 500m
