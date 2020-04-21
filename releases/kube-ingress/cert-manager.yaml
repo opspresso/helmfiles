@@ -1,8 +1,8 @@
-repositories:
-  - name: jetstack
-    url: https://charts.jetstack.io
-  - name: incubator
-    url: https://kubernetes-charts-incubator.storage.googleapis.com
+# repositories:
+#   - name: jetstack
+#     url: https://charts.jetstack.io
+#   - name: incubator
+#     url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:

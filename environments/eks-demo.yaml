@@ -15,6 +15,9 @@ cert-manager:
 nginx-ingress:
   controller:
     kind: DaemonSet
+  aws-load-balancer:
+    connection-idle-timeout: "3600"
+    extra-security-groups: "sg-02758b7cde7456d21"
   external-dns:
     hostname: "*.demo.mzdev.be"
     ttl: "300"
@@ -244,7 +247,7 @@ consul:
 # vault
 vault:
   dev: false
-  replicaCount: 1
+  replicaCount: 3
   ingress:
     enabled: false
     host: vault.demo.mzdev.be
@@ -252,15 +255,16 @@ vault:
     enabled: true
   iam-role: eks-demo-worker-bucket
   storage:
-    s3:
-      region: ap-northeast-2
-      bucket: eks-demo-vault-2
+    # s3:
+    #   region: ap-northeast-2
+    #   bucket: eks-demo-vault-2
     # etcd:
-    #   address: "http://etcd.etcd.svc.cluster.local:2379"
+    #   address: "http://etcd.etcd:2379"
     #   path: "vault/"
     #   etcd_api: "v3"
     #   ha_enabled: "true"
-    # consul:
-    #   address: "localhost:8500"
-  # consulAgent:
-  #   join: consul.service.consul
+    consul:
+      address: "consul:8500"
+      path: "vault/"
+  consulAgent:
+    join: consul.service.consul

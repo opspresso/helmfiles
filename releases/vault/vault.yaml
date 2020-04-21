@@ -1,6 +1,6 @@
-repositories:
-  - name: incubator
-    url: https://kubernetes-charts-incubator.storage.googleapis.com
+# repositories:
+#   - name: incubator
+#     url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:

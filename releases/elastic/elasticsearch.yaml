@@ -1,6 +1,6 @@
-repositories:
-  - name: elastic
-    url: https://helm.elastic.co
+# repositories:
+#   - name: elastic
+#     url: https://helm.elastic.co
 
 environments:
   default:

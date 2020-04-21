@@ -1,5 +1,9 @@
 # Ordered list of releases.
 
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+
 environments:
   default:
     values:

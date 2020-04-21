@@ -1,6 +1,6 @@
-repositories:
-  - name: oteemocharts
-    url: https://oteemo.github.io/charts
+# repositories:
+#   - name: oteemocharts
+#     url: https://oteemo.github.io/charts
 
 environments:
   default:

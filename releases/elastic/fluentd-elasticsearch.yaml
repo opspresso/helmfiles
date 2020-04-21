@@ -1,6 +1,6 @@
-repositories:
-  - name: kiwigrid
-    url: https://kiwigrid.github.io
+# repositories:
+#   - name: kiwigrid
+#     url: https://kiwigrid.github.io
 
 environments:
   default:

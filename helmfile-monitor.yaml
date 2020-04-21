@@ -1,5 +1,11 @@
 # Ordered list of releases.
 
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
+
 environments:
   default:
     values:

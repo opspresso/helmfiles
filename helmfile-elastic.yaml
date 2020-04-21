@@ -1,5 +1,13 @@
 # Ordered list of releases.
 
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+  - name: elastic
+    url: https://helm.elastic.co
+  - name: kiwigrid
+    url: https://kiwigrid.github.io
+
 environments:
   default:
     values:

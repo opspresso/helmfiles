@@ -1,6 +1,6 @@
-repositories:
-  - name: argo
-    url: https://argoproj.github.io/argo-helm
+# repositories:
+#   - name: argo
+#     url: https://argoproj.github.io/argo-helm
 
 environments:
   default:
