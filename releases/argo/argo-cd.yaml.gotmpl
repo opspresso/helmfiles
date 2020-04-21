@@ -71,11 +71,11 @@ server:
       g, "jyyu@mz.co.kr", role:admin
       g, demo:admin, role:admin
 
-# configs:
-#   secret:
-#     createSecret: true
-#     argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
-#     argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
+configs:
+  secret:
+    createSecret: true
+    argocdServerAdminPassword: '{{ .Values | getOrNil "argo-cd.password" | default "password" }}'
+    argocdServerAdminPasswordMtime: '{{ .Values | getOrNil "argo-cd.mod-time" | default "2020-02-02" }}'
 
 # sso
 # https://argoproj.github.io/argo-cd/operator-manual/user-management/#existing-oidc-provider
