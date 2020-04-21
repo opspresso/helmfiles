@@ -72,6 +72,7 @@ elasticsearch:
     enabled: false
     host: elasticsearch.demo.mzdev.be
   persistence:
+    enabled: true
     storageClass: efs
   # esJavaOpts: "-Xmx512m -Xms512m"
   resources:
@@ -218,11 +219,18 @@ harbor:
       notary: harbor-notary.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
   persistence:
+    enabled: true
     storageClass: efs
   storage:
     amazon:
       region: ap-northeast-2
       bucket: eks-demo-harbor-2
+
+# etcd
+etcd:
+  persistence:
+    enabled: true
+    storageClass: efs
 
 # consul
 consul:
@@ -230,6 +238,7 @@ consul:
     enabled: true
     host: consul.demo.mzdev.be
   persistence:
+    enabled: true
     storageClass: efs
 
 # vault
@@ -243,5 +252,15 @@ vault:
     enabled: true
   iam-role: eks-demo-worker-bucket
   storage:
-    region: ap-northeast-2
-    bucket: eks-demo-vault-2
+    s3:
+      region: ap-northeast-2
+      bucket: eks-demo-vault-2
+    # etcd:
+    #   address: "http://etcd.etcd.svc.cluster.local:2379"
+    #   path: "vault/"
+    #   etcd_api: "v3"
+    #   ha_enabled: "true"
+    # consul:
+    #   address: "localhost:8500"
+  # consulAgent:
+  #   join: consul.service.consul

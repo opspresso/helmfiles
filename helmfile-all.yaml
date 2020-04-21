@@ -45,9 +45,3 @@ helmfiles:
   - releases/devops/sonatype-nexus.yaml
   - releases/devops/sonarqube.yaml
   # - releases/devops/harbor.yaml
-
-  # consul
-  - releases/consul/consul.yaml
-
-  # vault
-  - releases/vault/vault.yaml
