@@ -1,0 +1,6 @@
+nameOverride: etcd
+
+persistentVolume:
+  enabled: {{ .Values | getOrNil "etcd.persistence.enabled" | default false }}
+  storage: '{{ .Values | getOrNil "etcd.persistence.storageSize" | default "2Gi" }}'
+  storageClass: '{{ .Values | getOrNil "etcd.persistence.storageClass" | default "default" }}'
