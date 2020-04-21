@@ -10,11 +10,11 @@ controller:
   service:
     annotations:
       # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+      # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
       service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
       service.beta.kubernetes.io/aws-load-balancer-security-groups: '{{ .Values | getOrNil "nginx-ingress-open.aws-load-balancer.security-groups" | default "" }}'
       service.beta.kubernetes.io/aws-load-balancer-ssl-cert: '{{ .Values | getOrNil "nginx-ingress-open.aws-load-balancer.ssl-cert" | default "" }}'
-      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+      # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
       external-dns.alpha.kubernetes.io/hostname: '{{ .Values | getOrNil "nginx-ingress-open.external-dns.hostname" | default "" }}'
       external-dns.alpha.kubernetes.io/ttl: '{{ .Values | getOrNil "nginx-ingress-open.external-dns.ttl" | default "300" }}'
   stats:
