@@ -37,6 +37,7 @@ serviceMonitor:
     prometheus-scraper: "default"
     release: prometheus-operator
 
+# vault
 # https://learn.hashicorp.com/vault/getting-started/deploy#initializing-the-vault
 
 # k port-forward $(k get pod -n vault | grep Running | head -1 | cut -d' ' -f1) 8200 -n vault
