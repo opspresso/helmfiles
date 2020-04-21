@@ -17,7 +17,7 @@ nginx-ingress-closed:
     kind: DaemonSet
   aws-load-balancer:
     security-groups: sg-0442a60247418c3c7
-    ssl-cert: ""
+    ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/c6448e70-3654-4eeb-9dde-a0c4d9915f09"
   external-dns:
     hostname: "*.closed.demo.mzdev.be"
   metrics:
@@ -28,7 +28,7 @@ nginx-ingress-open:
     kind: DaemonSet
   aws-load-balancer:
     security-groups: sg-0fc56921320d0ecf3
-    ssl-cert: ""
+    ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/4581504a-cf26-4bac-a482-8025b9b14a5e"
   external-dns:
     hostname: "*.demo.mzdev.be"
   metrics:
