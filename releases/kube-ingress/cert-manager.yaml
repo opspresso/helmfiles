@@ -25,7 +25,7 @@ releases:
         command: "/bin/sh"
         args:
           - -c
-          - kubectl apply --validate=false -f ./cert-manager-0.13/
+          - kubectl apply --validate=false -f ./cert-manager-0.14/
     values:
       - cert-manager.yaml.gotmpl
 

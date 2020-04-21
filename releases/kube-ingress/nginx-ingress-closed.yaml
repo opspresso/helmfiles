@@ -11,11 +11,11 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: nginx-ingress
+  - name: nginx-ingress-closed
     namespace: kube-ingress
     chart: stable/nginx-ingress
     version: ~1.36.0
     installed: true
     # wait: true
     values:
-      - nginx-ingress.yaml.gotmpl
+      - nginx-ingress-closed.yaml.gotmpl
