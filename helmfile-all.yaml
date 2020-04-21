@@ -9,8 +9,6 @@ repositories:
     url: https://charts.jetstack.io
   - name: argo
     url: https://argoproj.github.io/argo-helm
-  - name: harbor
-    url: https://helm.goharbor.io
   - name: oteemocharts
     url: https://oteemo.github.io/charts
   - name: codecentric

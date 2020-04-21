@@ -5,10 +5,10 @@ repositories:
     url: https://kubernetes-charts.storage.googleapis.com
   - name: incubator
     url: https://kubernetes-charts-incubator.storage.googleapis.com
-  - name: harbor
-    url: https://helm.goharbor.io
   - name: oteemocharts
     url: https://oteemo.github.io/charts
+  # - name: harbor
+  #   url: https://helm.goharbor.io
 
 environments:
   default:
@@ -25,4 +25,4 @@ helmfiles:
   - releases/devops/jenkins.yaml
   - releases/devops/sonatype-nexus.yaml
   - releases/devops/sonarqube.yaml
-  - releases/devops/harbor.yaml
+  # - releases/devops/harbor.yaml

@@ -15,12 +15,8 @@ cert-manager:
 nginx-ingress:
   controller:
     kind: DaemonSet
-  aws-load-balancer:
-    connection-idle-timeout: "3600"
-    extra-security-groups: "sg-02758b7cde7456d21"
   external-dns:
     hostname: "*.demo.mzdev.be"
-    ttl: "300"
   metrics:
     enabled: true
 
@@ -36,7 +32,19 @@ k8s-spot-termination-handler:
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
-  efsFileSystemId: "fs-1798c376"
+  efsFileSystemId: "fs-c4a680a5"
+
+# keycloak
+keycloak:
+  username: admin
+  password: password
+  service:
+    type: LoadBalancer
+    external-dns: keycloak.demo.mzdev.be
+    extra-sg: sg-0f66b330b0bb642ac
+  ingress:
+    enabled: true
+    host: keycloak.demo.mzdev.be
 
 # monitor
 prometheus:
@@ -59,7 +67,7 @@ grafana:
   oic:
     client:
       id: grafana
-      secret: 9a3084e9-5272-4efc-a9d0-304615868a5e
+      secret: 1c6cb41d-bf1b-4c11-b94d-0d659fbc2b6f
     server:
       token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
@@ -100,6 +108,10 @@ kibana:
 
 # argo
 argo:
+  service:
+    type: LoadBalancer
+    external-dns: argo.demo.mzdev.be
+    extra-sg: sg-0f66b330b0bb642ac
   ingress:
     enabled: true
     host: argo.demo.mzdev.be
@@ -114,23 +126,19 @@ argo-cd:
   mod-time: "2020-03-14"
   metrics:
     enabled: true
+  service:
+    type: LoadBalancer
+    external-dns: argocd.demo.mzdev.be
+    extra-sg: sg-0f66b330b0bb642ac
   ingress:
     enabled: true
     host: argocd.demo.mzdev.be
   oic:
     client:
       id: argo-cd
-      secret: d15d2335-2cef-4eb1-bf36-40ac7583c711
+      secret: d530a8f2-a9f4-4827-a6dc-808c3ed511a4
     server:
       issuer: https://keycloak.demo.mzdev.be/auth/realms/demo
-
-# keycloak
-keycloak:
-  username: admin
-  password: password
-  ingress:
-    enabled: true
-    host: keycloak.demo.mzdev.be
 
 # devops
 chartmuseum:
@@ -162,7 +170,7 @@ jenkins:
   oic:
     client:
       id: jenkins
-      secret: 23a2c36f-d4b2-4566-97bf-5ee53899111c
+      secret: c3ea5afc-24af-4a39-af09-77f2f024ae20
     server:
       token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth

@@ -6,7 +6,11 @@ controller:
   podAnnotations:
     iam.amazonaws.com/role: '{{ .Values | getOrNil "argo.iam-role" | default "" }}'
 
-ui:
+server:
+  serviceType: '{{ .Values | getOrNil "argo.service.type" | default "ClusterIP" }}'
+  serviceAnnotations:
+    service.beta.kubernetes.io/aws-load-balancer-extra-security-groups: '{{ .Values | getOrNil "argo.service.extra-sg" | default "" }}'
+    external-dns.alpha.kubernetes.io/hostname: '{{ .Values | getOrNil "argo.service.external-dns" | default "" }}'
   ingress:
     enabled: {{ .Values | getOrNil "argo.ingress.enabled" | default false }}
     annotations:

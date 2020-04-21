@@ -21,6 +21,12 @@ server:
       additionalLabels:
         release: prometheus-operator
 
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-extra-security-groups: '{{ .Values | getOrNil "argo-cd.service.extra-sg" | default "" }}'
+      external-dns.alpha.kubernetes.io/hostname: '{{ .Values | getOrNil "argo-cd.service.external-dns" | default "" }}'
+    type: '{{ .Values | getOrNil "argo-cd.service.type" | default "ClusterIP" }}'
+
   ingress:
     enabled: {{ .Values | getOrNil "argo-cd.ingress.enabled" | default false }}
     annotations:
