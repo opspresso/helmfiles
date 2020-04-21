@@ -15,7 +15,9 @@ cert-manager:
 nginx-ingress-closed:
   controller:
     kind: DaemonSet
-  elb-sg: sg-0119bf11ef9593639
+  aws-load-balancer:
+    security-groups: sg-0442a60247418c3c7
+    ssl-cert: ""
   external-dns:
     hostname: "*.closed.demo.mzdev.be"
   metrics:
@@ -24,7 +26,9 @@ nginx-ingress-closed:
 nginx-ingress-open:
   controller:
     kind: DaemonSet
-  elb-sg: sg-0f4cdbcbf8dd6f59b
+  aws-load-balancer:
+    security-groups: sg-0fc56921320d0ecf3
+    ssl-cert: ""
   external-dns:
     hostname: "*.demo.mzdev.be"
   metrics:
@@ -42,7 +46,7 @@ k8s-spot-termination-handler:
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
-  efsFileSystemId: fs-c4a680a5
+  efsFileSystemId: fs-b4a98fd5
 
 # keycloak
 keycloak:
@@ -50,7 +54,7 @@ keycloak:
   password: password
   ingress:
     enabled: true
-    host: keycloak.closed.demo.mzdev.be
+    host: keycloak.demo.mzdev.be
 
 # monitor
 prometheus:
@@ -66,7 +70,7 @@ grafana:
   disable_login_form: true
   ingress:
     enabled: true
-    host: grafana.closed.demo.mzdev.be
+    host: grafana.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -75,9 +79,9 @@ grafana:
       id: grafana
       secret: 7cc105ad-ac36-43a3-913b-40e5c76d9f74
     server:
-      token: https://keycloak.closed.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.closed.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.closed.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 fluentd:
   host: elasticsearch-master.elastic.svc.cluster.local
@@ -87,7 +91,7 @@ fluentd:
 elasticsearch:
   ingress:
     enabled: false
-    host: elasticsearch.closed.demo.mzdev.be
+    host: elasticsearch.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -103,7 +107,7 @@ elasticsearch:
 kibana:
   ingress:
     enabled: true
-    host: kibana.closed.demo.mzdev.be
+    host: kibana.demo.mzdev.be
   resources:
     requests:
       cpu: 200m
@@ -116,7 +120,7 @@ kibana:
 argo:
   ingress:
     enabled: true
-    host: argo.closed.demo.mzdev.be
+    host: argo.demo.mzdev.be
   bucket: eks-demo-argo-2
   iam-role: eks-demo-worker-bucket
 
@@ -130,19 +134,19 @@ argo-cd:
     enabled: true
   ingress:
     enabled: true
-    host: argocd.closed.demo.mzdev.be
+    host: argocd.demo.mzdev.be
   oic:
     client:
       id: argo-cd
       secret: ba7471a6-f985-456b-85ea-40eb3eef936e
     server:
-      issuer: https://keycloak.closed.demo.mzdev.be/auth/realms/demo
+      issuer: https://keycloak.demo.mzdev.be/auth/realms/demo
 
 # devops
 chartmuseum:
   ingress:
     enabled: true
-    host: chartmuseum.closed.demo.mzdev.be
+    host: chartmuseum.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
   storage:
     amazon:
@@ -152,7 +156,7 @@ chartmuseum:
 docker-registry:
   ingress:
     enabled: true
-    host: registry.closed.demo.mzdev.be
+    host: registry.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
   s3:
     region: ap-northeast-2
@@ -161,7 +165,7 @@ docker-registry:
 jenkins:
   ingress:
     enabled: true
-    host: jenkins.closed.demo.mzdev.be
+    host: jenkins.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -170,9 +174,9 @@ jenkins:
       id: jenkins
       secret: e3e54c6d-db17-42e7-a983-b9405c4b16f4
     server:
-      token: https://keycloak.closed.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.closed.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.closed.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
   resources:
     requests:
       cpu: 500m
@@ -184,7 +188,7 @@ jenkins:
 sonatype-nexus:
   ingress:
     enabled: true
-    host: nexus.closed.demo.mzdev.be
+    host: nexus.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -203,7 +207,7 @@ sonatype-nexus:
 sonarqube:
   ingress:
     enabled: true
-    host: sonarqube.closed.demo.mzdev.be
+    host: sonarqube.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -224,8 +228,8 @@ harbor:
     password: password
   ingress:
     host:
-      core: harbor-core.closed.demo.mzdev.be
-      notary: harbor-notary.closed.demo.mzdev.be
+      core: harbor-core.demo.mzdev.be
+      notary: harbor-notary.demo.mzdev.be
   iam-role: eks-demo-worker-bucket
   persistence:
     enabled: true
@@ -245,7 +249,7 @@ etcd:
 consul:
   ingress:
     enabled: true
-    host: consul.closed.demo.mzdev.be
+    host: consul.demo.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -256,7 +260,7 @@ vault:
   replicaCount: 3
   ingress:
     enabled: false
-    host: vault.closed.demo.mzdev.be
+    host: vault.demo.mzdev.be
   metrics:
     enabled: true
   iam-role: eks-demo-worker-bucket

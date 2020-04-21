@@ -37,3 +37,6 @@ helmfiles:
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress-closed.yaml
   - releases/kube-ingress/nginx-ingress-open.yaml
+
+  # keycloak
+  - releases/keycloak/keycloak.yaml
