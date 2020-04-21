@@ -224,10 +224,18 @@ harbor:
       region: ap-northeast-2
       bucket: eks-demo-harbor-2
 
+# consul
+consul:
+  ingress:
+    enabled: true
+    host: consul.demo.mzdev.be
+  persistence:
+    storageClass: efs
+
 # vault
 vault:
   dev: false
-  replicaCount: 3
+  replicaCount: 1
   ingress:
     enabled: true
     host: vault.demo.mzdev.be

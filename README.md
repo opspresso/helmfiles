@@ -20,6 +20,7 @@ helmfile -e eks-demo apply
 helmfile -f helmfile-all.yaml -e eks-demo apply
 
 helmfile -f helmfile-argo.yaml -e eks-demo apply
+helmfile -f helmfile-consul.yaml -e eks-demo apply
 helmfile -f helmfile-devops.yaml -e eks-demo apply
 helmfile -f helmfile-elastic.yaml -e eks-demo apply
 helmfile -f helmfile-keycloak.yaml -e eks-demo apply

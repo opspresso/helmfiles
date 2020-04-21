@@ -46,5 +46,8 @@ helmfiles:
   - releases/devops/sonarqube.yaml
   # - releases/devops/harbor.yaml
 
+  # consul
+  - releases/consul/consul.yaml
+
   # vault
   - releases/vault/vault.yaml
