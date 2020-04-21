@@ -246,7 +246,7 @@ vault:
   dev: false
   replicaCount: 1
   ingress:
-    enabled: true
+    enabled: false
     host: vault.demo.mzdev.be
   metrics:
     enabled: true
