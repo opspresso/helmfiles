@@ -86,7 +86,7 @@ grafana:
   oic:
     client:
       id: grafana
-      secret: 5f55f086-30ac-402d-bb02-9c1319969ed6
+      secret: 3f66b625-08f2-4ed6-8759-fb67aff7bb7a
     server:
       token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
@@ -147,7 +147,7 @@ argo-cd:
   oic:
     client:
       id: argo-cd
-      secret: 98afd161-a3b5-43dd-939a-97c0a8990ae9
+      secret: 68a076a3-bef7-4877-976e-c5fb3c0f525f
     server:
       issuer: https://keycloak.closed.mzdev.be/auth/realms/demo
 
@@ -181,7 +181,7 @@ jenkins:
   oic:
     client:
       id: jenkins
-      secret: dd24247f-d110-421e-8507-fe5c5207ad63
+      secret: 4ef3cbd8-7e9a-4296-a1eb-fcc489aa4623
     server:
       token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
