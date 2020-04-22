@@ -248,6 +248,15 @@ harbor:
       region: ap-northeast-2
       bucket: eks-demo-harbor-2
 
+# atlantis
+atlantis:
+  orgWhitelist: github.org/mzcdev/*
+  ingress:
+    host:
+      core: atlantis.closed.mzdev.be
+      notary: atlantis.closed.mzdev.be
+  iam-role: eks-demo-worker-admin
+
 # etcd
 etcd:
   persistence:
