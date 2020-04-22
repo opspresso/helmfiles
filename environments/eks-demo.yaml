@@ -55,6 +55,11 @@ keycloak:
   ingress:
     enabled: true
     host: keycloak.closed.mzdev.be
+  postgresql:
+    enabled: true
+    persistence:
+      enabled: true
+      storageClass: efs
 
 # monitor
 prometheus:
@@ -81,7 +86,7 @@ grafana:
   oic:
     client:
       id: grafana
-      secret: 2966a122-4f6e-42dc-8a3e-566ebcf38773
+      secret: 5f55f086-30ac-402d-bb02-9c1319969ed6
     server:
       token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
@@ -142,7 +147,7 @@ argo-cd:
   oic:
     client:
       id: argo-cd
-      secret: 2b9a9148-6e3c-4fde-935d-3aa3ee5aaaab
+      secret: 98afd161-a3b5-43dd-939a-97c0a8990ae9
     server:
       issuer: https://keycloak.closed.mzdev.be/auth/realms/demo
 
@@ -176,7 +181,7 @@ jenkins:
   oic:
     client:
       id: jenkins
-      secret: 5f1ca4dc-862b-4e32-abb4-8d6bfefadc22
+      secret: dd24247f-d110-421e-8507-fe5c5207ad63
     server:
       token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
