@@ -58,6 +58,7 @@ keycloak:
 
 # monitor
 prometheus:
+  scrape_interval: 30s
   persistence:
     enabled: true
     storageClass: efs
@@ -74,6 +75,9 @@ grafana:
   persistence:
     enabled: true
     storageClass: efs
+  datasources:
+    # prometheus: http://prometheus-server:80
+    prometheus: http://prometheus-operator-prometheus:9090
   oic:
     client:
       id: grafana

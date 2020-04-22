@@ -46,8 +46,7 @@ datasources:
     datasources:
       - name: Prometheus
         type: prometheus
-      # url: http://prometheus-server:80
-        url: http://prometheus-operator-prometheus:9090
+        url: '{{ .Values | getOrNil "grafana.datasources.prometheus" | default "" }}'
         access: proxy
         isDefault: true
 
