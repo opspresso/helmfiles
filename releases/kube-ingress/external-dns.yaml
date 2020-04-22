@@ -1,6 +1,6 @@
 repositories:
-  - name: stable
-    url: https://kubernetes-charts.storage.googleapis.com
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
 
 environments:
   default:
@@ -13,7 +13,7 @@ environments:
 releases:
   - name: external-dns
     namespace: kube-ingress
-    chart: stable/external-dns
+    chart: bitnami/external-dns
     version: ~2.20.4
     installed: true
     # wait: true
