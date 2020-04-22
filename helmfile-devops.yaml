@@ -1,15 +1,5 @@
 # Ordered list of releases.
 
-repositories:
-  - name: stable
-    url: https://kubernetes-charts.storage.googleapis.com
-  - name: incubator
-    url: https://kubernetes-charts-incubator.storage.googleapis.com
-  - name: oteemocharts
-    url: https://oteemo.github.io/charts
-  # - name: harbor
-  #   url: https://helm.goharbor.io
-
 environments:
   default:
     values:

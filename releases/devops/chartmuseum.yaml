@@ -1,6 +1,6 @@
-# repositories:
-#   - name: stable
-#     url: https://kubernetes-charts.storage.googleapis.com
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
 
 environments:
   default:
@@ -14,7 +14,7 @@ releases:
   - name: chartmuseum
     namespace: devops
     chart: stable/chartmuseum
-    version: ~2.11.0
+    version: ~2.12.0
     installed: true
     # wait: true
     values:

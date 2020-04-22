@@ -1,6 +1,6 @@
-# repositories:
-#   - name: codecentric
-#     url: https://codecentric.github.io/helm-charts
+repositories:
+  - name: codecentric
+    url: https://codecentric.github.io/helm-charts
 
 environments:
   default:
