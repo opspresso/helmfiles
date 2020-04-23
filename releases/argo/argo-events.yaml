@@ -14,7 +14,7 @@ releases:
   - name: argo-events
     namespace: argo-events
     chart: argo/argo-events
-    version: ~0.7.0
+    version: ~0.14.0
     installed: true
     # wait: true
     values:
