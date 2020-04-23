@@ -5,7 +5,7 @@ prometheusOperator:
 
 prometheus:
   prometheusSpec:
-    scrapeInterval: "30s"
+    scrapeInterval: '{{ .Values | getOrNil "prometheus.scrape_interval" | default "30s" }}'
 
 grafana:
   enabled: false

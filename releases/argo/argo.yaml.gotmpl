@@ -6,7 +6,7 @@ controller:
   podAnnotations:
     iam.amazonaws.com/role: '{{ .Values | getOrNil "argo.iam-role" | default "" }}'
 
-ui:
+server:
   ingress:
     enabled: {{ .Values | getOrNil "argo.ingress.enabled" | default false }}
     annotations:

@@ -10,7 +10,6 @@ keycloak:
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      # ingress.kubernetes.io/affinity: cookie
     hosts:
       - '{{ .Values | getOrNil "keycloak.ingress.host" | default "keycloak.example.com" }}'
     tls:
@@ -21,3 +20,15 @@ keycloak:
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
+
+  persistence:
+    deployPostgres: {{ .Values | getOrNil "keycloak.postgresql.enabled" | default false }}
+    dbVendor: postgres
+    dbHost: keycloak-postgresql
+
+postgresql:
+  enabled: {{ .Values | getOrNil "keycloak.postgresql.enabled" | default false }}
+  persistence:
+    enabled: {{ .Values | getOrNil "keycloak.postgresql.persistence.enabled" | default false }}
+    storageClass: '{{ .Values | getOrNil "keycloak.postgresql.persistence.storageClass" | default "default" }}'
+    size: '{{ .Values | getOrNil "keycloak.postgresql.persistence.storageSize" | default "10Gi" }}'

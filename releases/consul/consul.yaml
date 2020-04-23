@@ -1,6 +1,6 @@
 repositories:
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
 
 environments:
   default:
@@ -11,11 +11,11 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: external-dns
-    namespace: kube-ingress
-    chart: bitnami/external-dns
-    version: ~2.20.4
+  - name: consul
+    namespace: consul
+    chart: stable/consul
+    version: ~3.9.0
     installed: true
     # wait: true
     values:
-      - external-dns.yaml.gotmpl
+      - consul.yaml.gotmpl

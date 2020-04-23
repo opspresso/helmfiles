@@ -1,6 +1,6 @@
 repositories:
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
 
 environments:
   default:
@@ -11,11 +11,11 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: external-dns
+  - name: nginx-ingress-closed
     namespace: kube-ingress
-    chart: bitnami/external-dns
-    version: ~2.20.4
+    chart: stable/nginx-ingress
+    version: ~1.36.0
     installed: true
     # wait: true
     values:
-      - external-dns.yaml.gotmpl
+      - nginx-ingress-closed.yaml.gotmpl

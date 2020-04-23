@@ -12,12 +12,27 @@ base:
 cert-manager:
   issuer-email: me@nalbam.com
 
-nginx-ingress:
+nginx-ingress-closed:
   controller:
     kind: DaemonSet
+  aws-load-balancer:
+    security-groups: sg-0fc56921320d0ecf3 # open
+    # security-groups: sg-0442a60247418c3c7 # closed
+    # ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/9def384c-3123-479e-84c8-57d46682fe94"
+  external-dns:
+    hostname: "*.closed.mzdev.be"
+  metrics:
+    enabled: true
+
+nginx-ingress-open:
+  controller:
+    kind: DaemonSet
+  aws-load-balancer:
+    security-groups: sg-0fc56921320d0ecf3 # open
+    # security-groups: sg-0442a60247418c3c7 # closed
+    # ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/4581504a-cf26-4bac-a482-8025b9b14a5e"
   external-dns:
     hostname: "*.demo.mzdev.be"
-    ttl: "300"
   metrics:
     enabled: true
 
@@ -33,10 +48,24 @@ k8s-spot-termination-handler:
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
-  efsFileSystemId: "fs-1798c376"
+  efsFileSystemId: fs-b4a98fd5
+
+# keycloak
+keycloak:
+  username: admin
+  password: password
+  ingress:
+    enabled: true
+    host: keycloak.closed.mzdev.be
+  postgresql:
+    enabled: true
+    persistence:
+      enabled: true
+      storageClass: efs
 
 # monitor
 prometheus:
+  scrape_interval: 30s
   persistence:
     enabled: true
     storageClass: efs
@@ -49,18 +78,21 @@ grafana:
   disable_login_form: true
   ingress:
     enabled: true
-    host: grafana.demo.mzdev.be
+    host: grafana.closed.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
+  datasources:
+    # prometheus: http://prometheus-server:80
+    prometheus: http://prometheus-operator-prometheus:9090
   oic:
     client:
       id: grafana
-      secret: 9a3084e9-5272-4efc-a9d0-304615868a5e
+      secret: 3f66b625-08f2-4ed6-8759-fb67aff7bb7a
     server:
-      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+      token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
 
 fluentd:
   host: elasticsearch-master.elastic.svc.cluster.local
@@ -70,8 +102,9 @@ fluentd:
 elasticsearch:
   ingress:
     enabled: false
-    host: elasticsearch.demo.mzdev.be
+    host: elasticsearch.closed.mzdev.be
   persistence:
+    enabled: true
     storageClass: efs
   # esJavaOpts: "-Xmx512m -Xms512m"
   resources:
@@ -85,7 +118,7 @@ elasticsearch:
 kibana:
   ingress:
     enabled: true
-    host: kibana.demo.mzdev.be
+    host: kibana.closed.mzdev.be
   resources:
     requests:
       cpu: 200m
@@ -98,7 +131,7 @@ kibana:
 argo:
   ingress:
     enabled: true
-    host: argo.demo.mzdev.be
+    host: argo.closed.mzdev.be
   bucket: eks-demo-argo-2
   iam-role: eks-demo-worker-bucket
 
@@ -112,27 +145,19 @@ argo-cd:
     enabled: true
   ingress:
     enabled: true
-    host: argocd.demo.mzdev.be
+    host: argocd.closed.mzdev.be
   oic:
     client:
       id: argo-cd
-      secret: d15d2335-2cef-4eb1-bf36-40ac7583c711
+      secret: 68a076a3-bef7-4877-976e-c5fb3c0f525f
     server:
-      issuer: https://keycloak.demo.mzdev.be/auth/realms/demo
-
-# keycloak
-keycloak:
-  username: admin
-  password: password
-  ingress:
-    enabled: true
-    host: keycloak.demo.mzdev.be
+      issuer: https://keycloak.closed.mzdev.be/auth/realms/demo
 
 # devops
 chartmuseum:
   ingress:
     enabled: true
-    host: chartmuseum.demo.mzdev.be
+    host: chartmuseum.closed.mzdev.be
   iam-role: eks-demo-worker-bucket
   storage:
     amazon:
@@ -142,7 +167,7 @@ chartmuseum:
 docker-registry:
   ingress:
     enabled: true
-    host: registry.demo.mzdev.be
+    host: registry.closed.mzdev.be
   iam-role: eks-demo-worker-bucket
   s3:
     region: ap-northeast-2
@@ -151,18 +176,18 @@ docker-registry:
 jenkins:
   ingress:
     enabled: true
-    host: jenkins.demo.mzdev.be
+    host: jenkins.closed.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
   oic:
     client:
       id: jenkins
-      secret: 23a2c36f-d4b2-4566-97bf-5ee53899111c
+      secret: 4ef3cbd8-7e9a-4296-a1eb-fcc489aa4623
     server:
-      token: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/token
-      auth: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
-      userinfo: https://keycloak.demo.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
+      token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
+      auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
+      userinfo: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/userinfo
   resources:
     requests:
       cpu: 500m
@@ -174,7 +199,7 @@ jenkins:
 sonatype-nexus:
   ingress:
     enabled: true
-    host: nexus.demo.mzdev.be
+    host: nexus.closed.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -193,7 +218,7 @@ sonatype-nexus:
 sonarqube:
   ingress:
     enabled: true
-    host: sonarqube.demo.mzdev.be
+    host: sonarqube.closed.mzdev.be
   persistence:
     enabled: true
     storageClass: efs
@@ -214,12 +239,62 @@ harbor:
     password: password
   ingress:
     host:
-      core: harbor-core.demo.mzdev.be
-      notary: harbor-notary.demo.mzdev.be
+      core: harbor-core.closed.mzdev.be
+      notary: harbor-notary.closed.mzdev.be
   iam-role: eks-demo-worker-bucket
   persistence:
+    enabled: true
     storageClass: efs
   storage:
     amazon:
       region: ap-northeast-2
       bucket: eks-demo-harbor-2
+
+# atlantis
+atlantis:
+  orgWhitelist: github.org/mzcdev/*
+  ingress:
+    host:
+      core: atlantis.closed.mzdev.be
+      notary: atlantis.closed.mzdev.be
+  iam-role: eks-demo-worker-admin
+
+# etcd
+etcd:
+  persistence:
+    enabled: true
+    storageClass: efs
+
+# consul
+consul:
+  ingress:
+    enabled: true
+    host: consul.closed.mzdev.be
+  persistence:
+    enabled: true
+    storageClass: efs
+
+# vault
+vault:
+  dev: false
+  replicaCount: 3
+  ingress:
+    enabled: false
+    host: vault.closed.mzdev.be
+  metrics:
+    enabled: true
+  iam-role: eks-demo-worker-bucket
+  storage:
+    # s3:
+    #   region: ap-northeast-2
+    #   bucket: eks-demo-vault-2
+    # etcd:
+    #   address: "http://etcd.etcd:2379"
+    #   path: "vault/"
+    #   etcd_api: "v3"
+    #   ha_enabled: "true"
+    consul:
+      address: "consul:8500"
+      path: "vault/"
+  consulAgent:
+    join: consul.service.consul

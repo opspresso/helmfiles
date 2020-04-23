@@ -1,6 +1,6 @@
 repositories:
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:
@@ -11,11 +11,11 @@ environments:
       - ../../environments/eks-demo.yaml
 
 releases:
-  - name: external-dns
-    namespace: kube-ingress
-    chart: bitnami/external-dns
-    version: ~2.20.4
+  - name: etcd
+    namespace: etcd
+    chart: incubator/etcd
+    version: ~0.7.0
     installed: true
     # wait: true
     values:
-      - external-dns.yaml.gotmpl
+      - etcd.yaml.gotmpl

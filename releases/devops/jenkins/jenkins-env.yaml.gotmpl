@@ -1,8 +1,14 @@
+# https://jenkinsci.github.io/kubernetes-credentials-provider-plugin/examples/
+
 resources:
   - apiVersion: v1
     kind: Secret
     metadata:
       name: jenkins-env
+      labels:
+        "jenkins.io/credentials-type": "secretText"
+      annotations:
+        "jenkins.io/credentials-description" : "secret text credential from Kubernetes"
     type: Opaque
     stringData:
       groovy: |-
@@ -18,6 +24,8 @@ resources:
         def slack_token = "{{ .Values | getOrNil "slack.token" | default "" }}"
         @Field
         def jenkins = "{{ .Values | getOrNil "jenkins.ingress.host" | default "" }}"
+        @Field
+        def harbor = "{{ .Values | getOrNil "harbor.ingress.host.core" | default "" }}"
         @Field
         def chartmuseum = "{{ .Values | getOrNil "chartmuseum.ingress.host" | default "" }}"
         @Field

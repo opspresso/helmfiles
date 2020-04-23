@@ -3,7 +3,7 @@ nameOverride: prometheus
 server:
   enabled: true
   global:
-    scrape_interval: 30s
+    scrape_interval: '{{ .Values | getOrNil "prometheus.scrape_interval" | default "30s" }}'
   persistentVolume:
     enabled: {{ .Values | getOrNil "prometheus.persistence.enabled" | default false }}
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'

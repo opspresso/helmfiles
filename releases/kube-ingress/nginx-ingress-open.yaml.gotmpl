@@ -1,0 +1,31 @@
+nameOverride: nginx-ingress-open
+
+controller:
+  kind: '{{ .Values | getOrNil "nginx-ingress-open.controller.kind" | default "Deployment" }}'
+  config:
+    proxy-protocol: "true"
+    real-ip-header: "proxy_protocol"
+    set-real-ip-from: "0.0.0.0/0"
+    use-forwarded-headers: "true"
+  service:
+    annotations:
+      # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+      # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+      service.beta.kubernetes.io/aws-load-balancer-security-groups: '{{ .Values | getOrNil "nginx-ingress-open.aws-load-balancer.security-groups" | default "" }}'
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: '{{ .Values | getOrNil "nginx-ingress-open.aws-load-balancer.ssl-cert" | default "" }}'
+      # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+      external-dns.alpha.kubernetes.io/hostname: '{{ .Values | getOrNil "nginx-ingress-open.external-dns.hostname" | default "" }}'
+      external-dns.alpha.kubernetes.io/ttl: '{{ .Values | getOrNil "nginx-ingress-open.external-dns.ttl" | default "300" }}'
+  stats:
+    enabled: {{ .Values | getOrNil "nginx-ingress-open.metrics.enabled" | default false }}
+  metrics:
+    enabled: {{ .Values | getOrNil "nginx-ingress-open.metrics.enabled" | default false }}
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
+    serviceMonitor:
+      enabled: {{ .Values | getOrNil "nginx-ingress-open.metrics.enabled" | default false }}
+      additionalLabels:
+        release: prometheus-operator

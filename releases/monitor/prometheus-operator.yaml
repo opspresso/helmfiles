@@ -1,8 +1,6 @@
 repositories:
   - name: stable
     url: https://kubernetes-charts.storage.googleapis.com
-  - name: incubator
-    url: https://kubernetes-charts-incubator.storage.googleapis.com
 
 environments:
   default:
@@ -16,7 +14,7 @@ releases:
   - name: prometheus-operator
     namespace: monitor
     chart: stable/prometheus-operator
-    version: ~8.12.0
+    version: ~8.13.0
     installed: true
     # wait: true
     # hooks:

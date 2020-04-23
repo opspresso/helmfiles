@@ -9,5 +9,5 @@ environments:
       - environments/eks-demo.yaml
 
 helmfiles:
-  # istio-system
-  - releases/istio-system/istio.yaml
+  # etcd
+  - releases/etcd/etcd.yaml

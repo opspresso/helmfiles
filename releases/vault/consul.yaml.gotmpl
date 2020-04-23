@@ -1,0 +1,19 @@
+fullnameOverride: consul
+
+uiIngress:
+  enabled: {{ .Values | getOrNil "consul.ingress.enabled" | default false }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  hosts:
+    - '{{ .Values | getOrNil "consul.ingress.host" | default "consul.example.com" }}'
+  path: /
+  tls:
+    - hosts:
+        - '{{ .Values | getOrNil "consul.ingress.host" | default "consul.example.com" }}'
+      secretName: consul-tls
+
+Storage: '{{ .Values | getOrNil "consul.persistence.storageSize" | default "2Gi" }}'
+
+StorageClass: '{{ .Values | getOrNil "consul.persistence.storageClass" | default "default" }}'
