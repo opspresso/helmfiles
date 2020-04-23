@@ -25,9 +25,14 @@ keycloak:
     deployPostgres: {{ .Values | getOrNil "keycloak.postgresql.enabled" | default false }}
     dbVendor: postgres
     dbHost: keycloak-postgresql
+    dbPort: 5432
+    dbUser: keycloak
+    dbPassword: password
 
 postgresql:
   enabled: {{ .Values | getOrNil "keycloak.postgresql.enabled" | default false }}
+  postgresqlUsername: keycloak
+  postgresqlPassword: password
   persistence:
     enabled: {{ .Values | getOrNil "keycloak.postgresql.persistence.enabled" | default false }}
     storageClass: '{{ .Values | getOrNil "keycloak.postgresql.persistence.storageClass" | default "default" }}'

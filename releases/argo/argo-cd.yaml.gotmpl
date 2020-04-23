@@ -58,18 +58,11 @@ server:
         - email
         - profile
         - roles
-    #   requestedIDTokenClaims:
-    #     email:
-    #       essential: true
-    #     groups:
-    #       essential: true
-    #       value: org:demo
 
   rbacConfig:
     policy.default: role:readonly
     policy.csv: |
-      g, "jyyu@mz.co.kr", role:admin
-      g, demo:admin, role:admin
+      g, "/admin", role:admin
 
 configs:
   secret:
