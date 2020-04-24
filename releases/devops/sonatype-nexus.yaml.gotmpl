@@ -1,37 +1,47 @@
 fullnameOverride: sonatype-nexus
 
 statefulset:
-  enabled: true
+  enabled: {{ .Values | getOrNil "sonatype-nexus.statefulset" | default false }}
 
 nexus:
   resources:
     requests:
-      cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.requests.cpu" | default "1000m" }}'
+      cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.requests.cpu" | default "500m" }}'
       memory: '{{ .Values | getOrNil "sonatype-nexus.resources.requests.memory" | default "3Gi" }}'
     limits:
-      cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.cpu" | default "1200m" }}'
+      cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.cpu" | default "600m" }}'
       memory: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.memory" | default "3Gi" }}'
 
-  podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  # podAnnotations:
+  #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 
   livenessProbe:
-    initialDelaySeconds: 100
+    initialDelaySeconds: 60
     periodSeconds: 30
     failureThreshold: 12
     path: /
   readinessProbe:
-    initialDelaySeconds: 100
+    initialDelaySeconds: 60
     periodSeconds: 30
     failureThreshold: 12
     path: /
+
+persistence:
+  enabled: {{ .Values | getOrNil "sonatype-nexus.persistence.enabled" | default false }}
+  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "default" }}'
+  storageSize: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageSize" | default "50Gi" }}'
 
 nexusProxy:
   env:
     nexusHttpHost: '{{ .Values | getOrNil "sonatype-nexus.ingress.host" | default "nexus.example.com" }}'
 
 nexusBackup:
+  enabled: false
   nexusAdminPassword: '{{ .Values | getOrNil "sonatype-nexus.password" | default "password" }}'
+  persistence:
+    enabled: {{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.enabled" | default false }}
+    storageClass: '{{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.storageClass" | default "default" }}'
+    storageSize: '{{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.storageSize" | default "20Gi" }}'
 
 ingress:
   enabled: {{ .Values | getOrNil "sonatype-nexus.ingress.enabled" | default false }}
@@ -44,15 +54,3 @@ ingress:
   tls:
     enabled: true
     secretName: sonatype-nexus-tls
-
-persistence:
-  enabled: {{ .Values | getOrNil "sonatype-nexus.persistence.enabled" | default false }}
-  storageClass: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageClass" | default "default" }}'
-  storageSize: '{{ .Values | getOrNil "sonatype-nexus.persistence.storageSize" | default "20Gi" }}'
-
-nexusBackup:
-  enabled: false
-  persistence:
-    enabled: {{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.enabled" | default false }}
-    storageClass: '{{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.storageClass" | default "default" }}'
-    storageSize: '{{ .Values | getOrNil "sonatype-nexus.nexusBackup.persistence.storageSize" | default "20Gi" }}'

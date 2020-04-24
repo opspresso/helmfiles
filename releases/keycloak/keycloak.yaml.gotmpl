@@ -21,6 +21,18 @@ keycloak:
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
 
+  extraVolumes: |
+    - name: realm-demo-secret
+      secret:
+        secretName: realm-demo-secret
+
+  extraVolumeMounts: |
+    - name: realm-demo-secret
+      mountPath: "/realm/"
+      readOnly: true
+
+  extraArgs: -Dkeycloak.import=/realm/demo.json
+
   persistence:
     deployPostgres: {{ .Values | getOrNil "keycloak.postgresql.enabled" | default false }}
     dbVendor: postgres

@@ -10,4 +10,5 @@ environments:
 
 helmfiles:
   # keycloak
+  - releases/keycloak/keycloak-realm.yaml
   - releases/keycloak/keycloak.yaml

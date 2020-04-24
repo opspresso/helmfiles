@@ -1,7 +1,6 @@
 nameOverride: efs-provisioner
 
 podAnnotations:
-  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   iam.amazonaws.com/role: '{{ .Values | getOrNil "efs-provisioner.iam-role" | default "" }}'
 
 efsProvisioner:

@@ -26,11 +26,13 @@ helmfiles:
 
   # kube-ingress
   - releases/kube-ingress/cert-manager.yaml
+  - releases/kube-ingress/cert-manager-issuers.yaml
   - releases/kube-ingress/external-dns.yaml
   - releases/kube-ingress/nginx-ingress-closed.yaml
   - releases/kube-ingress/nginx-ingress-open.yaml
 
   # keycloak
+  - releases/keycloak/keycloak-realm.yaml
   - releases/keycloak/keycloak.yaml
 
   # argo
@@ -40,9 +42,10 @@ helmfiles:
   # - releases/argo/argo-events.yaml
 
   # devops
+  - releases/devops/archiva.yaml
   - releases/devops/chartmuseum.yaml
   - releases/devops/docker-registry.yaml
   - releases/devops/jenkins.yaml
-  - releases/devops/sonatype-nexus.yaml
+  # - releases/devops/sonatype-nexus.yaml
   # - releases/devops/sonarqube.yaml
   # - releases/devops/harbor.yaml

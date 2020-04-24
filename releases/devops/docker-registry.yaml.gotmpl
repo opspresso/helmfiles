@@ -1,7 +1,6 @@
 nameOverride: docker-registry
 
 podAnnotations:
-  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
   iam.amazonaws.com/role: '{{ .Values | getOrNil "docker-registry.iam-role" | default "" }}'
 
 storage: s3

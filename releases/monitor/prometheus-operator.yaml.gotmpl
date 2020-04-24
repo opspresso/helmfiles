@@ -7,6 +7,15 @@ prometheus:
   prometheusSpec:
     scrapeInterval: '{{ .Values | getOrNil "prometheus.scrape_interval" | default "30s" }}'
 
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "default" }}'
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "50Gi" }}'
+
 grafana:
   enabled: false
 

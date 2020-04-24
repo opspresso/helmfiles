@@ -27,6 +27,8 @@ resources:
         @Field
         def harbor = "{{ .Values | getOrNil "harbor.ingress.host.core" | default "" }}"
         @Field
+        def archiva = "{{ .Values | getOrNil "archiva.ingress.host" | default "" }}"
+        @Field
         def chartmuseum = "{{ .Values | getOrNil "chartmuseum.ingress.host" | default "" }}"
         @Field
         def registry = "{{ .Values | getOrNil "docker-registry.ingress.host" | default "" }}"
