@@ -10,7 +10,7 @@ base:
 
 ingress:
   closed:
-    whitelist: 10.10.1.0/24,211.60.50.190/32
+    whitelist: 10.10.0.0/16,211.60.50.190/32
 
 # kube-ingress
 cert-manager:
