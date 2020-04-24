@@ -9,7 +9,8 @@ keycloak:
     annotations:
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
       kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/whitelist-source-range: '{{ .Values | getOrNil "ingress.closed.whitelist" | default "0.0.0.0/0" }}'
     hosts:
       - '{{ .Values | getOrNil "keycloak.ingress.host" | default "keycloak.example.com" }}'
     tls:
