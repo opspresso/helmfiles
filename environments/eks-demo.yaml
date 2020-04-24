@@ -154,6 +154,14 @@ argo-cd:
       issuer: https://keycloak.closed.mzdev.be/auth/realms/demo
 
 # devops
+archiva:
+  ingress:
+    enabled: true
+    host: archiva.closed.mzdev.be
+  persistence:
+    enabled: true
+    storageClass: efs
+
 chartmuseum:
   ingress:
     enabled: true
@@ -197,6 +205,7 @@ jenkins:
       memory: 2G
 
 sonatype-nexus:
+  statefulset: true
   ingress:
     enabled: true
     host: nexus.closed.mzdev.be

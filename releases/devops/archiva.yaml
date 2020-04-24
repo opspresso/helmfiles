@@ -1,0 +1,21 @@
+repositories:
+  - name: xetusoss
+    url: https://xetus-oss.github.io/helm-charts/
+
+environments:
+  default:
+    values:
+      - ../../environments/default.yaml
+  eks-demo:
+    values:
+      - ../../environments/eks-demo.yaml
+
+releases:
+  - name: archiva
+    namespace: devops
+    chart: xetusoss/xetusoss-archiva
+    version: ~0.1.0
+    installed: true
+    # wait: true
+    values:
+      - archiva.yaml.gotmpl

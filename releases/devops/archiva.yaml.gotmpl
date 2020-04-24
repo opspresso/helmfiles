@@ -1,0 +1,24 @@
+nameOverride: archiva
+
+proxy:
+  enabled: {{ .Values | getOrNil "archiva.ingress.enabled" | default false }}
+  hostname: '{{ .Values | getOrNil "archiva.ingress.host" | default "archiva.example.com" }}'
+  proto: https
+  pathPrefix: /
+
+ingress:
+  enabled: {{ .Values | getOrNil "archiva.ingress.enabled" | default false }}
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    ingress.kubernetes.io/proxy-body-size: 500m
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
+  tls:
+    enabled: {{ .Values | getOrNil "archiva.ingress.enabled" | default false }}
+    secret: archiva-tls
+
+persistence:
+  enabled: {{ .Values | getOrNil "archiva.persistence.enabled" | default false }}
+  storageClass: '{{ .Values | getOrNil "archiva.persistence.storageClass" | default "default" }}'
+  requestSize: '{{ .Values | getOrNil "archiva.persistence.storageSize" | default "50Gi" }}'
