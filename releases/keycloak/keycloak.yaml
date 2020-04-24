@@ -17,12 +17,5 @@ releases:
     version: ~7.5.0
     installed: true
     # wait: true
-    # hooks:
-    #   - events: ["prepare"]
-    #     showlogs: true
-    #     command: "/bin/sh"
-    #     args:
-    #       - -c
-    #       - kubectl create secret -n keycloak generic realm-demo-secret --from-file=realm/demo.json
     values:
       - keycloak.yaml.gotmpl
