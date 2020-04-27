@@ -4,9 +4,13 @@ installCRD: true
 
 controller:
   podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     iam.amazonaws.com/role: '{{ .Values | getOrNil "argo.iam-role" | default "" }}'
 
 server:
+  podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+
   ingress:
     enabled: {{ .Values | getOrNil "argo.ingress.enabled" | default false }}
     annotations:

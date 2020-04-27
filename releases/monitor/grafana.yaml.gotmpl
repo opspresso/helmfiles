@@ -3,6 +3,9 @@ nameOverride: grafana
 adminUser: '{{ .Values | getOrNil "grafana.username" | default "admin" }}'
 adminPassword: '{{ .Values | getOrNil "grafana.password" | default "password" }}'
 
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+
 ingress:
   enabled: {{ .Values | getOrNil "grafana.ingress.enabled" | default false }}
   annotations:

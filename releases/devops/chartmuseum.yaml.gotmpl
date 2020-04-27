@@ -2,6 +2,7 @@ fullnameOverride: chartmuseum
 
 replica:
   annotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     iam.amazonaws.com/role: '{{ .Values | getOrNil "chartmuseum.iam-role" | default "" }}'
 
 env:
