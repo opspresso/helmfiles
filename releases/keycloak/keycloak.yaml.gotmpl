@@ -19,7 +19,7 @@ keycloak:
           - '{{ .Values | getOrNil "keycloak.ingress.host" | default "keycloak.example.com" }}'
 
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING

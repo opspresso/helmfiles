@@ -11,7 +11,7 @@ controller:
         release: prometheus-operator
 
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
 server:
   extraArgs:
@@ -25,7 +25,7 @@ server:
         release: prometheus-operator
 
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
   ingress:
     enabled: {{ .Values | getOrNil "argo-cd.ingress.enabled" | default false }}

@@ -13,7 +13,7 @@ nexus:
       memory: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.memory" | default "3Gi" }}'
 
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
   livenessProbe:
     initialDelaySeconds: 60

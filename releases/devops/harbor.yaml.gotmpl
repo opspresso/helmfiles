@@ -25,17 +25,17 @@ harborAdminPassword: '{{ .Values | getOrNil "harbor.admin.password" | default "p
 
 core:
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
     iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
 
 registry:
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
     iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
 
 chartmuseum:
   podAnnotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
     iam.amazonaws.com/role: '{{ .Values | getOrNil "harbor.iam-role" | default "" }}'
 
 persistence:
