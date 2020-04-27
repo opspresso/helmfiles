@@ -5,18 +5,14 @@ prometheus:
   port: {{ .Values | getOrNil "prometheus-adapter.prometheus.port" | default "" }}
 
 rules:
-  # default: false
+  default: true
   custom:
-    - metricsQuery: sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)
-      name:
-        as: ${1}_per_second
-        matches: ^(.*)_total
+    - seriesQuery: 'http_requests_total{kubernetes_namespace!="",kubernetes_pod_name!=""}'
       resources:
         overrides:
-          namespace:
-            resource: namespace
-          pod:
-            resource: pod
-          service:
-            resource: service
-      seriesQuery: http_requests_total{namespace!="",pod!=""}
+          kubernetes_namespace: {resource: "namespace"}
+          kubernetes_pod_name: {resource: "pod"}
+      name:
+        matches: "^(.*)_total"
+        as: "${1}_per_second"
+      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'

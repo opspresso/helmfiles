@@ -77,13 +77,14 @@ prometheus:
 prometheus-adapter:
   prometheus:
     # url: http://prometheus-server.monitor.svc
+    # port: 80
     url: http://prometheus-operator-prometheus.monitor.svc
     port: 9090
 
 grafana:
   username: admin
   password: password
-  disable_login_form: true
+  disable_login_form: false
   ingress:
     enabled: true
     host: grafana.closed.mzdev.be
