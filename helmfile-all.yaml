@@ -14,9 +14,11 @@ helmfiles:
   - releases/kube-system/metrics-server.yaml
   # - releases/kube-system/kube-state-metrics.yaml
   - releases/kube-system/cluster-autoscaler.yaml
-  - releases/kube-system/cluster-overprovisioner.yaml
   - releases/kube-system/k8s-spot-termination-handler.yaml
   - releases/kube-system/efs-provisioner.yaml
+
+  # default
+  - releases/default/cluster-overprovisioner.yaml
 
   # monitor
   # - releases/monitor/prometheus.yaml
