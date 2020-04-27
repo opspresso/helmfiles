@@ -18,7 +18,7 @@ helmfiles:
   # - releases/kube-system/efs-provisioner.yaml
 
   # default
-  - releases/default/cluster-overprovisioner.yaml
+  # - releases/default/cluster-overprovisioner.yaml
 
   # monitor
   # - releases/monitor/prometheus.yaml
