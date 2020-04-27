@@ -74,6 +74,12 @@ prometheus:
   kubeStateMetrics:
     enabled: true
 
+prometheus-adapter:
+  prometheus:
+    # url: http://prometheus-server.monitor.svc
+    url: http://prometheus-operator-prometheus.monitor.svc
+    port: 9090
+
 grafana:
   username: admin
   password: password

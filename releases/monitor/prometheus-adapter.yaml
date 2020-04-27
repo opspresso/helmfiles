@@ -14,7 +14,7 @@ releases:
   - name: prometheus-adapter
     namespace: monitor
     chart: stable/prometheus-adapter
-    version: ~2.2.0
+    version: ~2.3.0
     installed: true
     # wait: true
     values:
