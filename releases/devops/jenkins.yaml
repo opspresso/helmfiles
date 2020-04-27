@@ -25,7 +25,7 @@ releases:
   - name: jenkins
     namespace: devops
     chart: stable/jenkins
-    version: ~1.16.0
+    version: ~1.18.0
     installed: true
     # wait: true
     values:
