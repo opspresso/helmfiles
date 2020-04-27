@@ -17,8 +17,8 @@ ingress:
       hosts:
         - '{{ .Values | getOrNil "sonarqube.ingress.host" | default "sonarqube.example.com" }}'
 
-# annotations:
-#   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+annotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 
 # plugins:
 #   install:

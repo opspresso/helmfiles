@@ -12,8 +12,8 @@ nexus:
       cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.cpu" | default "600m" }}'
       memory: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.memory" | default "3Gi" }}'
 
-  # podAnnotations:
-  #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 
   livenessProbe:
     initialDelaySeconds: 60
