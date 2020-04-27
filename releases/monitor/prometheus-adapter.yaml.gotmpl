@@ -1,8 +1,8 @@
 nameOverride: prometheus-adapter
 
 prometheus:
-  url: http://prometheus-server
-  port: 80
+  url: '{{ .Values | getOrNil "prometheus-adapter.prometheus.url" | default "" }}'
+  port: {{ .Values | getOrNil "prometheus-adapter.prometheus.port" | default "" }}
 
 rules:
   # default: false
