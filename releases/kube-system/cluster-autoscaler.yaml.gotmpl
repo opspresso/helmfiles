@@ -6,15 +6,13 @@ autoDiscovery:
 
 awsRegion: '{{ .Values | getOrNil "aws.region" | default "ap-northeast-2" }}'
 
-# extraArgs:
-#   v: 4
-#   stderrthreshold: info
-#   logtostderr: true
-#   expander: most-pods # default least-waste
-#   scale-down-enabled: true # default true
-#   scale-down-utilization-threshold: 0.6 # default 0.5
-#   skip-nodes-with-local-storage: false # default false
-#   skip-nodes-with-system-pods: false # default true
+extraArgs:
+  v: 4
+  logtostderr: true
+  scale-down-enabled: true # default true
+  scale-down-utilization-threshold: 0.66 # default 0.5
+  skip-nodes-with-local-storage: false # default false
+  skip-nodes-with-system-pods: false # default true
 
 podAnnotations:
   iam.amazonaws.com/role: '{{ .Values | getOrNil "cluster-autoscaler.iam-role" | default "" }}'
