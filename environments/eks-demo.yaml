@@ -52,6 +52,8 @@ cluster-autoscaler:
 
 k8s-spot-termination-handler:
   slackUrl: ""
+  iam-role: eks-demo-worker-asg
+  detachAsg: true
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
@@ -60,7 +62,7 @@ efs-provisioner:
 # default
 cluster-overprovisioner:
   name: default
-  replicaCount: 3
+  replicaCount: 0
   resources:
     requests:
       cpu: 1000m
