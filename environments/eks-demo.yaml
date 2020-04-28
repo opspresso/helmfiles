@@ -52,6 +52,15 @@ efs-provisioner:
   iam-role: eks-demo-worker-efs
   efsFileSystemId: fs-b4a98fd5
 
+# default
+cluster-overprovisioner:
+  name: default
+  replicaCount: 4
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 1G
+
 # keycloak
 keycloak:
   username: admin
