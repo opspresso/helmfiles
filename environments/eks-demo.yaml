@@ -53,7 +53,7 @@ cluster-autoscaler:
 k8s-spot-termination-handler:
   slackUrl: ""
   iam-role: eks-demo-worker-asg
-  detachAsg: true
+  detachAsg: false
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
