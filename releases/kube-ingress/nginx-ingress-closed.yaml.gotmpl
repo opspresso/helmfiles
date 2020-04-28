@@ -21,10 +21,10 @@ controller:
     enabled: {{ .Values | getOrNil "nginx-ingress-closed.metrics.enabled" | default false }}
   metrics:
     enabled: {{ .Values | getOrNil "nginx-ingress-closed.metrics.enabled" | default false }}
-    service:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "10254"
+    # service:
+    #   annotations:
+    #     prometheus.io/scrape: "true"
+    #     prometheus.io/port: "10254"
     serviceMonitor:
       enabled: {{ .Values | getOrNil "nginx-ingress-closed.metrics.enabled" | default false }}
       additionalLabels:
