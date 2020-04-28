@@ -2,4 +2,9 @@ nameOverride: k8s-spot-termination-handler
 
 clusterName: '{{ .Values | getOrNil "cluster.name" | default "" }}'
 
+podAnnotations:
+  iam.amazonaws.com/role: '{{ .Values | getOrNil "k8s-spot-termination-handler.iam-role" | default "" }}'
+
+detachAsg: {{ .Values | getOrNil "k8s-spot-termination-handler.detachAsg" | default false }}
+
 slackUrl: '{{ .Values | getOrNil "k8s-spot-termination-handler.slackUrl" | default "" }}'
