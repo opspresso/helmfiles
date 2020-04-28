@@ -44,6 +44,11 @@ external-dns:
 # kube-system
 cluster-autoscaler:
   iam-role: eks-demo-worker-asg
+  extraArgs:
+    scale-down-enabled: true # default true
+    scale-down-utilization-threshold: 0.66 # default 0.5
+    skip-nodes-with-local-storage: false # default false
+    skip-nodes-with-system-pods: false # default true
 
 k8s-spot-termination-handler:
   slackUrl: ""
@@ -55,7 +60,7 @@ efs-provisioner:
 # default
 cluster-overprovisioner:
   name: default
-  replicaCount: 4
+  replicaCount: 3
   resources:
     requests:
       cpu: 1000m
