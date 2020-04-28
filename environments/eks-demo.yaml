@@ -85,6 +85,8 @@ prometheus:
   persistence:
     enabled: true
     storageClass: efs
+  grafana:
+    enabled: false
   kubeStateMetrics:
     enabled: true
 
