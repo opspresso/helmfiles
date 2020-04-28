@@ -12,8 +12,8 @@ nexus:
       cpu: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.cpu" | default "600m" }}'
       memory: '{{ .Values | getOrNil "sonatype-nexus.resources.limits.memory" | default "3Gi" }}'
 
-  # podAnnotations:
-  #   cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+  podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
   livenessProbe:
     initialDelaySeconds: 60
@@ -47,10 +47,11 @@ ingress:
   enabled: {{ .Values | getOrNil "sonatype-nexus.ingress.enabled" | default false }}
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    ingress.kubernetes.io/proxy-body-size: "500m"
+    ingress.kubernetes.io/proxy-body-size: "0"
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/whitelist-source-range: '{{ .Values | getOrNil "ingress.closed.whitelist" | default "0.0.0.0/0" }}'
   tls:
     enabled: true
     secretName: sonatype-nexus-tls

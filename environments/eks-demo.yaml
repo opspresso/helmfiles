@@ -8,6 +8,10 @@ aws:
 base:
   domain: demo.mzdev.be
 
+ingress:
+  closed:
+    whitelist: 10.10.0.0/16,211.60.50.190/32
+
 # kube-ingress
 cert-manager:
   issuer-email: me@nalbam.com
@@ -15,10 +19,9 @@ cert-manager:
 nginx-ingress-closed:
   controller:
     kind: DaemonSet
-  aws-load-balancer:
-    security-groups: sg-0fc56921320d0ecf3 # open
-    # security-groups: sg-0442a60247418c3c7 # closed
-    # ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/9def384c-3123-479e-84c8-57d46682fe94"
+  # aws-load-balancer:
+  #   security-groups: sg-0442a60247418c3c7 # closed
+  #   ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/9def384c-3123-479e-84c8-57d46682fe94"
   external-dns:
     hostname: "*.closed.mzdev.be"
   metrics:
@@ -27,10 +30,9 @@ nginx-ingress-closed:
 nginx-ingress-open:
   controller:
     kind: DaemonSet
-  aws-load-balancer:
-    security-groups: sg-0fc56921320d0ecf3 # open
-    # security-groups: sg-0442a60247418c3c7 # closed
-    # ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/4581504a-cf26-4bac-a482-8025b9b14a5e"
+  # aws-load-balancer:
+  #   security-groups: sg-0fc56921320d0ecf3 # open
+  #   ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/4581504a-cf26-4bac-a482-8025b9b14a5e"
   external-dns:
     hostname: "*.demo.mzdev.be"
   metrics:
@@ -42,6 +44,11 @@ external-dns:
 # kube-system
 cluster-autoscaler:
   iam-role: eks-demo-worker-asg
+  extraArgs:
+    scale-down-enabled: true # default true
+    scale-down-utilization-threshold: 0.66 # default 0.5
+    skip-nodes-with-local-storage: false # default false
+    skip-nodes-with-system-pods: false # default true
 
 k8s-spot-termination-handler:
   slackUrl: ""
@@ -49,6 +56,15 @@ k8s-spot-termination-handler:
 efs-provisioner:
   iam-role: eks-demo-worker-efs
   efsFileSystemId: fs-b4a98fd5
+
+# default
+cluster-overprovisioner:
+  name: default
+  replicaCount: 3
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 1G
 
 # keycloak
 keycloak:
@@ -69,13 +85,22 @@ prometheus:
   persistence:
     enabled: true
     storageClass: efs
+  grafana:
+    enabled: false
   kubeStateMetrics:
     enabled: true
+
+prometheus-adapter:
+  prometheus:
+    # url: http://prometheus-server.monitor.svc
+    # port: 80
+    url: http://prometheus-operator-prometheus.monitor.svc
+    port: 9090
 
 grafana:
   username: admin
   password: password
-  disable_login_form: true
+  disable_login_form: false
   ingress:
     enabled: true
     host: grafana.closed.mzdev.be
@@ -138,9 +163,9 @@ argo:
 argo-cd:
   username: admin
   # password: "$(htpasswd -nbBC 10 '' 'password' | tr -d ':\n' | sed 's/$2y/$2a/')"
-  password: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"
+  # password: "$2a$10$RihNM/bmql87aKhSa/U0DOmTx5JDPl2byap07bLSNRtsEXFiq87E2"
   # mod-time: "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-  mod-time: "2020-03-14"
+  # mod-time: "2020-03-14"
   metrics:
     enabled: true
   ingress:

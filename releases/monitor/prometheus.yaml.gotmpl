@@ -8,6 +8,8 @@ server:
     enabled: {{ .Values | getOrNil "prometheus.persistence.enabled" | default false }}
     storageClass: '{{ .Values | getOrNil "prometheus.persistence.storageClass" | default "" }}'
     size: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "8Gi" }}'
+  podAnnotations:
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 
 alertmanager:
   enabled: true

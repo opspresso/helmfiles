@@ -12,7 +12,7 @@ environments:
 
 releases:
   - name: cluster-overprovisioner
-    namespace: kube-system
+    namespace: default
     chart: stable/cluster-overprovisioner
     version: ~0.3.0
     installed: true

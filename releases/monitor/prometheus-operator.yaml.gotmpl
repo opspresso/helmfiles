@@ -17,7 +17,7 @@ prometheus:
               storage: '{{ .Values | getOrNil "prometheus.persistence.storageSize" | default "50Gi" }}'
 
 grafana:
-  enabled: false
+  enabled: {{ .Values | getOrNil "prometheus.grafana.enabled" | default false }}
 
 kubeStateMetrics:
   enabled: {{ .Values | getOrNil "prometheus.kubeStateMetrics.enabled" | default false }}

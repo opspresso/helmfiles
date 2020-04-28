@@ -14,7 +14,7 @@ releases:
   # - name: argo-rollouts
   #   namespace: argo-rollouts
   #   chart: argo/argo-rollouts
-  #   version: ~0.2.0
+  #   version: ~0.3.0
   #   installed: true
   #   # wait: true
   #   values:

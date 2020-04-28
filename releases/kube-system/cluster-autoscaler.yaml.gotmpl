@@ -8,13 +8,11 @@ awsRegion: '{{ .Values | getOrNil "aws.region" | default "ap-northeast-2" }}'
 
 extraArgs:
   v: 4
-  stderrthreshold: info
   logtostderr: true
-  expander: most-pods
-  scale-down-enabled: true
-  scale-down-utilization-threshold: 0.75
-  skip-nodes-with-local-storage: false
-  skip-nodes-with-system-pods: false
+  scale-down-enabled: {{ .Values | getOrNil "cluster-autoscaler.extraArgs.scale-down-enabled" | default false }}
+  scale-down-utilization-threshold: {{ .Values | getOrNil "cluster-autoscaler.extraArgs.scale-down-utilization-threshold" | default 0.5 }}
+  skip-nodes-with-local-storage: {{ .Values | getOrNil "cluster-autoscaler.extraArgs.skip-nodes-with-local-storage" | default false }}
+  skip-nodes-with-system-pods: {{ .Values | getOrNil "cluster-autoscaler.extraArgs.skip-nodes-with-system-pods" | default false }}
 
 podAnnotations:
   iam.amazonaws.com/role: '{{ .Values | getOrNil "cluster-autoscaler.iam-role" | default "" }}'
