@@ -10,6 +10,7 @@ environments:
 
 helmfiles:
   # devops
+  - releases/devops/0-devops.yaml
   - releases/devops/archiva.yaml
   - releases/devops/chartmuseum.yaml
   - releases/devops/docker-registry.yaml

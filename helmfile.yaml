@@ -18,15 +18,17 @@ helmfiles:
   # - releases/kube-system/efs-provisioner.yaml
 
   # default
-  - releases/default/cluster-overprovisioner.yaml
+  # - releases/default/cluster-overprovisioner.yaml
 
   # monitor
+  - releases/monitor/0-monitor.yaml
   # - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/prometheus-operator.yaml
   - releases/monitor/grafana.yaml
 
   # kube-ingress
+  - releases/kube-ingress/0-kube-ingress.yaml
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/cert-manager-issuers.yaml
   - releases/kube-ingress/external-dns.yaml
@@ -34,5 +36,6 @@ helmfiles:
   - releases/kube-ingress/nginx-ingress-open.yaml
 
   # keycloak
+  - releases/keycloak/0-keycloak.yaml
   - releases/keycloak/keycloak-realm.yaml
   - releases/keycloak/keycloak.yaml

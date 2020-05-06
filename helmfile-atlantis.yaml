@@ -10,4 +10,5 @@ environments:
 
 helmfiles:
   # atlantis
+  - releases/atlantis/0-atlantis.yaml
   - releases/atlantis/atlantis.yaml

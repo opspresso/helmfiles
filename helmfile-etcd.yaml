@@ -10,4 +10,5 @@ environments:
 
 helmfiles:
   # etcd
+  - releases/etcd/0-etcd.yaml
   - releases/etcd/etcd.yaml

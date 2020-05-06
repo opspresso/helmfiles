@@ -10,7 +10,12 @@ environments:
 
 helmfiles:
   # argo
+  - releases/argo/0-argo.yaml
   - releases/argo/argo.yaml
+
+  - releases/argo/0-argo-cd.yaml
   - releases/argo/argo-cd.yaml
+
+  - releases/argo/0-argo-rollouts.yaml
   - releases/argo/argo-rollouts.yaml
   # - releases/argo/argo-events.yaml

@@ -16,7 +16,7 @@ releases:
   - name: jenkins-env
     namespace: default
     chart: incubator/raw
-    version: ~0.2.3
+    version: ~0.2.0
     installed: true
     # wait: true
     values:
@@ -34,7 +34,7 @@ releases:
   - name: jenkins-role
     namespace: devops
     chart: incubator/raw
-    version: ~0.2.3
+    version: ~0.2.0
     installed: true
     # wait: true
     values:

@@ -23,7 +23,7 @@ releases:
   - name: argo-rollouts
     namespace: argo-rollouts
     chart: incubator/raw
-    version: ~0.2.3
+    version: ~0.2.0
     installed: true
     # wait: true
     hooks:

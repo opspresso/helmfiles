@@ -10,5 +10,6 @@ environments:
 
 helmfiles:
   # vault
+  - releases/vault/0-vault.yaml
   - releases/vault/consul.yaml
   - releases/vault/vault.yaml

@@ -1,0 +1,25 @@
+repositories:
+  - name: incubator
+    url: https://kubernetes-charts-incubator.storage.googleapis.com
+
+environments:
+  default:
+    values:
+      - ../../environments/default.yaml
+  eks-demo:
+    values:
+      - ../../environments/eks-demo.yaml
+
+releases:
+  - name: ns-keycloak
+    namespace: default
+    chart: incubator/raw
+    version: ~0.2.0
+    installed: true
+    # wait: true
+    values:
+      - resources:
+          - apiVersion: v1
+            kind: Namespace
+            metadata:
+              name: keycloak
