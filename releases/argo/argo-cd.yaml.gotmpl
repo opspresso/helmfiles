@@ -71,6 +71,88 @@ server:
     policy.csv: |
       g, "/admin", role:admin
 
+  additionalApplications:
+    - name: base
+      project: default
+      source:
+        repoURL: https://github.com/opspresso/argocd-env-demo
+        targetRevision: HEAD
+        path: dev-demo/base
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    - name: demo-dev
+      project: default
+      source:
+        repoURL: https://github.com/opspresso/argocd-env-demo
+        targetRevision: HEAD
+        path: dev-demo/demo-dev
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo-dev
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    - name: demo-prod
+      project: default
+      source:
+        repoURL: https://github.com/opspresso/argocd-env-demo
+        targetRevision: HEAD
+        path: dev-demo/demo-prod
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo-prod
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    - name: sample-node-dev
+      project: default
+      source:
+        repoURL: https://github.com/opspresso/argocd-env-demo
+        targetRevision: HEAD
+        path: sample-node/demo-dev
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo-dev
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    - name: sample-node-prod
+      project: default
+      source:
+        repoURL: https://github.com/opspresso/argocd-env-demo
+        targetRevision: HEAD
+        path: sample-node/demo-prod
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo-prod
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    - name: sample-spring-dev
+      project: default
+      source:
+        repoURL: https://github.com/opspresso/argocd-env-demo
+        targetRevision: HEAD
+        path: sample-spring/demo-dev
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: demo-dev
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+  additionalProjects: []
+
 # configs:
 #   secret:
 #     createSecret: true
