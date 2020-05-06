@@ -10,6 +10,7 @@ environments:
 
 helmfiles:
   # kube-ingress
+  - releases/kube-ingress/0-kube-ingress.yaml
   - releases/kube-ingress/cert-manager.yaml
   - releases/kube-ingress/cert-manager-issuers.yaml
   - releases/kube-ingress/external-dns.yaml

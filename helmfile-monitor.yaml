@@ -10,6 +10,7 @@ environments:
 
 helmfiles:
   # monitor
+  - releases/monitor/0-monitor.yaml
   # - releases/monitor/prometheus.yaml
   - releases/monitor/prometheus-adapter.yaml
   - releases/monitor/prometheus-operator.yaml

@@ -14,7 +14,7 @@ releases:
   - name: docker-registry
     namespace: devops
     chart: stable/docker-registry
-    version: ~1.9.2
+    version: ~1.9.0
     installed: true
     # wait: true
     values:

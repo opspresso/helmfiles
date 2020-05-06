@@ -10,4 +10,5 @@ environments:
 
 helmfiles:
   # consul
+  - releases/consul/0-consul.yaml
   - releases/consul/consul.yaml

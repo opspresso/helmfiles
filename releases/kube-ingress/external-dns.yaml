@@ -14,7 +14,7 @@ releases:
   - name: external-dns
     namespace: kube-ingress
     chart: bitnami/external-dns
-    version: ~2.21.0
+    version: ~2.22.0
     installed: true
     # wait: true
     values:

@@ -10,6 +10,7 @@ environments:
 
 helmfiles:
   # elastic
+  - releases/elastic/0-elastic.yaml
   - releases/elastic/elasticsearch.yaml
   - releases/elastic/kibana.yaml
   - releases/elastic/fluentd-elasticsearch.yaml

@@ -20,8 +20,8 @@ nginx-ingress-closed:
   controller:
     kind: DaemonSet
   # aws-load-balancer:
-  #   security-groups: sg-0442a60247418c3c7 # closed
-  #   ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/9def384c-3123-479e-84c8-57d46682fe94"
+  #   security-groups: sg-0d5a05895ed272cab # closed
+  #   ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/40eaf5d5-cd09-4beb-8369-36905171292e"
   external-dns:
     hostname: "*.closed.mzdev.be"
   metrics:
@@ -31,8 +31,8 @@ nginx-ingress-open:
   controller:
     kind: DaemonSet
   # aws-load-balancer:
-  #   security-groups: sg-0fc56921320d0ecf3 # open
-  #   ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/4581504a-cf26-4bac-a482-8025b9b14a5e"
+  #   security-groups: sg-0755a3a2c31eb810e # open
+  #   ssl-cert: "arn:aws:acm:ap-northeast-2:147748575754:certificate/cb29d6a9-e53e-4d1e-b90b-657ea36a7d14"
   external-dns:
     hostname: "*.demo.mzdev.be"
   metrics:
@@ -57,7 +57,7 @@ k8s-spot-termination-handler:
 
 efs-provisioner:
   iam-role: eks-demo-worker-efs
-  efsFileSystemId: fs-b4a98fd5
+  efsFileSystemId: fs-e1cfed80
 
 # default
 cluster-overprovisioner:
@@ -115,7 +115,7 @@ grafana:
   oic:
     client:
       id: grafana
-      secret: c8c6bbb7-f1b0-4c6f-aea3-de0c4654003c
+      secret: df7d395f-e833-49b6-b19c-eea8a54fb06a
     server:
       token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
@@ -176,7 +176,7 @@ argo-cd:
   oic:
     client:
       id: argo-cd
-      secret: 36fad268-f43e-42be-83a4-1b8bf0d5996a
+      secret: d91fdbbc-5dbb-43ab-b388-ce4170ff79c6
     server:
       issuer: https://keycloak.closed.mzdev.be/auth/realms/demo
 
@@ -218,7 +218,7 @@ jenkins:
   oic:
     client:
       id: jenkins
-      secret: edbe77e6-0faf-4777-82d7-7e7399729975
+      secret: f76f3359-4be2-45dd-aba9-6f5204e62438
     server:
       token: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/token
       auth: https://keycloak.closed.mzdev.be/auth/realms/demo/protocol/openid-connect/auth
