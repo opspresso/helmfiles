@@ -592,7 +592,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "d91fdbbc-5dbb-43ab-b388-ce4170ff79c6",
       "redirectUris": [
         "https://argocd.closed.mzdev.be/*"
       ],
@@ -703,7 +703,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "df7d395f-e833-49b6-b19c-eea8a54fb06a",
       "redirectUris": [
         "https://grafana.closed.mzdev.be/*"
       ],
@@ -761,7 +761,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "f76f3359-4be2-45dd-aba9-6f5204e62438",
       "redirectUris": [
         "https://jenkins.closed.mzdev.be/*"
       ],
