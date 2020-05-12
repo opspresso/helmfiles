@@ -66,7 +66,7 @@ cluster-overprovisioner:
   resources:
     requests:
       cpu: 1000m
-      memory: 1G
+      memory: 1Gi
 
 # keycloak
 keycloak:
@@ -137,10 +137,10 @@ elasticsearch:
   resources:
     requests:
       cpu: 300m
-      memory: 2G
+      memory: 2Gi
     limits:
       cpu: 330m
-      memory: 2G
+      memory: 2Gi
 
 kibana:
   ingress:
@@ -149,10 +149,10 @@ kibana:
   resources:
     requests:
       cpu: 200m
-      memory: 1G
+      memory: 1Gi
     limits:
       cpu: 220m
-      memory: 1G
+      memory: 1Gi
 
 # argo
 argo:
@@ -226,10 +226,10 @@ jenkins:
   resources:
     requests:
       cpu: 500m
-      memory: 2G
+      memory: 2Gi
     limits:
       cpu: 550m
-      memory: 2G
+      memory: 2Gi
 
 sonatype-nexus:
   statefulset: true
@@ -246,10 +246,10 @@ sonatype-nexus:
   resources:
     requests:
       cpu: 300m
-      memory: 2G
+      memory: 2Gi
     limits:
       cpu: 330m
-      memory: 2G
+      memory: 2Gi
 
 sonarqube:
   ingress:
@@ -265,10 +265,10 @@ sonarqube:
   resources:
     requests:
       cpu: 300m
-      memory: 2G
+      memory: 2Gi
     limits:
       cpu: 330m
-      memory: 2G
+      memory: 2Gi
 
 harbor:
   admin:
