@@ -14,7 +14,7 @@ releases:
   - name: cluster-autoscaler
     namespace: kube-system
     chart: stable/cluster-autoscaler
-    version: ~7.2.2
+    version: ~7.3.0
     installed: true
     # wait: true
     values:
